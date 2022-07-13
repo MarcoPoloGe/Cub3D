@@ -34,7 +34,7 @@ int		ft_strlen_char(char *str, char c);
 char	*ft_strndup(char *str, int n);
 char	*ft_strrev(char *str);
 int		ft_power(int nb, int power);
-int 	ft_putnbr(long n);
+int		ft_putnbr(long n);
 void	ft_putendl(char *str);
 char	*ft_strcombine_char(char *s1, char c);
 int		ft_str_is_num(char *str);

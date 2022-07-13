@@ -22,4 +22,3 @@ void	ft_free_tab_int(int **tab)
 	if (tab)
 		free(tab);
 }
-

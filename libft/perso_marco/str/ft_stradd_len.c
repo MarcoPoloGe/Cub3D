@@ -14,16 +14,16 @@
 
 void	ft_stradd_len(char **s1, char *s2, int s2_len)
 {
-	char *old_s1;
-	int s1_len;
+	char	*old_s1;
+	int		s1_len;
 
 	if (!s2 || s2_len <= 0)
-		return;
+		return ;
 	s1_len = ft_strlen(*s1);
 	old_s1 = (*s1);
 	(*s1) = ft_calloc(s1_len + s2_len + 1, sizeof(char));
 	if ((*s1) == NULL)
-		return;
+		return ;
 	ft_strcpy((*s1), old_s1);
 	ft_strlcat((*s1), s2, s1_len + s2_len + 1);
 	if (old_s1)

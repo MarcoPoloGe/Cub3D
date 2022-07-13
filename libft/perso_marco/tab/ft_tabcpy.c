@@ -14,8 +14,8 @@
 
 int	ft_tabcpy(char **dst, char **tab)
 {
-	int i;
-	int tablen;
+	int	i;
+	int	tablen;
 
 	tablen = ft_tablen(tab);
 	i = 0;

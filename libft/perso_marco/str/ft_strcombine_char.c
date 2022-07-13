@@ -14,8 +14,8 @@
 
 char	*ft_strcombine_char(char *s1, char c)
 {
-	char *old_s1;
-	int len;
+	char	*old_s1;
+	int		len;
 
 	len = ft_strlen(s1);
 	old_s1 = s1;

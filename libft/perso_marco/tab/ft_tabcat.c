@@ -14,9 +14,9 @@
 
 int	ft_tabcat(char **dst, char **tab)
 {
-	int i;
-	int dstlen;
-	int tablen;
+	int	i;
+	int	dstlen;
+	int	tablen;
 
 	if (tab == NULL)
 		return (0);

@@ -56,5 +56,6 @@ void	leave(t_data *data, char *errormsg);
 void	free_all(t_data *data);
 void	*check_keycode(int keycode, t_data *data, void *img);
 int		main(int ac, char **av);
+t_map	*ft_get_map(char **input_tab, t_data *data);
 
 #endif

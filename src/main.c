@@ -31,8 +31,8 @@ void	load_img(t_data *data)
 
 int	main(int ac, char **av)
 {
-	t_data	data;
-
+	//t_data	data;
+	(void)av;
 
 	if (ac != 2)
 	{

@@ -44,6 +44,7 @@
 *.su
 *.idb
 *.pdb
+*.json
 
 # Kernel Module Compile Results
 *.mod*
@@ -61,3 +62,4 @@ CMakeLists.txt
 settings.json
 src/main.c
 .gitignore
+.vscode/settings.json

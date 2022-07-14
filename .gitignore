@@ -44,6 +44,7 @@
 *.su
 *.idb
 *.pdb
+*.json
 
 # Kernel Module Compile Results
 *.mod*
@@ -58,4 +59,7 @@ dkms.conf
 cmake-build-debug
 CMakeLists.txt
 .idea
-
+settings.json
+src/main.c
+.gitignore
+.vscode/settings.json

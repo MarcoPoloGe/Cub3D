@@ -1,37 +1,35 @@
-NAME = Cub3D
+SRCS	= 	${addprefix src/, main.c}	\
 
-SRC = main.c
-SRC_FOLDER =
+OBJS		=	${SRCS:.c=.o}
+NAME		= 	cub3D
+AR			=	ar rcs
+GCC			=	gcc 
+RM			= 	rm -f
+CFLAGS		=	-Wall -Wextra -Werror
+MLX_PATH	=	./mlx/
+LBFT_PATH	=	./libft/
+FRAMLIBS	=	-L ${LBFT_PATH} -lft -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit
 
-SRC_PATH := $(foreach wrd,$(SRC),./src/$(wrd))\
-			#$(foreach wrd,$(SRC_FOLDER),src/FOLDER/$(wrd))
+all:		$(NAME)
 
-LIB = ./libft/libft.a
-LIB_DIR = ./libft
+.c.o:
+			$(GCC) $(CFLAGS) -Imlx -c $< -o $@
 
-INCL = src/Cub3D.h
-
-CC = gcc
-
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
-
-all: $(NAME)
-
-$(NAME): $(SRC_PATH) $(LIB) $(INCL)
-	$(CC) $(CFLAGS) $(SRC_PATH) $(LIB) -o $(NAME)
-
-test: $(SRC_PATH) $(LIB) $(INCL)
-	$(CC) $(SRC_PATH) $(LIB) -o $(NAME)
-
-$(LIB): $(LIB_DIR)
-	make -C $(LIB_DIR)
+$(NAME):	$(OBJS)
+			@$(MAKE) -C $(LBFT_PATH)
+			@$(MAKE) -C $(MLX_PATH)
+			$(GCC) $(OBJS) $(CFLAGS) -I ${MLX_PATH} -I ${LBFT_PATH} -o $(NAME) $(FRAMLIBS)
 
 clean:
-	make -C $(LIB_DIR) clean
+			${RM} ${OBJS}
+			@$(MAKE) -C $(LBFT_PATH) clean
+			@$(MAKE) -C $(MLX_PATH) clean
 
-fclean: clean
-	make -C $(LIB_DIR) fclean
-	rm -f $(NAME)
+fclean:		clean
+			${RM} ${NAME}
+			@$(MAKE) -C $(LBFT_PATH) fclean
 
-re: fclean all
+re:			fclean all
+
+.PHONY:		all clean fclean re
 

@@ -1,0 +1,117 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/ktrosset/Desktop/Cub3D'
+gcc  -Wall -Wextra -Werror -Imlx -c src/main.c -o src/main.o
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ./libft/
+ 
+make[1]: Entering directory `/Users/ktrosset/Desktop/Cub3D/libft'
+gcc -c -Wall -Wextra -Werror -o get_next_line/get_next_line.o get_next_line/get_next_line.c
+ 
+gcc -c -Wall -Wextra -Werror -o printf/ft_printf.o printf/ft_printf.c
+gcc -c -Wall -Wextra -Werror -o printf/ft_itoa_base_16.o printf/ft_itoa_base_16.c
+gcc -c -Wall -Wextra -Werror -o printf/ft_print_pointer_len.o printf/ft_print_pointer_len.c
+gcc -c -Wall -Wextra -Werror -o printf/ft_puthexa_len.o printf/ft_puthexa_len.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_isalpha.o libft42/ft_isalpha.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_memchr.o libft42/ft_memchr.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_putchar_fd.o libft42/ft_putchar_fd.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strdup.o libft42/ft_strdup.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strlen.o libft42/ft_strlen.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_tolower.o libft42/ft_tolower.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_atoi.o libft42/ft_atoi.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_isascii.o libft42/ft_isascii.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_memcmp.o libft42/ft_memcmp.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_putendl_fd.o libft42/ft_putendl_fd.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_striteri.o libft42/ft_striteri.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strmapi.o libft42/ft_strmapi.c
+ 
+gcc -c -Wall -Wextra -Werror -o libft42/ft_toupper.o libft42/ft_toupper.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_bzero.o libft42/ft_bzero.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_isdigit.o libft42/ft_isdigit.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_memcpy.o libft42/ft_memcpy.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_putnbr_fd.o libft42/ft_putnbr_fd.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strjoin.o libft42/ft_strjoin.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strncmp.o libft42/ft_strncmp.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_calloc.o libft42/ft_calloc.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_isprint.o libft42/ft_isprint.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_memmove.o libft42/ft_memmove.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_putstr_fd.o libft42/ft_putstr_fd.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strlcat.o libft42/ft_strlcat.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strrchr.o libft42/ft_strrchr.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_isalnum.o libft42/ft_isalnum.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_itoa.o libft42/ft_itoa.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_memset.o libft42/ft_memset.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strchr.o libft42/ft_strchr.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strlcpy.o libft42/ft_strlcpy.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_substr.o libft42/ft_substr.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_split.o libft42/ft_split.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strtrim.o libft42/ft_strtrim.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_strnstr.o libft42/ft_strnstr.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstnew.o libft42/ft_lstnew.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstadd_front.o libft42/ft_lstadd_front.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstsize.o libft42/ft_lstsize.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstlast.o libft42/ft_lstlast.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstadd_back.o libft42/ft_lstadd_back.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstdelone.o libft42/ft_lstdelone.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstclear.o libft42/ft_lstclear.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstiter.o libft42/ft_lstiter.c
+gcc -c -Wall -Wextra -Werror -o libft42/ft_lstmap.o libft42/ft_lstmap.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_display_bits_int.o perso_marco/ft_display_bits_int.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_check_ext.o perso_marco/ft_check_ext.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_read_file.o perso_marco/ft_read_file.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_isspace.o perso_marco/ft_isspace.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_read_two_way_tab.o perso_marco/ft_read_two_way_tab.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_read_fd.o perso_marco/ft_read_fd.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_putchar.o perso_marco/ft_putchar.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_putstr.o perso_marco/ft_putstr.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_putendl.o perso_marco/ft_putendl.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/ft_putnbr.o perso_marco/ft_putnbr.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/int/ft_int_too_big.o perso_marco/int/ft_int_too_big.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/int/ft_itoa_base.o perso_marco/int/ft_itoa_base.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/int/ft_nbrlen.o perso_marco/int/ft_nbrlen.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/int/ft_power.o perso_marco/int/ft_power.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/int/ft_atoi_big.o perso_marco/int/ft_atoi_big.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_str_to_lowercase.o perso_marco/str/ft_str_to_lowercase.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_str_to_uppercase.o perso_marco/str/ft_str_to_uppercase.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strcat.o perso_marco/str/ft_strcat.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strcombine.o perso_marco/str/ft_strcombine.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strcpy.o perso_marco/str/ft_strcpy.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strlen_char.o perso_marco/str/ft_strlen_char.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strndup.o perso_marco/str/ft_strndup.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strrev.o perso_marco/str/ft_strrev.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strcombine_char.o perso_marco/str/ft_strcombine_char.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_str_is_num.o perso_marco/str/ft_str_is_num.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_stradd.o perso_marco/str/ft_stradd.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_str_match.o perso_marco/str/ft_str_match.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_skip_spaces.o perso_marco/str/ft_skip_spaces.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_str_same.o perso_marco/str/ft_str_same.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_strlen_char_end.o perso_marco/str/ft_strlen_char_end.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_is_lower.o perso_marco/str/ft_is_lower.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_is_upper.o perso_marco/str/ft_is_upper.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/str/ft_stradd_len.o perso_marco/str/ft_stradd_len.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabcpy.o perso_marco/tab/ft_tabcpy.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabadd.o perso_marco/tab/ft_tabadd.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabadd_len.o perso_marco/tab/ft_tabadd_len.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_free_tab.o perso_marco/tab/ft_free_tab.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_free_tab_int.o perso_marco/tab/ft_free_tab_int.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tablen.o perso_marco/tab/ft_tablen.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabdup.o perso_marco/tab/ft_tabdup.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabadd_front.o perso_marco/tab/ft_tabadd_front.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabcat.o perso_marco/tab/ft_tabcat.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tab_combine.o perso_marco/tab/ft_tab_combine.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tablcpy.o perso_marco/tab/ft_tablcpy.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabndup.o perso_marco/tab/ft_tabndup.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tabdel.o perso_marco/tab/ft_tabdel.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_tablast.o perso_marco/tab/ft_tablast.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_free_big_tab.o perso_marco/tab/ft_free_big_tab.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_big_tablen.o perso_marco/tab/ft_big_tablen.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_display_big_tab.o perso_marco/tab/ft_display_big_tab.c
+gcc -c -Wall -Wextra -Werror -o perso_marco/tab/ft_display_tab.o perso_marco/tab/ft_display_tab.c
+ar -qcs libft.a get_next_line/get_next_line.o printf/ft_printf.o printf/ft_itoa_base_16.o printf/ft_print_pointer_len.o printf/ft_puthexa_len.o libft42/ft_isalpha.o libft42/ft_memchr.o libft42/ft_putchar_fd.o libft42/ft_strdup.o libft42/ft_strlen.o libft42/ft_tolower.o libft42/ft_atoi.o libft42/ft_isascii.o libft42/ft_memcmp.o libft42/ft_putendl_fd.o libft42/ft_striteri.o libft42/ft_strmapi.o libft42/ft_toupper.o libft42/ft_bzero.o libft42/ft_isdigit.o libft42/ft_memcpy.o libft42/ft_putnbr_fd.o libft42/ft_strjoin.o libft42/ft_strncmp.o libft42/ft_calloc.o libft42/ft_isprint.o libft42/ft_memmove.o libft42/ft_putstr_fd.o libft42/ft_strlcat.o libft42/ft_strrchr.o libft42/ft_isalnum.o libft42/ft_itoa.o libft42/ft_memset.o libft42/ft_strchr.o libft42/ft_strlcpy.o libft42/ft_substr.o libft42/ft_split.o libft42/ft_strtrim.o libft42/ft_strnstr.o libft42/ft_lstnew.o libft42/ft_lstadd_front.o libft42/ft_lstsize.o libft42/ft_lstlast.o libft42/ft_lstadd_back.o libft42/ft_lstdelone.o libft42/ft_lstclear.o libft42/ft_lstit 
+er.o libft42/ft_lstmap.o perso_marco/ft_display_bits_int.o perso_marco/ft_check_ext.o perso_marco/ft_read_file.o perso_marco/ft_isspace.o perso_marco/ft_read_two_way_tab.o perso_marco/ft_read_fd.o perso_marco/ft_putchar.o perso_marco/ft_putstr.o perso_marco/ft_putendl.o perso_marco/ft_putnbr.o perso_marco/int/ft_int_too_big.o perso_marco/int/ft_itoa_base.o perso_marco/int/ft_nbrlen.o perso_marco/int/ft_power.o perso_marco/int/ft_atoi_big.o perso_marco/str/ft_str_to_lowercase.o perso_marco/str/ft_str_to_uppercase.o perso_marco/str/ft_strcat.o perso_marco/str/ft_strcombine.o perso_marco/str/ft_strcpy.o perso_marco/str/ft_strlen_char.o perso_marco/str/ft_strndup.o perso_marco/str/ft_strrev.o perso_marco/str/ft_strcombine_char.o perso_marco/str/ft_str_is_num.o perso_marco/str/ft_stradd.o perso_marco/str/ft_str_match.o perso_marco/str/ft_skip_spaces.o perso_marco/str/ft_str_same.o perso_marco/str/ft_strlen_char_end.o perso_marco/str/ft_is_lower.o perso_marco/str/ft_is_upper.o perso_marco/str/ft_stradd_len.o perso_marco/tab/ft_tabcpy.o perso_marco/tab/ft_tabadd.o perso_marco/tab/ft_tabadd_len.o perso_marco/tab/ft_free_tab.o perso_marco/tab/ft_free_tab_int.o perso_marco/tab/ft_tablen.o perso_marco/tab/ft_tabdup.o perso_marco/tab/ft_tabadd_front.o perso_marco/tab/ft_tabcat.o perso_marco/tab/ft_tab_combine.o perso_marco/tab/ft_tablcpy.o perso_marco/tab/ft_tabndup.o perso_marco/tab/ft_tabdel.o perso_marco/tab/ft_tablast.o perso_marco/tab/ft_free_big_tab.o perso_marco/tab/ft_big_tablen.o perso_marco/tab/ft_display_big_tab.o perso_marco/tab/ft_display_tab.o
+make[1]: Leaving directory `/Users/ktrosset/Desktop/Cub3D/libft'
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ./mlx/
+make[1]: Entering directory `/Users/ktrosset/Desktop/Cub3D/mlx'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/Users/ktrosset/Desktop/Cub3D/mlx'
+gcc  src/main.o -Wall -Wextra -Werror -I ./mlx/ -I ./libft/ -o cub3D -L ./libft/ -lft -L ./mlx/ -lmlx -framework OpenGL -framework AppKit
+make: Leaving directory `/Users/ktrosset/Desktop/Cub3D'
+ 

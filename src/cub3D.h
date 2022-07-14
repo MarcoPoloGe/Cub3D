@@ -6,14 +6,13 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/14 14:41:54 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/14 15:18:34 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
 # include <stdio.h>
 # include <math.h>
 # include "../mlx/mlx.h"
@@ -52,7 +51,7 @@ typedef struct s_data {
 	t_map	map;
 }				t_data;
 
-void	leave(t_data *data, char *errormsg);
+int		leave(t_data *data, char *errormsg);
 void	free_all(t_data *data);
 void	*check_keycode(int keycode, t_data *data, void *img);
 int		main(int ac, char **av);

@@ -58,4 +58,6 @@ dkms.conf
 cmake-build-debug
 CMakeLists.txt
 .idea
-
+settings.json
+src/main.c
+.gitignore

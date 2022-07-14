@@ -1,9 +1,9 @@
-SRCS	= 	${addprefix src/, main.c}	\
+SRCS	= 	${addprefix src/, main.c leave.c}	\
 
 OBJS		=	${SRCS:.c=.o}
 NAME		= 	cub3D
 AR			=	ar rcs
-GCC			=	gcc 
+GCC			=	gcc
 RM			= 	rm -f
 CFLAGS		=	-Wall -Wextra -Werror
 MLX_PATH	=	./mlx/

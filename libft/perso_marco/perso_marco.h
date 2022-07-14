@@ -70,4 +70,5 @@ void	ft_display_big_tab(char ***tab);
 char	*ft_read_fd(int fd);
 int		ft_strlen_char_end(char *str, char c);
 void	ft_free_tab_int(int **tab);
+char	**ft_read_tab(char *file_name, char *ext, char sep);
 #endif

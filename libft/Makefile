@@ -7,7 +7,7 @@ SRC_LIBFT42 = ft_isalpha.c ft_memchr.c ft_putchar_fd.c ft_strdup.c ft_strlen.c f
 
 SRC_KEANU =
 
-SRC_MARCO =  ft_display_bits_int.c ft_check_ext.c ft_read_file.c ft_isspace.c ft_read_two_way_tab.c ft_read_fd.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c
+SRC_MARCO =  ft_display_bits_int.c ft_check_ext.c ft_read_file.c ft_isspace.c ft_read_two_way_tab.c ft_read_fd.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_read_tab.c
 SRC_MARCO_INT = ft_int_too_big.c ft_itoa_base.c ft_nbrlen.c ft_power.c ft_atoi_big.c
 SRC_MARCO_STR = ft_str_to_lowercase.c ft_str_to_uppercase.c ft_strcat.c ft_strcombine.c ft_strcpy.c ft_strlen_char.c ft_strndup.c ft_strrev.c ft_strcombine_char.c ft_str_is_num.c ft_stradd.c ft_str_match.c ft_skip_spaces.c ft_str_same.c ft_strlen_char_end.c ft_is_lower.c ft_is_upper.c ft_stradd_len.c
 SRC_MARCO_TAB = ft_tabcpy.c ft_tabadd.c ft_tabadd_len.c ft_free_tab.c ft_free_tab_int.c ft_tablen.c ft_tabdup.c ft_tabadd_front.c ft_tabcat.c ft_tab_combine.c ft_tablcpy.c ft_tabndup.c ft_tabdel.c ft_tablast.c ft_free_big_tab.c ft_big_tablen.c ft_display_big_tab.c ft_display_tab.c

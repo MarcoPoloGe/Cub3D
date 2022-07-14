@@ -12,31 +12,15 @@
 
 #include "perso_marco.h"
 
-//permet de lire le fichier en entier et de verifier si le fichier est de la
-//bonne extension.
-//(si la valeur de ext est NULL alors toutes les extensions fonctionnent).
-char	*ft_read_file(char *file_name, char *ext)
+//permet de lire le fichier en entier et de le retourner sous forme de tableau.
+//(si la valeur de "ext" est NULL alors toutes les extensions fonctionnent).
+char	**ft_read_tab(char *file_name, char *ext, char sep)
 {
 	char	*file;
-	char	*line;
-	int		fd;
+	char	**tab;
 
-	if (!ft_check_ext(file_name, ext))
-		return (NULL);
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printf("Error: %s: %s\n", file_name, strerror(errno));
-		return (NULL);
-	}
-	file = NULL;
-	line = ft_get_next_line(fd);
-	while (line != NULL)
-	{
-		ft_stradd(&file, line);
-		free(line);
-		line = ft_get_next_line(fd);
-	}
-	close(fd);
-	return (file);
+	file = ft_read_file(file_name, ext);
+	tab = ft_split(file, sep);
+	free(file);
+	return (tab);
 }

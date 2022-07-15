@@ -57,5 +57,7 @@ int		main(int ac, char **av);
 int		ft_get_map(char **input_tab, t_data *data);
 void	ft_parser(char *file_name, t_data *data);
 int		ft_check_map(char **map);
+void	ft_display_img(t_img *img);
+void	ft_display_data(t_data *data);
 
 #endif

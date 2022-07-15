@@ -77,16 +77,15 @@ int	ft_get_textures(char **input_tab, t_data *data)
 	return (0);
 }
 
-t_data	*ft_parser(char *file)
+void ft_parser(char *file_name, t_data *data)
 {
-	t_data	*data;
 	int		i;
 	char	**tab;
 
 	data = ft_calloc(sizeof(t_data), 1);
-	tab = ft_read_tab(file, ".cub", '\n');
-	if (tab == 0)
-		return (0);
+	tab = ft_read_tab(file_name, ".cub", '\n');
+	if (tab == NULL)
+		return ;
 	i = 0;
 	i += ft_skip_empty(tab + i);
 	i += ft_get_textures(tab + i, data);
@@ -95,5 +94,4 @@ t_data	*ft_parser(char *file)
 	/*i += ft_get_colors(tab + i, data);
 	i += ft_skip_empty(tab + i);
 	i += ft_get_map(tab + i, data);*/
-	return (data);
 }

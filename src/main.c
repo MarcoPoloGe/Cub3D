@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:26:38 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/15 10:51:53 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/15 11:58:30 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,20 @@ void	*ft_new_image(char *path, t_data *data)
 	return (img);
 }
 
-void	load_img(t_data *data)
+void	init_img(t_data *data)
 {
-	data->img.no = ft_new_image("./assets/star1.xpm", data);
-	data->img.so = ft_new_image("./assets/star2.xpm", data);
-	data->img.we = ft_new_image("./assets/star3.xpm", data);
-	data->img.ea = ft_new_image("./assets/star4.xpm", data);
+	data->img.no = 0;
+	data->img.so = 0;
+	data->img.we = 0;
+	data->img.ea = 0;
+	data->img.f[0] = 0;
+	data->img.c[0] = 0;
 }
 
 int	main(int ac, char **av)
 {
 	t_data	data;
 
-	(void)av;
 	if (ac != 2)
 	{
 		leave(0, "Error: not enought argument\n");
@@ -85,8 +86,8 @@ int	main(int ac, char **av)
 	data.pos.y = 0;
 	data.map.map = 0;
 	data.mlx = mlx_init();
-	load_img(&data);
-	data = ft_parser(&data);
+	init_img(&data);
+	ft_parser(av[1], &data);
 	//load_map(&data, av[1]);
 	data.win = mlx_new_window(data.mlx, 1600, 1200, "Marco3D");
 	/*data.img.img = mlx_new_image(data.mlx, data.map.width * 50,

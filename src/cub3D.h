@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/14 15:18:34 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/15 14:23:04 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct s_img {
 	int		c[3];
 	int		f[3];
 
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
 }				t_img;
 
 typedef struct s_map {
@@ -51,10 +51,17 @@ typedef struct s_data {
 	t_map	map;
 }				t_data;
 
+//leave.c
 int		leave(t_data *data, char *errormsg);
 void	free_all(t_data *data);
+
+//main.c
 void	*check_keycode(int keycode, t_data *data, void *img);
 int		main(int ac, char **av);
 t_map	*ft_get_map(char **input_tab, t_data *data);
+void	*ft_new_image(char *path, t_data *data);
+
+//parser.c
+t_data	*ft_parser(char *file, t_data *data);
 
 #endif

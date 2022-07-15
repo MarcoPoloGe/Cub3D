@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:26:38 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/14 15:27:14 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/15 10:51:53 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	main(int ac, char **av)
 	data.map.map = 0;
 	data.mlx = mlx_init();
 	load_img(&data);
+	data = ft_parser(&data);
 	//load_map(&data, av[1]);
 	data.win = mlx_new_window(data.mlx, 1600, 1200, "Marco3D");
 	/*data.img.img = mlx_new_image(data.mlx, data.map.width * 50,

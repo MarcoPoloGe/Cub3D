@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:09:58 by mbelarbi          #+#    #+#             */
-/*   Updated: 2022/07/15 15:12:37 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/15 15:15:28 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,14 @@ int	ft_get_textures(char **input_tab, t_data *data)
 	return (0);
 }
 
-t_data	*ft_parser(char *file, t_data *data)
+void ft_parser(char *file_name, t_data *data)
 {
 	int		i;
 	char	**tab;
 
 	tab = ft_read_tab(file, ".cub", '\n');
 	if (tab == 0)
-		return (0);
+		return ;
 	i = 0;
 	i += ft_skip_empty(tab + i);
 	i += ft_get_textures(tab + i, data);

@@ -1,4 +1,4 @@
-SRCS	= 	${addprefix src/, main.c leave.c parser.c}	\
+SRCS	= 	${addprefix src/, main.c leave.c parser.c display.c map.c map_check.c}	\
 
 OBJS		=	${SRCS:.c=.o}
 NAME		= 	cub3D
@@ -19,6 +19,11 @@ $(NAME):	$(OBJS)
 			@$(MAKE) -C $(LBFT_PATH)
 			@$(MAKE) -C $(MLX_PATH)
 			$(GCC) $(OBJS) $(CFLAGS) -I ${MLX_PATH} -I ${LBFT_PATH} -o $(NAME) $(FRAMLIBS)
+
+test:		$(OBJS)
+			@$(MAKE) -C $(LBFT_PATH)
+			@$(MAKE) -C $(MLX_PATH)
+			$(GCC) $(OBJS) -I ${MLX_PATH} -I ${LBFT_PATH} -o $(NAME) $(FRAMLIBS)
 
 clean:
 			${RM} ${OBJS}

@@ -61,34 +61,26 @@ int	ft_forbiden_char(char **map)
 	return (0);
 }
 
-int	ft_no_wall(char c)
-{
-	if (c == ' ' || c == '1')
-		return (0);
-	else
-		return (1);
-}
-
 int	ft_no_wall_space_around(char **map, int y, int x)
 {
-	if (y > 0)
+	if (y > 0 && x < ft_strlen(map[y - 1]))
 	{
-		if (ft_no_wall(map[y - 1][x]))
+		if (map[y - 1][x] != ' ' && map[y - 1][x] != '1')
 			return (1);
 	}
 	if (x > 0)
 	{
-		if (ft_no_wall(map[y][x - 1]))
+		if (map[y][x - 1] != ' ' && map[y][x - 1] != '1')
 			return (1);
 	}
 	if (map[y + 1] && x < ft_strlen(map[y + 1]))
 	{
-		if (ft_no_wall(map[y + 1][x]))
+		if (map[y + 1][x] != ' ' && map[y + 1][x] != '1')
 			return (1);
 	}
 	if (map[x + 1])
 	{
-		if (ft_no_wall(map[y][x + 1]))
+		if (map[y][x + 1] != ' ' && map[y][x + 1] != '1')
 			return (1);
 	}
 	return (0);
@@ -105,8 +97,36 @@ int	ft_space_no_border(char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (ft_no_wall_space_around(map, y, x))
-				return (1);
+			if (map[y][x] == ' ')
+			{
+				if (ft_no_wall_space_around(map, y, x))
+					return (1);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+int	ft_end_no_border(char **map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] != '1' && map[y][x] != ' ')
+			{
+				if (y == 0 || x == 0)
+					return (1);
+				if (y == ft_tablen(map) || x == ft_strlen(map[y]) - 1)
+					return (1);
+			}
 			x++;
 		}
 		y++;
@@ -123,6 +143,8 @@ int	ft_check_map(char **map)
 	if (ft_forbiden_char(map))
 		return (1);
 	if (ft_space_no_border(map))
+		return (1);
+	if (ft_end_no_border(map))
 		return (1);
 	return (0);
 }

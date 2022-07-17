@@ -17,7 +17,7 @@ int	leave(t_data *data, char *errormsg)
 	if (data && data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (errormsg != 0)
-		ft_putstr_fd(errormsg, 1);
+		ft_putstr_fd(errormsg, 2);
 	if (data)
 		free_all(data);
 	exit(0);
@@ -35,11 +35,11 @@ void	free_all(t_data *data)
 		free(data->img.we);
 	if (data->img.ea)
 		free(data->img.ea);
-	if (data->map.map)
+	if (data->map)
 	{
 		i = -1;
-		while (data->map.map[++i])
-			free(data->map.map[i]);
-		free(data->map.map);
+		while (data->map[++i])
+			free(data->map[i]);
+		free(data->map);
 	}
 }

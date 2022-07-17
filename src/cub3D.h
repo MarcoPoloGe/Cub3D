@@ -52,11 +52,15 @@ void	free_all(t_data *data);
 //main.c
 void	*check_keycode(int keycode, t_data *data, void *img);
 int		main(int ac, char **av);
+void	*ft_new_image(char *path, t_data *data);
 
 //parser.c
-int		ft_get_map(char **input_tab, t_data *data);
 void	ft_parser(char *file_name, t_data *data);
+int		ft_get_map(char **input_tab, t_data *data);
 int		ft_check_map(char **map);
+
+//display.c
+void	ft_display_map(char **map);
 void	ft_display_img(t_img *img);
 void	ft_display_data(t_data *data);
 

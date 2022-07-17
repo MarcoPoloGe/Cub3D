@@ -14,18 +14,18 @@
 
 int	ft_get_map(char **input_tab, t_data *data)
 {
-	char	**map;
-
-	map = ft_tabdup(input_tab);
-	if (ft_check_map(map))
+	/*printf("--- MAP INPUT START ---\n");
+	ft_display_tab(input_tab);
+	printf("--- MAP INPUT END ---\n");*/
+	if (ft_check_map(input_tab))
 	{
-		printf("Error : map invalid");
-		ft_free_tab(map);
+		leave(data, "Error : map invalid\n");
+		ft_free_tab(input_tab);
 		return (0);
 	}
 	else
 	{
-		data->map = map;
-		return (ft_tablen(map));
+		data->map = ft_tabdup(input_tab);
+		return (ft_tablen(data->map));
 	}
 }

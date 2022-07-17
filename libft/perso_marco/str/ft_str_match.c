@@ -12,7 +12,7 @@
 
 #include "../perso_marco.h"
 
-// does the needle match with the start of hay
+//Does the needle match the start of hay returns 1 if it does otherwise 0.
 int	ft_str_match(char *hay, char *needle)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:26:38 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/15 11:58:30 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:18:03 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void	*check_keycode(int keycode, t_data *data, void *img)
 	if (keycode == 0)
 	{
 		data->pos.x -= 0.1;
-		img = data->img.we;
+		img = data->we.img;
 	}
 	if (keycode == 2)
 	{
 		data->pos.x += 0.1;
-		img = data->img.ea;
+		img = data->ea.img;
 	}
 	if (keycode == 1)
 	{
 		data->pos.y += 0.1;
-		img = data->img.no;
+		img = data->no.img;
 	}
 	if (keycode == 13)
 	{
 		data->pos.y -= 0.1;
-		img = data->img.so;
+		img = data->so.img;
 	}
 	return (img);
 }
@@ -67,34 +67,26 @@ void	*ft_new_image(char *path, t_data *data)
 }
 */
 
-void	*ft_new_image(char *path, t_data *data)
+void	*ft_new_image(char *path, t_img *img, t_data *data)
 {
-	void	*img;
+	void	*res;
 
-	img = mlx_xpm_file_to_image(data->mlx, path,
-			&(data->img.width), &(data->img.height));
-	if (img == NULL)
+	res = mlx_xpm_file_to_image(data->mlx, path,
+			&(img->width), &(img->height));
+	if (res == 0)
 		leave(data, "Error: could not load image\n");
-	return (img);
+	return (res);
 }
 
 void	init_img(t_img *img)
 {
-	img->img = NULL;
-	img->height = 0;
+	img->img = 0;
 	img->width = 0;
-	img->no = 0;
-	img->so = 0;
-	img->we = 0;
-	img->ea = 0;
-	//j'ai décider de les mettre a -1 pour signifier qu'il n'ont pas encore été assigné (comme str = NULL)->
-	//Vu que des valeurs correctes serait de 0 à 256;
-	img->f[0] = -1;
-	img->c[0] = -1;
-	img->f[1] = -1;
-	img->c[1] = -1;
-	img->f[2] = -1;
-	img->c[2] = -1;
+	img->height = 0;
+	img->addr = 0;
+	img->bpp = 0;
+	img->line_size = 0;
+	img->endian = 0;
 }
 
 void	init_data(t_data *data)
@@ -103,7 +95,16 @@ void	init_data(t_data *data)
 	data->map = 0;
 	data->pos.x = 0;
 	data->pos.y = 0;
-	init_img(&(data->img));
+	init_img(&(data->no));
+	init_img(&(data->so));
+	init_img(&(data->we));
+	init_img(&(data->ea));
+	data->f[0] = -1;
+	data->c[0] = -1;
+	data->f[1] = -1;
+	data->c[1] = -1;
+	data->f[2] = -1;
+	data->c[2] = -1;
 }
 
 int	main(int ac, char **av)
@@ -119,19 +120,10 @@ int	main(int ac, char **av)
 	ft_display_data(&data);
 	ft_parser(av[1], &data);
 	ft_display_data(&data);
-	//load_map(&data, av[1]);
-
-	//data.win = mlx_new_window(data.mlx, 1600, 1200, "Marco3D");
-
-
-		/*data.img.img = mlx_new_image(data.mlx, data.map.width * 50,
-			data.map.height * 50);*/
-		//is_valid_map(data.map.map, data.map.width, data.map.height);
-		//print_map(&data, 0, 0);
-		/*if (!(data.img.img))
-			leave(&data, "Error\nno img");*/
-
-		//mlx_hook(data.win, 2, 1L << 0, move_character, &data);
-		//mlx_hook(data.win, 17, 1L << 0, leave, &data);
-		//mlx_loop(data.mlx);
+	data.win = mlx_new_window(data.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Marco3D");
+	load_texture(&data);
+	//mlx_loop_hook(data.mlx, &load_texture, &data);
+	mlx_hook(data.win, 2, 1L << 0, move_character, &data);
+	mlx_hook(data.win, 17, 1L << 0, leave, &data);
+	mlx_loop(data.mlx);
 }

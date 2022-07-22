@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbelarbi <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:58:19 by mbelarbi          #+#    #+#             */
-/*   Updated: 2022/07/15 14:58:20 by mbelarbi         ###   ########.fr       */
+/*   Updated: 2022/07/22 11:32:35 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ void	ft_display_img(t_img *img)
 	printf("img.img = %p;\n", img->img);
 	printf("img.width = %i;\n", img->width);
 	printf("img.height = %i\n", img->height);
-	printf("img.c = %i,%i,%i;\n", img->c[0], img->c[1], img->c[2]);
-	printf("img.f = %i,%i,%i;\n", img->f[0], img->f[1], img->f[2]);
-	printf("img.no = %p;\n", img->no);
-	printf("img.so = %p;\n", img->so);
-	printf("img.we = %p;\n", img->we);
-	printf("img.ea = %p;\n", img->ea);
+	printf("img.addr = %p\n", img->addr);
+	printf("img.bpp = %i\n", img->bpp);
+	printf("img.line_size = %i\n", img->line_size);
+	printf("img.endian = %i\n", img->endian);
 }
 
 void	ft_display_data(t_data *data)
@@ -65,7 +63,16 @@ void	ft_display_data(t_data *data)
 	printf("data.win = %p;\n", data->win);
 	printf("pos.y = %fl;\n", data->pos.y);
 	printf("pos.x = %fl;\n", data->pos.x);
-	ft_display_img(&(data->img));
+	printf("c = %i,%i,%i;\n", data->c[0], data->c[1], data->c[2]);
+	printf("f = %i,%i,%i;\n", data->f[0], data->f[1], data->f[2]);
+	printf("no.img: \n");
+	ft_display_img(&(data->no));
+	printf("so.img: \n");
+	ft_display_img(&(data->so));
+	printf("we.img: \n");
+	ft_display_img(&(data->we));
+	printf("ea.img: \n");
+	ft_display_img(&(data->ea));
 	ft_display_map(data->map);
 	printf("--- End Struct Data ---\n");
 }

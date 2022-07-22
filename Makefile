@@ -1,4 +1,4 @@
-SRCS	= 	${addprefix src/, main.c leave.c parser.c display.c map.c map_check.c}	\
+SRCS	= 	${addprefix src/, main.c leave.c parser.c display.c map.c map_check.c raycasting.c }	\
 
 OBJS		=	${SRCS:.c=.o}
 NAME		= 	cub3D

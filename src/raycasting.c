@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/22 15:26:44 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:21:57 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	int		*pixel;
-	int		i;
+	int	*pixel;
+	int	i;
 
 	i = img->bpp - 8;
 	pixel = img->addr + (y * img->line_size + x * (img->bpp / 8));
@@ -30,18 +30,21 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 }
 
 //try de dessiner l'image en plus petit
-int	render_rect(t_img *img, t_img *color, t_rect rect)
+int	render_rect(t_img *img, t_img *color)
 {
 	int	i;
 	int	j;
 
-	i = rect.y;
-	while (i < rect.y + rect.height)
+	i = 0;
+	while (i < (img->line_size / 4) / 4)
 	{
-		j = rect.x;
-		while (j++ < rect.x + rect.width)
-			img->addr[i + j] = color->addr[i * color->line_size + j];
-			//img_pix_put(img, j, i, color->addr[i * color->line_size + j]);
+		j = -1;
+		while (j < img->line_size / 4 && (i * img->line_size + j) < (img->line_size / 4 * img->line_size / 4))
+		{
+			img->addr[i * img->line_size + j - i] = color->addr[i
+				* color->line_size + j * (color->bpp / 16)];
+				j++;
+		}
 		++i;
 	}
 	return (0);
@@ -96,14 +99,14 @@ int	load_texture(t_data *data)
 	render_background(&tmp, data->f, data->c);*/
 
 
-	tmp.img = mlx_new_image(data->mlx, 100, 100);
+	tmp.img = mlx_new_image(data->mlx, 700, 700);
 	if (!(tmp.img))
 		leave(data, "Error: no img\n");
 	tmp.addr = (int *)mlx_get_data_addr(tmp.img, &tmp.bpp,
 			&tmp.line_size, &tmp.endian);
 	data->no.addr = (int *)mlx_get_data_addr(data->no.img, &data->no.bpp,
 			&data->no.line_size, &data->no.endian);
-	render_rect(&tmp, &data->no, (t_rect){0, 0, 100, 100});
-	mlx_put_image_to_window(data->mlx, data->win, tmp.addr, 0, 0);
+	render_rect(&tmp, &data->no);
+	mlx_put_image_to_window(data->mlx, data->win, tmp.img, 0, 0);
 	return (0);
 }

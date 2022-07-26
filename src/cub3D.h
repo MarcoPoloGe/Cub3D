@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/22 14:52:15 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/26 11:12:37 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,6 @@ typedef struct s_data {
 	int		c[3];
 	int		f[3];
 }				t_data;
-
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-}	t_rect;
 
 //leave.c
 int		leave(t_data *data, char *errormsg);

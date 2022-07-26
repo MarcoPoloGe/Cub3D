@@ -19,7 +19,7 @@ void	ft_display_map(char **map)
 
 	if (map == NULL)
 	{
-		printf("map = NULL;\n");
+		printf("data.map = NULL;\n");
 		return ;
 	}
 	y = 0;

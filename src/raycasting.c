@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/26 13:21:57 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:28:41 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	int	*pixel;
-	int	i;
+	char		*pixel;
+	int		i;
 
 	i = img->bpp - 8;
-	pixel = img->addr + (y * img->line_size + x * (img->bpp / 8));
+	pixel = (char *)img->addr + (y * img->line_size + x * (img->bpp / 8));
 	while (i >= 0)
 	{
 		if (img->endian != 0)
@@ -36,16 +36,16 @@ int	render_rect(t_img *img, t_img *color)
 	int	j;
 
 	i = 0;
-	while (i < (img->line_size / 4) / 4)
+	while (i < img->line_size / 4)
 	{
 		j = -1;
-		while (j < img->line_size / 4 && (i * img->line_size + j) < (img->line_size / 4 * img->line_size / 4))
+		while (j < img->line_size / 4 && (i * img->line_size / 4 + j) < (img->line_size / 4 * img->line_size / 4))
 		{
-			img->addr[i * img->line_size + j - i] = color->addr[i
-				* color->line_size + j * (color->bpp / 16)];
+			img->addr[i * img->line_size / 4 + j] = color->addr[i
+				* color->line_size + j * (img->bpp / 8)];
 				j++;
 		}
-		++i;
+		i++;
 	}
 	return (0);
 }
@@ -59,23 +59,12 @@ int	encode_rgb(int red, int green, int blue)
 void	render_background(t_img *img, int *f, int *c)
 {
 	int	i;
-	int	j;
 
-	i = 0;
-	while (i < WINDOW_HEIGHT / 2)
-	{
-		j = -1;
-		while (j < WINDOW_WIDTH)
-			img_pix_put(img, j++, i, encode_rgb(f[0], f[1], f[2]));
-		++i;
-	}
-	while (i < WINDOW_HEIGHT)
-	{
-		j = -1;
-		while (j < WINDOW_WIDTH)
-			img_pix_put(img, j++, i, encode_rgb(c[0], c[1], c[2]));
-		++i;
-	}
+	i = -1;
+	while (++i < WINDOW_WIDTH * WINDOW_HEIGHT / 2)
+		img->addr[i] = encode_rgb(f[0], f[1], f[2]);
+	while (++i < WINDOW_WIDTH * WINDOW_HEIGHT)
+		img->addr[i] = encode_rgb(c[0], c[1], c[2]);
 }
 
 int	load_texture(t_data *data)
@@ -91,22 +80,21 @@ int	load_texture(t_data *data)
 	/*while (i >= 0 && data->map[i][j] && data->map[i][j] != 1)
 		i--;
 	d = pow((data->pos.x - i), 2) + pow((data->pos.y - j), 2);*/
-	/*tmp.img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	tmp.img = mlx_new_image(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!(tmp.img))
 		leave(data, "Error: no img\n");
 	tmp.addr = (int *)mlx_get_data_addr(tmp.img, &tmp.bpp,
 			&tmp.line_size, &tmp.endian);
-	render_background(&tmp, data->f, data->c);*/
+	render_background(&tmp, data->f, data->c);
 
-
-	tmp.img = mlx_new_image(data->mlx, 700, 700);
+	/*tmp.img = mlx_new_image(data->mlx, 100, 100);
 	if (!(tmp.img))
 		leave(data, "Error: no img\n");
 	tmp.addr = (int *)mlx_get_data_addr(tmp.img, &tmp.bpp,
 			&tmp.line_size, &tmp.endian);
 	data->no.addr = (int *)mlx_get_data_addr(data->no.img, &data->no.bpp,
 			&data->no.line_size, &data->no.endian);
-	render_rect(&tmp, &data->no);
+	render_rect(&tmp, &data->no);*/
 	mlx_put_image_to_window(data->mlx, data->win, tmp.img, 0, 0);
 	return (0);
 }

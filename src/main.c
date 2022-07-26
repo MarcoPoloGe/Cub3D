@@ -54,19 +54,6 @@ int	move_character(int keycode, t_data *data)
 	return (1);
 }
 
-/*
-void	*ft_new_image(char *path, t_data *data)
-{
-	void	*img;
-
-	img = mlx_xpm_file_to_image(data->mlx, path,
-			&data->img.width, &data->img.height);
-	if (img == NULL)
-		leave(data, "Error: could not load image\n");
-	return (img);
-}
-*/
-
 void	*ft_new_image(char *path, t_img *img, t_data *data)
 {
 	void	*res;

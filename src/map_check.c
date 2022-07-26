@@ -82,7 +82,7 @@ int	ft_no_wall_space_around(char **map, int y, int x)
 		if (map[y + 1][x] != ' ' && map[y + 1][x] != '1')
 			return (1);
 	}
-	if (map[x + 1])
+	if (map[y][x + 1])
 	{
 		if (map[y][x + 1] != ' ' && map[y][x + 1] != '1')
 			return (1);

@@ -12,25 +12,8 @@
 
 #include "cub3D.h"
 
-void	img_pix_put(t_img *img, int x, int y, int color)
-{
-	int	*pixel;
-	int	i;
-
-	i = img->bpp - 8;
-	pixel = img->addr + (y * img->line_size + x * (img->bpp / 8));
-	while (i >= 0)
-	{
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
-}
-
 //try de dessiner l'image en plus petit
-int	render_rect(t_img *img, t_img *color)
+int	render_rect_old(t_img *img, t_img *color)
 {
 	int	i;
 	int	j;
@@ -41,11 +24,60 @@ int	render_rect(t_img *img, t_img *color)
 		j = -1;
 		while (j < img->line_size / 4 && (i * img->line_size + j) < (img->line_size / 4 * img->line_size / 4))
 		{
-			img->addr[i * img->line_size + j - i] = color->addr[i
-				* color->line_size + j * (color->bpp / 16)];
+			img->addr[i * img->line_size + j] = color->addr[i * color->line_size + j * (color->bpp / 16)];
 				j++;
 		}
 		++i;
+	}
+	return (0);
+}
+
+void render_line(t_img *line, t_img *wall, int line_to_render)
+{	
+	int y;
+
+	y = 0;
+	while (y < line->height)
+	{
+		(void)line_to_render;
+		line->addr[y] = wall->addr[1]; //todo here should do calculation to choose which pixel use for the line displayed ex: line height is 64 but original image is 100;
+		++y;
+	}
+}
+
+void display_line(t_data *data, t_img *wall, int line_to_render, int pos_y, int pos_x, int len)
+{
+	t_img line;
+
+	line.width = 1;
+	line.height = len;
+	line.img = mlx_new_image(data->mlx, line.width, line.height);
+	if (!(line.img))
+		leave(data, "Error: no img\n");
+	line.addr = (int *)mlx_get_data_addr(line.img, &line.bpp,
+										&line.line_size, &line.endian);
+	data->no.addr = (int *)mlx_get_data_addr(data->no.img, &data->no.bpp,
+											 &data->no.line_size, &data->no.endian);
+	render_line(&line, wall, line_to_render);
+	mlx_put_image_to_window(data->mlx, data->win, line.img, pos_x , pos_y);
+}
+
+
+int	render_image(t_img *img, t_img *color)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < img->height)
+	{
+		x = 0;
+		while (x < img->width)
+		{
+			img->addr[(y * img->width) + x] = color->addr[((y * color->width)) + x];
+			x++;
+		}
+		++y;
 	}
 	return (0);
 }
@@ -83,7 +115,6 @@ int	load_texture(t_data *data)
 	int		i;
 	int		j;
 	double	d;
-	t_img	tmp;
 
 	i = (int)data->pos.y;
 	j = (int)data->pos.x;
@@ -98,15 +129,16 @@ int	load_texture(t_data *data)
 			&tmp.line_size, &tmp.endian);
 	render_background(&tmp, data->f, data->c);*/
 
-
-	tmp.img = mlx_new_image(data->mlx, 700, 700);
-	if (!(tmp.img))
-		leave(data, "Error: no img\n");
-	tmp.addr = (int *)mlx_get_data_addr(tmp.img, &tmp.bpp,
-			&tmp.line_size, &tmp.endian);
 	data->no.addr = (int *)mlx_get_data_addr(data->no.img, &data->no.bpp,
 			&data->no.line_size, &data->no.endian);
-	render_rect(&tmp, &data->no);
-	mlx_put_image_to_window(data->mlx, data->win, tmp.img, 0, 0);
+
+	i = 30;
+	while (i < 100)
+	{
+		display_line(data, &data->no, 0, (100 - (i / 2)), i, i);
+	    i++;
+	}
+	//render_image(&tmp, &data->no);
+//	mlx_put_image_to_window(data->mlx, data->win, tmp.img, 0, 0);
 	return (0);
 }

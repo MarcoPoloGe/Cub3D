@@ -18,6 +18,6 @@
 # include "../printf/ft_printf.h"
 # include "../perso_marco/perso_marco.h"
 
-char	*ft_strjoin_free(char const *s1, char const *s2);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 #endif

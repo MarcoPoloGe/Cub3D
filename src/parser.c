@@ -12,22 +12,22 @@
 
 #include "cub3D.h"
 
-int	check_data_good(t_data *data)
+int	check_assets_good(t_assets *assets)
 {
-	if (data->c[0] < 0 || data->c[0] > 255)
+	if (assets->c[0] < 0 || assets->c[0] > 255)
 		return (0);
-	if (data->c[1] < 0 || data->c[1] > 255)
+	if (assets->c[1] < 0 || assets->c[1] > 255)
 		return (0);
-	if (data->c[2] < 0 || data->c[2] > 255)
+	if (assets->c[2] < 0 || assets->c[2] > 255)
 		return (0);
-	if (data->f[0] < 0 || data->f[0] > 255)
+	if (assets->f[0] < 0 || assets->f[0] > 255)
 		return (0);
-	if (data->f[1] < 0 || data->f[1] > 255)
+	if (assets->f[1] < 0 || assets->f[1] > 255)
 		return (0);
-	if (data->f[2] < 0 || data->f[2] > 255)
+	if (assets->f[2] < 0 || assets->f[2] > 255)
 		return (0);
-	if (data->no.img == 0 || data->so.img == 0
-		|| data->we.img == 0 || data->ea.img == 0)
+	if (assets->no.ptr == 0 || assets->so.ptr == 0
+		|| assets->we.ptr == 0 || assets->ea.ptr == 0)
 		return (0);
 	return (1);
 }
@@ -54,12 +54,9 @@ void	ft_add_color(int *rgb, char *input, t_data *data)
 	ft_free_tab(fc);
 }
 
-void	ft_add_texture(void **texture_adress, char *texture_path, t_img *img,
-	t_data *data)
+void	ft_add_texture(t_img *img, char *texture_path, t_data *data)
 {
-	if (*texture_adress)
-		leave(data, "Error 6: asset or color\n");
-	(*texture_adress) = ft_new_image(texture_path, img, data);
+	ft_file_to_image(texture_path, img, data);
 }
 
 int	ft_get_textures(char **input_tab, t_data *data)
@@ -69,27 +66,75 @@ int	ft_get_textures(char **input_tab, t_data *data)
 	i = -1;
 	while (input_tab[++i])
 	{
-		if (ft_str_match(input_tab[i], "NO "))
-			ft_add_texture(&(data->no.img), input_tab[i] + 3, &data->no, data);
-		else if (ft_str_match(input_tab[i], "SO "))
-			ft_add_texture(&(data->so.img), input_tab[i] + 3, &data->so, data);
+		if (ft_str_match(input_tab[i], "SO "))
+			ft_add_texture(&(data->assets.so), input_tab[i] + 3, data);
+		else if (ft_str_match(input_tab[i], "NO "))
+			ft_add_texture(&(data->assets.no), input_tab[i] + 3, data);
 		else if (ft_str_match(input_tab[i], "WE "))
-			ft_add_texture(&(data->we.img), input_tab[i] + 3, &data->we, data);
+			ft_add_texture(&(data->assets.we), input_tab[i] + 3, data);
 		else if (ft_str_match(input_tab[i], "EA "))
-			ft_add_texture(&(data->ea.img), input_tab[i] + 3, &data->ea, data);
+			ft_add_texture(&(data->assets.ea), input_tab[i] + 3, data);
 		else if (ft_str_match(input_tab[i], "F "))
-			ft_add_color(data->f, input_tab[i] + 2, data);
+			ft_add_color(data->assets.f, input_tab[i] + 2, data);
 		else if (ft_str_match(input_tab[i], "C "))
-			ft_add_color(data->c, input_tab[i] + 2, data);
+			ft_add_color(data->assets.c, input_tab[i] + 2, data);
 		else if (ft_strlen(input_tab[i]) > 0)
 			break ;
 	}
-	if (!check_data_good(data))
+	if (!check_assets_good(&(data->assets)))
 		leave(data, "Error 7: asset or color\n");
 	return (i);
 }
 
-void ft_parser(char *file_name, t_data *data)
+void	ft_update_player_info(int y, int x, char dir_char, t_camera *camera)
+{
+	camera->coord.x = (float)x;
+	camera->coord.y = (float)y;
+	if (dir_char == 'N')
+	{
+		camera->dir.x = camera->coord.x;
+		camera->dir.y = camera->coord.y - DIR_VECTOR_LEN;
+	}
+	else if (dir_char == 'S')
+	{
+		camera->dir.x = camera->coord.x;
+		camera->dir.y = camera->coord.y + DIR_VECTOR_LEN;
+	}
+	else if (dir_char == 'E')
+	{
+		camera->dir.x = camera->coord.x + DIR_VECTOR_LEN;
+		camera->dir.y = camera->coord.y;
+	}
+	else if (dir_char == 'W')
+	{
+		camera->dir.x = camera->coord.x - DIR_VECTOR_LEN;
+		camera->dir.y = camera->coord.y;
+	}
+}
+
+void	ft_get_player_infos(char **map, t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'N' || map[y][x] == 'S'
+				|| map[y][x] == 'E' || map[y][x] == 'W')
+			{
+				ft_update_player_info(y, x, map[y][x], &(data->camera));
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	ft_parser(char *file_name, t_data *data)
 {
 	int		i;
 	char	**tab;
@@ -97,11 +142,12 @@ void ft_parser(char *file_name, t_data *data)
 	tab = ft_read_tab(file_name, ".cub", '\n');
 	if (tab == 0)
 		leave(NULL, "Error : invalid file\n");
-	printf("--- RAW INPUT START ---\n");
-	ft_display_tab(tab);
-	printf("--- RAW INPUT END ---\n");
+	//printf("--- RAW INPUT START ---\n");
+	//ft_display_tab(tab);
+	//printf("--- RAW INPUT END ---\n");
 	i = 0;
 	i += ft_get_textures(tab + i, data);
-	i += ft_get_map(tab + i, data);
+	ft_get_map(tab + i, data);
+	ft_get_player_infos(data->map, data);
 	ft_free_tab(tab);
 }

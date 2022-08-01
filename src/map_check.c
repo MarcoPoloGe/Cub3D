@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-int	ft_player_count_good(char **map, t_data *data)
+int	ft_player_count_good(char **map)
 {
 	int	player_count;
 	int	x;
@@ -26,13 +26,9 @@ int	ft_player_count_good(char **map, t_data *data)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'N' || map[y][x] == 'S')
-			{
-				data->pos.x = x;
-				data->pos.y = y;
 				player_count++;
-			}
 			if (map[y][x] == 'E' || map[y][x] == 'W')
-				player_count++; //useless? mettre en haut?
+				player_count++;
 			x++;
 		}
 		y++;
@@ -138,11 +134,11 @@ int	ft_end_no_border(char **map)
 	return (0);
 }
 
-int	ft_check_map(char **map, t_data *data)
+int	ft_check_map(char **map)
 {
 	if (map == NULL || *map == NULL)
 		return (1);
-	if (ft_player_count_good(map, data))
+	if (ft_player_count_good(map))
 		return (1);
 	if (ft_forbiden_char(map))
 		return (1);

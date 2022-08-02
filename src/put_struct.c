@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-void	ft_display_map(char **map)
+void	ft_put_map(char **map)
 {
 	int	x;
 	int	y;
@@ -38,14 +38,14 @@ void	ft_display_map(char **map)
 	printf("-- end map --\n");
 }
 
-void	ft_display_img(t_img *img)
+void	ft_put_img(t_img *img)
 {
 	if (img == NULL)
 	{
 		printf("img = NULL;\n");
 		return ;
 	}
-	printf("img.img = %p\n", img->img);
+	printf("img.ptr = %p\n", img->ptr);
 	printf("img.width = %i\n", img->width);
 	printf("img.height = %i\n", img->height);
 	printf("img.addr = %p\n", img->addr);
@@ -54,25 +54,55 @@ void	ft_display_img(t_img *img)
 	printf("img.endian = %i\n", img->endian);
 }
 
-void	ft_display_data(t_data *data)
+void ft_put_assets(t_assets assets)
+{
+	printf("c = %i,%i,%i\n", assets.c[0], assets.c[1], assets.c[2]);
+	printf("f = %i,%i,%i\n", assets.f[0], assets.f[1], assets.f[2]);
+	printf("no.img.ptr = %p\n", assets.no.ptr);
+	printf("so.img.ptr = %p\n", assets.so.ptr);
+	printf("we.img.ptr = %p\n", assets.we.ptr);
+	printf("ea.img.ptr = %p\n", assets.ea.ptr);
+}
+
+void ft_impact(t_impact impact)
+{
+	printf("impact.distance: %fl\n", impact.distance);
+	printf("impact.wall: %p\n", impact.wall->ptr);
+	printf("impact.wall_x: %i\n", impact.wall_x);
+}
+
+void ft_put_ray(t_ray ray)
+{
+	printf("ray.angle: %fl\n", ray.angle);
+	printf("ray.");
+	ft_impact(ray.impact);
+}
+
+void	ft_put_camera(t_camera camera)
+{
+	int i;
+	printf("camera.coord.y: %fl\n", camera.coord.y);
+	printf("camera.coord.x: %fl\n", camera.coord.x);
+	printf("camera.dir.y:   %fl\n", camera.dir.y);
+	printf("camera.dir.x:   %fl\n", camera.dir.x);
+	i = 0;
+	while (camera.ray_list + i != NULL)
+	{
+		ft_put_ray(camera.ray_list[i]);
+	    i++;
+	}
+}
+
+void	ft_put_data(t_data *data)
 {
 	if (data == NULL)
 		return ;
 	printf("--- Start Struct Data ---\n");
 	printf("data.mlx = %p\n", data->mlx);
 	printf("data.win = %p\n", data->win);
-	printf("pos.y = %fl\n", data->pos.y);
-	printf("pos.x = %fl\n", data->pos.x);
-	printf("c = %i,%i,%i\n", data->c[0], data->c[1], data->c[2]);
-	printf("f = %i,%i,%i\n", data->f[0], data->f[1], data->f[2]);
-	printf("no.img: \n");
-	ft_display_img(&(data->no));
-	printf("so.img: \n");
-	ft_display_img(&(data->so));
-	printf("we.img: \n");
-	ft_display_img(&(data->we));
-	printf("ea.img: \n");
-	ft_display_img(&(data->ea));
-	ft_display_map(data->map);
+	ft_put_camera(data->camera);
+	ft_put_assets(data->assets);
+
+	ft_put_map(data->map);
 	printf("--- End Struct Data ---\n");
 }

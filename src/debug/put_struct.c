@@ -54,7 +54,7 @@ void	ft_put_img(t_img *img)
 	printf("img.endian = %i\n", img->endian);
 }
 
-void ft_put_assets(t_assets assets)
+void	ft_put_assets(t_assets assets)
 {
 	printf("c = %i,%i,%i\n", assets.c[0], assets.c[1], assets.c[2]);
 	printf("f = %i,%i,%i\n", assets.f[0], assets.f[1], assets.f[2]);
@@ -64,7 +64,7 @@ void ft_put_assets(t_assets assets)
 	printf("ea.img.ptr = %p\n", assets.ea.ptr);
 }
 
-void ft_impact(t_impact impact)
+void	ft_impact(t_impact impact)
 {
 	printf("impact.coord.y: %fl\n", impact.coord.y);
 	printf("impact.coord.x: %fl\n", impact.coord.x);
@@ -73,7 +73,7 @@ void ft_impact(t_impact impact)
 	printf("impact.wall_x: %i\n", impact.wall_x);
 }
 
-void ft_put_ray(t_ray ray)
+void	ft_put_ray(t_ray ray)
 {
 	printf("ray.angle: %fl\n", ray.angle);
 	printf("ray.");
@@ -82,7 +82,8 @@ void ft_put_ray(t_ray ray)
 
 void	ft_put_camera(t_camera camera)
 {
-	int i;
+	int	i;
+
 	printf("camera.coord.y: %fl\n", camera.coord.y);
 	printf("camera.coord.x: %fl\n", camera.coord.x);
 	printf("camera.dir.y:   %fl\n", camera.dir.y);
@@ -91,7 +92,7 @@ void	ft_put_camera(t_camera camera)
 	while (camera.ray_list + i != NULL)
 	{
 		ft_put_ray(camera.ray_list[i]);
-	    i++;
+		i++;
 	}
 }
 

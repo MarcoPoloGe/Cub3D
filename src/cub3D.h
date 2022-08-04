@@ -60,7 +60,7 @@ typedef struct s_img
 
 typedef struct s_impact
 {
-	t_coord coord;
+	t_coord	coord;
 	t_img	*wall; // give the texture of the wall that was hit
 	int		wall_x; // x of the wall where the ray hit;
 }	t_impact;
@@ -75,7 +75,7 @@ typedef struct s_camera
 {
 	t_ray	*ray_list;
 	t_coord	coord;
-	double dir_angle; // may replace dir coord but not sur yet;
+	double	dir_angle; // may replace dir coord but not sur yet;
 	t_coord	dir; // direction of the camera
 }	t_camera;
 
@@ -139,7 +139,7 @@ t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle);
 void	init_data(t_data *data);
 
 //move.c
-int keycode_handling(int keycode, t_data *data);
+int		keycode_handling(int keycode, t_data *data);
 
 //map_check.c
 void	ft_get_player_infos(char **map, t_data *data);

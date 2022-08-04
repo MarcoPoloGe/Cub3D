@@ -52,9 +52,9 @@ int	render_rect(t_img *img, t_img *color)
 	return (0);
 }
 
-void render_line(t_img *line, t_img *wall, int line_to_render)
+void	render_line(t_img *line, t_img *wall, int line_to_render)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	while (y < line->height)
@@ -65,13 +65,13 @@ void render_line(t_img *line, t_img *wall, int line_to_render)
 	}
 }
 
-void display_line(t_data *data, t_img *wall, int line_to_render, int pos_y, int pos_x, int len) //should be called display_wall_vertical_line()
+void	display_line(t_data *data, t_img *wall, int line_to_render, int pos_y, int pos_x, int len) //should be called display_wall_vertical_line()
 {
-	t_img line;
+	t_img	line;
 
 	ft_new_image(&line, 1, len, data);
 	render_line(&line, wall, line_to_render);
-	mlx_put_image_to_window(data->mlx, data->win, line.ptr, pos_x , pos_y);
+	mlx_put_image_to_window(data->mlx, data->win, line.ptr, pos_x, pos_y);
 	mlx_destroy_image(data->mlx, line.ptr);
 }
 
@@ -79,7 +79,7 @@ int	load_texture(t_data *data)
 {
 	int		i;
 
-	display_background(data->assets ,data);
+	display_background(data->assets, data);
 	i = 30;
 	while (i < 100)
 	{

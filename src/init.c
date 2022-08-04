@@ -11,7 +11,7 @@ void	init_img(t_img *img)
 	img->endian = 0;
 }
 
-void init_assets(t_assets *assets)
+void	init_assets(t_assets *assets)
 {
 	init_img(&(assets->no));
 	init_img(&(assets->so));
@@ -25,7 +25,7 @@ void init_assets(t_assets *assets)
 	assets->c[2] = -1;
 }
 
-void init_camera(t_camera *camera)
+void	init_camera(t_camera *camera)
 {
 	camera->ray_list = NULL;
 	camera->dir.y = DIR_VECTOR_LEN;
@@ -43,9 +43,9 @@ void	init_data(t_data *data)
 	data->map = 0;
 }
 
-t_ray *init_rays(t_camera *camera) //todo
+t_ray	*init_rays(t_camera *camera) //todo
 {
-	t_ray *ray_list;
+	t_ray	*ray_list;
 
 	ray_list = NULL;
 	(void)ray_list;

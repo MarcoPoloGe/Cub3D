@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../src/cub3D.h"
 
 void	ft_put_map(char **map)
 {
@@ -66,7 +66,9 @@ void ft_put_assets(t_assets assets)
 
 void ft_impact(t_impact impact)
 {
-	printf("impact.distance: %fl\n", impact.distance);
+	printf("impact.coord.y: %fl\n", impact.coord.y);
+	printf("impact.coord.x: %fl\n", impact.coord.x);
+	printf("impact.distance: %fl\n", impact.coord.y);
 	printf("impact.wall: %p\n", impact.wall->ptr);
 	printf("impact.wall_x: %i\n", impact.wall_x);
 }

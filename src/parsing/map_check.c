@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../src/cub3D.h"
 
 int	ft_player_count_good(char **map)
 {

@@ -23,18 +23,18 @@ int	leave(t_data *data, char *errormsg)
 	exit(0);
 }
 
-void	free_all(t_data *data)
+void	free_all(t_data *data) //todo update so that it free everything in data.
 {
 	int	i;
 
-	if (data->no.img)
-		free(data->no.img);
-	if (data->so.img)
-		free(data->so.img);
-	if (data->we.img)
-		free(data->we.img);
-	if (data->ea.img)
-		free(data->ea.img);
+	if (data->assets.no.ptr)
+		free(data->assets.no.ptr);
+	if (data->assets.so.ptr)
+		free(data->assets.so.ptr);
+	if (data->assets.we.ptr)
+		free(data->assets.we.ptr);
+	if (data->assets.ea.ptr)
+		free(data->assets.ea.ptr);
 	if (data->map)
 	{
 		i = -1;

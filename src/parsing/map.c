@@ -10,14 +10,62 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../src/cub3D.h"
+
+void	ft_init_player_info(int y, int x, char dir_char, t_camera *camera)
+{
+	camera->coord.x = (float)x;
+	camera->coord.y = (float)y;
+	if (dir_char == 'N')
+	{
+		camera->dir.x = camera->coord.x;
+		camera->dir.y = camera->coord.y - DIR_VECTOR_LEN;
+	}
+	else if (dir_char == 'S')
+	{
+		camera->dir.x = camera->coord.x;
+		camera->dir.y = camera->coord.y + DIR_VECTOR_LEN;
+	}
+	else if (dir_char == 'E')
+	{
+		camera->dir.x = camera->coord.x + DIR_VECTOR_LEN;
+		camera->dir.y = camera->coord.y;
+	}
+	else if (dir_char == 'W')
+	{
+		camera->dir.x = camera->coord.x - DIR_VECTOR_LEN;
+		camera->dir.y = camera->coord.y;
+	}
+}
+
+void	ft_get_player_infos(char **map, t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'N' || map[y][x] == 'S'
+				|| map[y][x] == 'E' || map[y][x] == 'W')
+			{
+				ft_init_player_info(y, x, map[y][x], &(data->camera));
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
 int	ft_get_map(char **input_tab, t_data *data)
 {
 	/*printf("--- MAP INPUT START ---\n");
 	ft_display_tab(input_tab);
 	printf("--- MAP INPUT END ---\n");*/
-	if (ft_check_map(input_tab, data))
+	if (ft_check_map(input_tab))
 	{
 		leave(data, "Error : map invalid\n");
 		ft_free_tab(input_tab);

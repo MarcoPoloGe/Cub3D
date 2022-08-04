@@ -1,11 +1,14 @@
-SRCS	= 	${addprefix src/, main.c leave.c parser.c display.c map.c map_check.c raycasting.c }	\
+
+SRCS	= 	${addprefix src/, main.c leave.c raycasting.c display_background.c img.c coord_tools.c init.c move.c ray.c}
+SRCS	+= 	${addprefix src/parsing/, parser.c map.c map_check.c}
+SRCS	+= 	${addprefix src/debug/, put_struct.c render_fdf.c}
 
 OBJS		=	${SRCS:.c=.o}
 NAME		= 	cub3D
 AR			=	ar rcs
 GCC			=	gcc
 RM			= 	rm -f
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 MLX_PATH	=	./mlx/
 LBFT_PATH	=	./libft/
 FRAMLIBS	=	-L ${LBFT_PATH} -lft -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit

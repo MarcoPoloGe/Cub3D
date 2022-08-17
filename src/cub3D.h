@@ -91,6 +91,7 @@ typedef struct s_assets
 
 typedef struct s_data
 {
+	t_img		frame;
 	void		*mlx;
 	void		*win;
 	t_assets	assets;
@@ -130,7 +131,7 @@ int		load_texture(t_data *data);
 int		ft_fdf_render(t_data *data);
 
 //display_backgroud.c
-void	display_background(t_assets assets, t_data *data);
+void	render_background(t_img *frame, t_assets assets);
 
 //coord_tools.c
 double	ft_degrees_to_radian(double degrees);
@@ -146,5 +147,8 @@ int		keycode_handling(int keycode, t_data *data);
 
 //map_check.c
 void	ft_get_player_infos(char **map, t_data *data);
+//frame.c
+void	ft_put_pixel_frame(t_img *frame, int y, int x, int color);
+void ft_push_frame(t_data *data);
 
 #endif

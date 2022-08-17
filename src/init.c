@@ -28,6 +28,7 @@ void	init_assets(t_assets *assets)
 void	init_camera(t_camera *camera)
 {
 	camera->ray_list = NULL;
+	camera->dir_angle = 0;
 	camera->dir.y = DIR_VECTOR_LEN;
 	camera->dir.x = 0;
 	camera->coord.y = 0;
@@ -38,6 +39,7 @@ void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
+	ft_new_image(&(data->frame), WINDOW_WIDTH, WINDOW_HEIGHT, data);
 	init_assets(&(data->assets));
 	init_camera(&(data->camera));
 	//init_rays(&(data->camera));

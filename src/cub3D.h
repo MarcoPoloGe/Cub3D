@@ -95,7 +95,6 @@ typedef struct s_data
 	void		*win;
 	t_assets	assets;
 	t_camera	camera;
-	t_img		frame;
 	char		**map;
 }				t_data;
 

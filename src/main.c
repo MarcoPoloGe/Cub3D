@@ -20,7 +20,6 @@ int	main(int ac, char **av)
 		leave(0, "Error: not enough argument\n");
 
 	init_data(&data);
-	//ft_put_data(&data);
 	ft_parser(av[1], &data);
 	ft_put_data(&data);
 

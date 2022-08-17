@@ -1,7 +1,5 @@
 #include "../src/cub3D.h"
 
-
-
 void	ft_render_pixel_line(t_pos start, t_pos end, int color, t_data *data)
 {
 	int	dx;
@@ -132,50 +130,35 @@ t_pos	ft_coord_to_pos(t_coord input)
 {
 	t_pos	result;
 
-	result.x = (int)input.x;
-	result.y = (int)input.y;
-	return (result);
-}
-
-t_pos	ft_coord_to_pos_scaled(t_coord input)
-{
-	t_pos	result;
-
 	result.x = (int)(input.x * FDF_RENDER_SIZE + (FDF_RENDER_SIZE / 2));
 	result.y = (int)(input.y * FDF_RENDER_SIZE + (FDF_RENDER_SIZE / 2));
 	return (result);
 }
 
-void	ft_render_player(t_data *data)
+void	ft_render_player_fov(t_data *data)
 {
-	t_pos		dir;
-	t_pos		coord;
-
-	coord = ft_coord_to_pos_scaled(data->camera.coord);
-	dir = ft_coord_to_pos_scaled(data->camera.dir);
-
-	ft_render_pixel_line(coord, dir, COLOR_PLAYER_DIR, data);
-}
-
-void	ft_render_fov(t_data *data)
-{
-	t_camera	*camera;
+	t_coord dir;
+	t_coord coord;
 	t_coord		fov_left;
 	t_coord		fov_right;
 
-	camera = &(data->camera);
+	coord = data->camera.coord;
+	dir.y = coord.y - DIR_VECTOR_LEN;
+	dir.x = coord.x;
 
-	fov_left = ft_rotate_point(camera->coord, camera->dir, FOV / 2);
-	fov_right = ft_rotate_point(camera->coord, camera->dir, -(FOV / 2));
+	dir = ft_rotate_point(coord, dir, data->camera.dir_angle);
+	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(dir), COLOR_PLAYER_DIR, data);
 
-	ft_render_pixel_line(ft_coord_to_pos_scaled(camera->coord), ft_coord_to_pos_scaled(fov_right), COLOR_FOV, data);
-	ft_render_pixel_line(ft_coord_to_pos_scaled(camera->coord), ft_coord_to_pos_scaled(fov_left), COLOR_FOV, data);
+	fov_left = ft_rotate_point(coord, dir, FOV / 2);
+	fov_right = ft_rotate_point(coord, dir, -(FOV / 2));
+	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(fov_right), COLOR_FOV, data);
+	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(fov_left), COLOR_FOV, data);
 }
 
 void	ft_render_ray(t_coord coord, t_ray ray, t_data *data) //not tested yet
 {
 	ft_render_one_px(ray.impact.coord.y, ray.impact.coord.x, COLOR_COLLISION, data);
-	ft_render_pixel_line(ft_coord_to_pos_scaled(coord), ft_coord_to_pos_scaled(ray.impact.coord), COLOR_RAY, data);
+	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(ray.impact.coord), COLOR_RAY, data);
 }
 
 void	ft_render_rays(t_data *data) //not tested yet
@@ -201,8 +184,7 @@ int	ft_fdf_render(t_data *data)
 
 
 	ft_render_grid(data->map, FDF_RENDER_SIZE, data);
-	ft_render_fov(data);
-	ft_render_player(data);
+	ft_render_player_fov(data);
 	ft_render_rays(data);
 
 	ft_push_frame(data);

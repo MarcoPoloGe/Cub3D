@@ -88,9 +88,9 @@ void	ft_render_cube_wall(int pos_y, int pos_x, int size, int color, t_data *data
 	ft_render_cube_filled(pos_y + offset, pos_x + offset, size - offset * 2 + 1, color, data);
 }
 
-void	ft_render_one_px(int pos_y, int pos_x, int color, t_data *data)
+void	ft_render_one_px(t_pos pos, int color, t_data *data)
 {
-	ft_put_pixel_frame(&(data->frame), pos_y, pos_x, color);
+	ft_put_pixel_frame(&(data->frame), pos.y, pos.x, color);
 }
 
 void	ft_render_grid(char **map, int size, t_data *data)
@@ -155,10 +155,23 @@ void	ft_render_player_fov(t_data *data)
 	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(fov_left), COLOR_FOV, data);
 }
 
-void	ft_render_ray(t_coord coord, t_ray ray, t_data *data) //not tested yet
+void	ft_render_ray(t_coord coord, t_ray ray, t_data *data)
 {
-	ft_render_one_px(ray.impact->coord.y, ray.impact->coord.x, COLOR_COLLISION, data);
-	ft_render_pixel_line(ft_coord_to_pos_scaled(coord), ft_coord_to_pos_scaled(ray.impact->coord), COLOR_RAY, data);
+	t_coord fake_impact;
+
+	if(ray.impact == NULL)
+	{
+		fake_impact.y = coord.y - DIR_VECTOR_LEN;
+		fake_impact.x = coord.x;
+		fake_impact = ft_rotate_point(coord, fake_impact, ray.angle);
+		ft_render_one_px(ft_coord_to_pos(fake_impact), COLOR_COLLISION, data);
+		ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(fake_impact), COLOR_RAY, data);
+	}
+	else
+	{
+		ft_render_one_px(ft_coord_to_pos(ray.impact->coord), COLOR_COLLISION, data);
+		ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(ray.impact->coord), COLOR_RAY, data);
+	}
 }
 
 void	ft_render_rays(t_data *data) //not tested yet

@@ -174,8 +174,8 @@ void	ft_render_fov(t_data *data)
 
 void	ft_render_ray(t_coord coord, t_ray ray, t_data *data) //not tested yet
 {
-	ft_render_one_px(ray.impact.coord.y, ray.impact.coord.x, COLOR_COLLISION, data);
-	ft_render_pixel_line(ft_coord_to_pos_scaled(coord), ft_coord_to_pos_scaled(ray.impact.coord), COLOR_RAY, data);
+	ft_render_one_px(ray.impact->coord.y, ray.impact->coord.x, COLOR_COLLISION, data);
+	ft_render_pixel_line(ft_coord_to_pos_scaled(coord), ft_coord_to_pos_scaled(ray.impact->coord), COLOR_RAY, data);
 }
 
 void	ft_render_rays(t_data *data) //not tested yet
@@ -188,7 +188,7 @@ void	ft_render_rays(t_data *data) //not tested yet
 	ray_list = camera->ray_list;
 
 	i = 0;
-	while (ray_list + i)
+	while (i < WINDOW_WIDTH)
 	{
 		ft_render_ray(camera->coord, ray_list[i], data);
 		i++;
@@ -203,7 +203,7 @@ int	ft_fdf_render(t_data *data)
 	ft_render_grid(data->map, FDF_RENDER_SIZE, data);
 	ft_render_fov(data);
 	ft_render_player(data);
-	ft_render_rays(data);
+//	ft_render_rays(data);
 
 	ft_push_frame(data);
 	return (0);

@@ -42,25 +42,31 @@ void	init_data(t_data *data)
 	ft_new_image(&(data->frame), WINDOW_WIDTH, WINDOW_HEIGHT, data);
 	init_assets(&(data->assets));
 	init_camera(&(data->camera));
-	//init_rays(&(data->camera));
+	init_rays(&(data->camera), data);
 	data->map = 0;
 }
 
-/*t_ray	*init_rays(t_camera *camera) //todo
+t_ray	*init_rays(t_camera *camera, t_data *data) //todo
 {
 	t_ray	*ray_list;
 	double	angle;
 	int		i;
 
-	angle = ft_degrees_to_radian(angle);
-	ray_list = NULL;
-	ray_list = malloc(sizeof(t_ray) * (WINDOW_WIDTH + 1));
+	ray_list = malloc(sizeof(t_ray) * (WINDOW_WIDTH));
 	i = -1;
 	while (++i < WINDOW_WIDTH)
 	{
-		camera->dir.x -= 90;
-		camera->dir.y -= 90;
+		(void)data;
+		//printf("%f\n", FOV / WINDOW_WIDTH * i);
+		angle = -(FOV / 2) + ((double)FOV / (double)WINDOW_WIDTH * (double)i);
+		ray_list[i].angle = angle;
+		ray_list[i].impact = 0;
+		/*ray_list[i].impact.coord.x = 0;
+		ray_list[i].impact.coord.y = 0;
+		ray_list[i].impact.wall = &data->assets.no;
+		ray_list[i].impact.wall_x = 0;*/
+		printf("angle %d = %f\n", i, angle);
 	}
+	camera->ray_list = ray_list;
 	return (ray_list);
-
-}*/
+}

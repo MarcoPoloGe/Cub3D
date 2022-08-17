@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   put_struct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:58:19 by mbelarbi          #+#    #+#             */
-/*   Updated: 2022/07/22 11:32:35 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:57:49 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,16 @@ void	ft_put_assets(t_assets assets)
 	printf("ea.img.ptr = %p\n", assets.ea.ptr);
 }
 
-void	ft_impact(t_impact impact)
+void	ft_impact(t_impact *impact)
 {
-	printf("impact.coord.y: %fl\n", impact.coord.y);
-	printf("impact.coord.x: %fl\n", impact.coord.x);
-	printf("impact.distance: %fl\n", impact.coord.y);
-	printf("impact.wall: %p\n", impact.wall->ptr);
-	printf("impact.wall_x: %i\n", impact.wall_x);
+	if (impact != 0)
+	{
+		printf("impact.coord.y: %fl\n", impact->coord.y);
+		printf("impact.coord.x: %fl\n", impact->coord.x);
+		printf("impact.distance: %fl\n", impact->coord.y);
+		printf("impact.wall: %p\n", impact->wall->ptr);
+		printf("impact.wall_x: %i\n", impact->wall_x);
+	}
 }
 
 void	ft_put_ray(t_ray ray)
@@ -89,7 +92,7 @@ void	ft_put_camera(t_camera camera)
 	printf("camera.dir.y:   %fl\n", camera.dir.y);
 	printf("camera.dir.x:   %fl\n", camera.dir.x);
 	i = 0;
-	while (camera.ray_list + i != NULL)
+	while (i < WINDOW_WIDTH)
 	{
 		ft_put_ray(camera.ray_list[i]);
 		i++;

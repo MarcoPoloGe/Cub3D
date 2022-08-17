@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/17 15:22:19 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:54:48 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_impact
 typedef struct s_ray
 {
 	double		angle;
-	t_impact	impact;
+	t_impact	*impact;
 }	t_ray;
 
 typedef struct s_camera
@@ -96,7 +96,6 @@ typedef struct s_data
 	void		*win;
 	t_assets	assets;
 	t_camera	camera;
-	t_img		frame;
 	char		**map;
 }				t_data;
 
@@ -140,7 +139,7 @@ t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle);
 
 //init.c
 void	init_data(t_data *data);
-t_ray	*init_rays(t_camera *camera);
+t_ray	*init_rays(t_camera *camera, t_data *data);
 
 //move.c
 int		keycode_handling(int keycode, t_data *data);
@@ -149,6 +148,6 @@ int		keycode_handling(int keycode, t_data *data);
 void	ft_get_player_infos(char **map, t_data *data);
 //frame.c
 void	ft_put_pixel_frame(t_img *frame, int y, int x, int color);
-void ft_push_frame(t_data *data);
+void	ft_push_frame(t_data *data);
 
 #endif

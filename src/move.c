@@ -8,6 +8,7 @@ void	ft_rotate_camera(t_camera *camera, double angle)
 		camera->dir_angle += 360;
 	if(camera->dir_angle >= 360)
 		camera->dir_angle -= 360;
+	printf("angle: %f\n", camera->dir_angle);
 }
 
 void	ft_move_player(double move, t_data *data) // has to calculate where to move both player coord and player dir

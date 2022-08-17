@@ -79,7 +79,7 @@ int	load_texture(t_data *data)
 {
 	int		i;
 
-	display_background(data->assets, data);
+	render_background(&(data->frame), data->assets);
 	i = 30;
 	while (i < 100)
 	{

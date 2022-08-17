@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/26 11:12:37 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:22:19 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_data
 	void		*win;
 	t_assets	assets;
 	t_camera	camera;
+	t_img		frame;
 	char		**map;
 }				t_data;
 
@@ -133,10 +134,12 @@ void	display_background(t_assets assets, t_data *data);
 
 //coord_tools.c
 double	ft_degrees_to_radian(double degrees);
+double	ft_radian_to_degrees(double degrees);
 t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle);
 
 //init.c
 void	init_data(t_data *data);
+t_ray	*init_rays(t_camera *camera);
 
 //move.c
 int		keycode_handling(int keycode, t_data *data);

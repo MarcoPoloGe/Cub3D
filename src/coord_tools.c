@@ -4,7 +4,15 @@ double	ft_degrees_to_radian(double degrees)
 {
 	double	radians;
 
-	radians = degrees * (M_PI / 360);
+	radians = degrees * (M_PI / 180);
+	return (radians);
+}
+
+double	ft_radian_to_degrees(double degrees)
+{
+	double	radians;
+
+	radians = degrees * (M_PI * 180);
 	return (radians);
 }
 

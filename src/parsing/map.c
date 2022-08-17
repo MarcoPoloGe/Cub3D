@@ -18,23 +18,19 @@ void	ft_init_player_info(int y, int x, char dir_char, t_camera *camera)
 	camera->coord.y = (float)y;
 	if (dir_char == 'N')
 	{
-		camera->dir.x = camera->coord.x;
-		camera->dir.y = camera->coord.y - DIR_VECTOR_LEN;
+		camera->dir_angle = 0;
 	}
 	else if (dir_char == 'S')
 	{
-		camera->dir.x = camera->coord.x;
-		camera->dir.y = camera->coord.y + DIR_VECTOR_LEN;
+		camera->dir_angle = 180;
 	}
 	else if (dir_char == 'E')
 	{
-		camera->dir.x = camera->coord.x + DIR_VECTOR_LEN;
-		camera->dir.y = camera->coord.y;
+		camera->dir_angle = 90;
 	}
 	else if (dir_char == 'W')
 	{
-		camera->dir.x = camera->coord.x - DIR_VECTOR_LEN;
-		camera->dir.y = camera->coord.y;
+		camera->dir_angle = 270;
 	}
 }
 

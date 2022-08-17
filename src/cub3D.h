@@ -76,7 +76,6 @@ typedef struct s_camera
 	t_ray	*ray_list;
 	t_coord	coord;
 	double	dir_angle; // may replace dir coord but not sur yet;
-	t_coord	dir; // direction of the camera
 }	t_camera;
 
 typedef struct s_assets

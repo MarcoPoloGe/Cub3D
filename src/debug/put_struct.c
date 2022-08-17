@@ -89,8 +89,7 @@ void	ft_put_camera(t_camera camera)
 
 	printf("camera.coord.y: %fl\n", camera.coord.y);
 	printf("camera.coord.x: %fl\n", camera.coord.x);
-	printf("camera.dir.y:   %fl\n", camera.dir.y);
-	printf("camera.dir.x:   %fl\n", camera.dir.x);
+	printf("camera.dir_angle: %fl\n", camera.dir_angle);
 	i = 0;
 	while (i < WINDOW_WIDTH)
 	{

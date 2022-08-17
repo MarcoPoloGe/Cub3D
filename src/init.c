@@ -29,8 +29,6 @@ void	init_camera(t_camera *camera)
 {
 	camera->ray_list = NULL;
 	camera->dir_angle = 0;
-	camera->dir.y = DIR_VECTOR_LEN;
-	camera->dir.x = 0;
 	camera->coord.y = 0;
 	camera->coord.x = 0;
 }

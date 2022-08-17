@@ -8,6 +8,14 @@ double	ft_degrees_to_radian(double degrees)
 	return (radians);
 }
 
+double	ft_radian_to_degrees(double degrees)
+{
+	double	radians;
+
+	radians = degrees * (M_PI * 180);
+	return (radians);
+}
+
 t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle)
 {
 	double	c;

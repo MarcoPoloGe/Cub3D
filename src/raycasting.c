@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/26 15:32:33 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:27:34 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@ int	render_image(t_img *img, t_img *color)
 {
 	int	y;
 	int	x;
+	int	distance;
 
+	distance = 8;
 	y = 0;
-	while (y < img->height)
+	while (y < color->height / distance)
 	{
 		x = 0;
-		while (x < img->width)
+		while (x < color->width / distance)
 		{
-			img->addr[(y * img->width) + x] = color->addr[((y * color->width)) + x];
+			img->addr[(y * img->width) + x]
+				= color->addr[((y * distance) * color->width) + (x * distance)];
 			x++;
+			//printf("%d/%d, %d/%d\n", y, color->height, x, color->width);
 		}
 		++y;
 	}
@@ -34,34 +38,48 @@ int	render_image(t_img *img, t_img *color)
 //try de dessiner l'image en plus petit
 int	render_rect(t_img *img, t_img *color)
 {
+	int	y;
+	int	x;
 	int	i;
 	int	j;
+	int	distance;
 
-	i = 0;
-	while (i < img->line_size / 4)
-	{
-		j = -1;
-		while (j < img->line_size / 4 && (i * img->line_size / 4 + j) < (img->line_size / 4 * img->line_size / 4))
+
+	distance = 6;
+	x = 0;
+	j = (WINDOW_WIDTH / 2) - ((color->width / distance) / 2);
+	/*while (j < (WINDOW_WIDTH / 2) + ((color->width / distance) / 2))
+	{*/
+		i = (WINDOW_HEIGHT / 2) - (color->height / distance / 2);
+		y = 0;
+		while (i < (WINDOW_HEIGHT / 2) + (color->height / distance / 2))
 		{
-			img->addr[i * img->line_size / 4 + j] = color->addr[i
-				* color->line_size + j * (img->bpp / 8)];
-				j++;
+			img->addr[(i * img->width) + j]
+				= color->addr[((y * distance) * color->width) + (x * distance)];
+			++y;
+			++i;
 		}
-		i++;
-	}
+		/*//color->height -= 2;
+		++x;
+		++j;
+	}*/
 	return (0);
 }
 
 void	render_line(t_img *line, t_img *wall, int line_to_render)
 {
 	int	y;
+	int	d;
 
 	y = 0;
+	printf("height: %d, len: %d, width: %d\n", line->height, wall->line_size, wall->height);
+	d = wall->line_size  / line->height;
 	while (y < line->height)
 	{
 		(void)line_to_render;
-		line->addr[y] = wall->addr[1]; //todo here should do calculation to choose which pixel use for the line displayed ex: line height is 64 but original image is 100;
+		line->addr[y] = wall->addr[d]; //todo here should do calculation to choose which pixel use for the line displayed ex: line height is 64 but original image is 100;
 		++y;
+		d += wall->line_size / line->height;
 	}
 }
 
@@ -77,14 +95,18 @@ void	display_line(t_data *data, t_img *wall, int line_to_render, int pos_y, int 
 
 int	load_texture(t_data *data)
 {
-	int		i;
+	//int		i;
 
-	render_background(&(data->frame), data->assets);
-	i = 30;
-	while (i < 100)
+	//display_background(data->assets, data);
+
+	render_rect(&data->frame, &data->assets.no);
+	//render_image(&data->frame, &data->assets.no);
+
+	/*i = 40;
+	while (i < 200)
 	{
-		display_line(data, &data->assets.no, 0, (100 - (i / 2)), i, i);
+		display_line(data, &data->assets.no, i, (300 - (i / 2)), i, i);
 		i++;
-	}
+	}*/
 	return (0);
 }

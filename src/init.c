@@ -40,15 +40,25 @@ void	init_data(t_data *data)
 	ft_new_image(&(data->frame), WINDOW_WIDTH, WINDOW_HEIGHT, data);
 	init_assets(&(data->assets));
 	init_camera(&(data->camera));
+	//init_rays(&(data->camera));
 	data->map = 0;
 }
 
-t_ray	*init_rays(t_camera *camera) //todo
+/*t_ray	*init_rays(t_camera *camera) //todo
 {
 	t_ray	*ray_list;
+	double	angle;
+	int		i;
 
+	angle = ft_degrees_to_radian(angle);
 	ray_list = NULL;
-	(void)ray_list;
-	(void)camera;
+	ray_list = malloc(sizeof(t_ray) * (WINDOW_WIDTH + 1));
+	i = -1;
+	while (++i < WINDOW_WIDTH)
+	{
+		camera->dir.x -= 90;
+		camera->dir.y -= 90;
+	}
 	return (ray_list);
-}
+
+}*/

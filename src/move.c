@@ -7,7 +7,7 @@ void	ft_rotate_camera(t_camera *camera, double angle)
 		camera->dir_angle += 360;
 	if(camera->dir_angle >= 360)
 		camera->dir_angle -= 360;
-	printf("angle: %f\n", camera->dir_angle);
+	//printf("angle: %f\n", camera->dir_angle);
 }
 
 void	ft_move_player(double move, t_camera *camera) // has to calculate where to move both player coord and player dir
@@ -24,7 +24,8 @@ void	ft_move_player(double move, t_camera *camera) // has to calculate where to 
 
 int	keycode_handling(int keycode, t_data *data)
 {
-	t_camera *camera;
+	t_camera	*camera;
+	int			i;
 
 	camera = &(data->camera);
 	if (keycode == 53)
@@ -37,5 +38,13 @@ int	keycode_handling(int keycode, t_data *data)
 		ft_move_player(0.5, camera);
 	if (keycode == 13)
 		ft_move_player(-0.5, camera);
+	i = -1;
+	while (++i < WINDOW_WIDTH)
+	{
+		ft_ray_calculate_collision(data->map, data->camera.coord,
+			&data->camera.ray_list[i]);
+		/*ft_put_pixel_frame(&(data->frame), data->camera.coord.y,
+			data->camera.coord.x, 0x009933CC);*/
+	}
 	return (0);
 }

@@ -202,4 +202,5 @@ int	ft_fdf_render(t_data *data)
 
 	ft_push_frame(data);
 	return (0);
+
 }

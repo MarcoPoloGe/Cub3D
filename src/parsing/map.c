@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:38:45 by Marco Belar       #+#    #+#             */
-/*   Updated: 2022/07/19 14:09:10 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/18 10:27:48 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ char **ft_make_map_rectangular(char **map)
 	while(map[i])
 	{
 		while (ft_strlen(map[i]) < max_len)
-			ft_stradd(map[i], " ");
+			ft_stradd(&map[i], " ");
 		i++;
 	}
-	return (map)
+	return (map);
 }
 
 int	ft_get_map(char **input_tab, t_data *data)

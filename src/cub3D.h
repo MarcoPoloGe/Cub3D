@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/17 16:54:48 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/18 10:43:46 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,12 @@ int		keycode_handling(int keycode, t_data *data);
 
 //map_check.c
 void	ft_get_player_infos(char **map, t_data *data);
+
 //frame.c
 void	ft_put_pixel_frame(t_img *frame, int y, int x, int color);
 void	ft_push_frame(t_data *data);
+
+//ray.c
+void	ft_ray_calculate_collision(char **map, t_coord coord, t_ray *ray);
 
 #endif

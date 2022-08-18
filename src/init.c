@@ -55,7 +55,6 @@ t_ray	*init_rays(t_camera *camera, t_data *data) //todo
 	while (++i < WINDOW_WIDTH)
 	{
 		(void)data;
-		//printf("%f\n", FOV / WINDOW_WIDTH * i);
 		angle = -(FOV / 2) + ((double)FOV / (double)WINDOW_WIDTH * (double)i);
 		ray_list[i].angle = angle;
 		ray_list[i].impact = 0;
@@ -63,7 +62,6 @@ t_ray	*init_rays(t_camera *camera, t_data *data) //todo
 		ray_list[i].impact.coord.y = 0;
 		ray_list[i].impact.wall = &data->assets.no;
 		ray_list[i].impact.wall_x = 0;*/
-		printf("angle %d = %f\n", i, angle);
 	}
 	camera->ray_list = ray_list;
 	return (ray_list);

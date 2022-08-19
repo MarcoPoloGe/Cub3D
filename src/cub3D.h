@@ -135,6 +135,8 @@ void	render_background(t_img *frame, t_assets assets);
 double	ft_degrees_to_radian(double degrees);
 double	ft_radian_to_degrees(double degrees);
 t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle);
+t_coord	ft_find_next_coord(t_coord a, double alpha, t_coord c);
+t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c);
 int		ft_check_if_wall_hit(char **map, t_coord coord, int xory);
 
 //init.c

@@ -14,8 +14,8 @@
 
 void	ft_init_player_info(int y, int x, char dir_char, t_camera *camera)
 {
-	camera->coord.x = (float)x;
-	camera->coord.y = (float)y;
+	camera->coord.x = (double)x + 0.5;
+	camera->coord.y = (double)y + 0.5;
 	if (dir_char == 'N')
 	{
 		camera->dir_angle = 0;
@@ -55,6 +55,7 @@ void	ft_get_player_infos(char **map, t_data *data)
 		y++;
 	}
 }
+/*
 
 char **ft_make_map_rectangular(char **map)
 {
@@ -80,6 +81,7 @@ char **ft_make_map_rectangular(char **map)
 	}
 	return (map);
 }
+*/
 
 int	ft_get_map(char **input_tab, t_data *data)
 {
@@ -91,15 +93,15 @@ int	ft_get_map(char **input_tab, t_data *data)
 	printf("--- MAP INPUT END ---\n");*/
 
 	data->map = ft_tabdup(input_tab);
-	data->map = ft_make_map_rectangular(data->map);
-	if (ft_check_map(data->map))
-	{
-		leave(data, "Error : map invalid\n");
-		ft_free_tab(input_tab);
-		return (0);
-	}
-	else
-	{
+//	data->map = ft_make_map_rectangular(data->map);
+//	if (ft_check_map(data->map))
+//	{
+	//	leave(data, "Error : map invalid\n");
+//		ft_free_tab(input_tab);
+	//	return (0);
+//	}
+//	else
+	//{
 		return (ft_tablen(data->map));
-	}
+	//}
 }

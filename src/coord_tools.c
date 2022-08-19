@@ -56,6 +56,21 @@ t_coord	ft_find_next_coord(t_coord a, double alpha, t_coord c)
 	return (res);
 }
 
+t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c)
+{
+	double	ab;
+	double	ac;
+	double	bc;
+	t_coord	res;
+
+	ac = c.y - a.y;
+	ab = 1 * ac / cos(alpha);
+	bc = pow(ab, 2) - pow(ac, 2);
+	res.x = c.x - bc;
+	res.y = c.y;
+	return (res);
+}
+
 int	ft_check_if_wall_hit(char **map, t_coord coord, int xory)
 {
 	int	i;

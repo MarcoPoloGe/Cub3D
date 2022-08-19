@@ -44,8 +44,8 @@ void	ft_add_color(int *rgb, char *input, t_data *data)
 	fc = ft_split(input, ',');
 	if (ft_tablen(fc) != 3)
 		leave(data, "Error 2: asset or color\n");
-	if (rgb[0] != -1 || rgb[1] != -1 || rgb[2] != -1)
-		leave(data, "Error 3: asset or color\n");
+	//if (rgb[0] != -1 || rgb[1] != -1 || rgb[2] != -1)
+		//leave(data, "Error 3: asset or color\n");
 	if (ft_strlen(fc[0]) > 3 || ft_strlen(fc[1]) > 3 || ft_strlen(fc[2]) > 3)
 		leave(data, "Error 5: asset or color\n");
 	rgb[0] = ft_atoi(fc[0]);

@@ -90,7 +90,18 @@ void	ft_render_cube_wall(int pos_y, int pos_x, int size, int color, t_data *data
 
 void	ft_render_one_px(t_pos pos, int color, t_data *data)
 {
+	ft_put_pixel_frame(&(data->frame), pos.y - 1, pos.x - 1, color);
+	ft_put_pixel_frame(&(data->frame), pos.y - 1, pos.x, color);
+	ft_put_pixel_frame(&(data->frame), pos.y, pos.x - 1, color);
+
 	ft_put_pixel_frame(&(data->frame), pos.y, pos.x, color);
+
+	ft_put_pixel_frame(&(data->frame), pos.y + 1, pos.x + 1, color);
+	ft_put_pixel_frame(&(data->frame), pos.y + 1, pos.x, color);
+	ft_put_pixel_frame(&(data->frame), pos.y, pos.x + 1, color);
+
+	ft_put_pixel_frame(&(data->frame), pos.y + 1, pos.x - 1, color);
+	ft_put_pixel_frame(&(data->frame), pos.y - 1, pos.x + 1, color);
 }
 
 void	ft_render_grid(char **map, int size, t_data *data)
@@ -130,8 +141,8 @@ t_pos	ft_coord_to_pos(t_coord input)
 {
 	t_pos	result;
 
-	result.x = (int)(input.x * FDF_RENDER_SIZE + (FDF_RENDER_SIZE / 2));
-	result.y = (int)(input.y * FDF_RENDER_SIZE + (FDF_RENDER_SIZE / 2));
+	result.x = (int)(input.x * FDF_RENDER_SIZE);
+	result.y = (int)(input.y * FDF_RENDER_SIZE);
 	return (result);
 }
 
@@ -163,7 +174,7 @@ void	ft_render_ray(t_coord coord, t_ray ray, t_data *data)
 	{
 		fake_impact.y = coord.y - DIR_VECTOR_LEN;
 		fake_impact.x = coord.x;
-		fake_impact = ft_rotate_point(coord, fake_impact, ray.angle);
+		fake_impact = ft_rotate_point(coord, fake_impact, ray.angle + data->camera.dir_angle);
 		ft_render_one_px(ft_coord_to_pos(fake_impact), COLOR_COLLISION, data);
 		ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(fake_impact), COLOR_RAY, data);
 	}
@@ -191,14 +202,109 @@ void	ft_render_rays(t_data *data) //not tested yet
 	}
 }
 
+double ft_get_sideDist(double nb)
+{
+	double diff;
+	double sideDist;
+
+
+	diff =  1 - (nb - (int)nb);
+	sideDist = nb + diff;
+
+	/*if(diff < 0.500)
+	{
+
+	}
+	else
+	{
+		diff -= 1;
+	}*/
+
+
+//	printf("coord.y = %f, coord.x = %f\n", coord.y, coord.x);
+	//printf("dist.y = %f, dist.x = %f, diff = %f, decimal = %f\n", sideDist.y, sideDist.x, diff, decimal);
+	return(sideDist);
+}
+
+t_coord ft_coord(double y, double x)
+{
+	t_coord coord;
+
+	coord.y = y;
+	coord.x = x;
+	return (coord);
+}
+
+void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
+{
+	t_coord sideX;
+	t_coord sideY;
+
+	sideX.y = coord.y;
+	sideX.x = ft_get_sideDist(coord.x);
+
+	sideY.y = ft_get_sideDist(coord.y);
+	sideY.x = coord.x;
+
+	ft_render_one_px(ft_coord_to_pos(sideX), COLOR_WALL, data);
+
+	//while (1) //ray->impact == NULL
+
+	int i;
+
+	sideX = ft_find_next_coord(coord, ray->angle, sideX);
+	sideY = ft_find_next_coord(coord, ray->angle, sideY);
+	i = 0;
+	while (i < 15)
+	{
+		if(i != 0)
+		{
+			sideX = ft_find_next_coord(sideX, ray->angle, ft_coord(sideX.y, sideX.x + 1));
+			sideY = ft_find_next_coord(sideY, ray->angle, ft_coord(sideY.y + 1, sideY.x));
+
+			if(ft_check_if_wall_hit(data->map, data->camera.coord, 1))
+				ft_printf("YES\n");
+			else
+				ft_printf("NO\n");
+
+		}
+		ft_render_one_px(ft_coord_to_pos(sideX), COLOR_COLLISION, data);
+		ft_render_one_px(ft_coord_to_pos(sideY), COLOR_RAY, data);
+
+	    i++;
+	}
+
+//	ft_render_one_px(ft_coord_to_pos(sideY), COLOR_WALL, data);
+	
+}
+
 int	ft_fdf_render(t_data *data)
 {
 	mlx_clear_window(data->mlx, data->win);
 
-
 	ft_render_grid(data->map, FDF_RENDER_SIZE, data);
 	ft_render_player_fov(data);
-	ft_render_rays(data);
+
+	//ft_calculate_impact_point(data->camera.coord,data->camera.ray_list + 1000 ,data);
+
+
+
+	ft_calculate_impact_point(data->camera.coord,data->camera.ray_list + 500 ,data);
+
+	/*int i;
+
+	i = 0;
+	while (i < WINDOW_WIDTH)
+	{
+	    i++;
+	}*/
+
+/*	ft_printf("map_y: %i map_x: %i", (int)data->camera.coord.y , (int)data->camera.coord.x);
+
+
+	//ft_render_rays(data);
+	ft_putstr("\n");
+	ft_put_camera(data->camera);*/
 
 	ft_push_frame(data);
 	return (0);

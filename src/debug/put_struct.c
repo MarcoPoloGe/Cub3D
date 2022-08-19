@@ -85,17 +85,17 @@ void	ft_put_ray(t_ray ray)
 
 void	ft_put_camera(t_camera camera)
 {
-	int	i;
+//	int	i;
 
 	printf("camera.coord.y: %fl\n", camera.coord.y);
 	printf("camera.coord.x: %fl\n", camera.coord.x);
 	printf("camera.dir_angle: %fl\n", camera.dir_angle);
-	i = 0;
-	while (i < WINDOW_WIDTH)
-	{
-		ft_put_ray(camera.ray_list[i]);
-		i++;
-	}
+	//i = 0;
+	//while (i < WINDOW_WIDTH)
+//	{
+//		ft_put_ray(camera.ray_list[i]);
+//		i++;
+//	}
 }
 
 void	ft_put_data(t_data *data)

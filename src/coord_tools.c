@@ -55,3 +55,22 @@ t_coord	ft_find_next_coord(t_coord a, double alpha, t_coord c)
 	res.x = c.x;
 	return (res);
 }
+
+int	ft_check_if_wall_hit(char **map, t_coord coord, int xory)
+{
+	int	i;
+	int	j;
+
+	if (xory == 0)
+		i = (int)coord.y + 0.1;
+	else
+		i = (int)coord.y - 0.1;
+	if (xory == 0)
+		j = (int)coord.x + 0.1;
+	else
+		j = (int)coord.x - 0.1;
+	if (map[i][j] > 0)
+		return (1);
+	else
+		return (0);
+}

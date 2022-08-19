@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/18 10:43:46 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/19 12:05:18 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	render_background(t_img *frame, t_assets assets);
 double	ft_degrees_to_radian(double degrees);
 double	ft_radian_to_degrees(double degrees);
 t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle);
+int		ft_check_if_wall_hit(char **map, t_coord coord, int xory);
 
 //init.c
 void	init_data(t_data *data);

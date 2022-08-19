@@ -71,21 +71,41 @@ t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c)
 	return (res);
 }
 
-int	ft_check_if_wall_hit(char **map, t_coord coord, int xory)
+t_impact	*ft_check_if_wall_hit(t_data *data, char **map, t_coord coord, int xory)
 {
-	int	i;
-	int	j;
+	int			i;
+	int			j;
+	t_impact	*res;
 
+	res = malloc(sizeof(t_impact));
+	i = (int)coord.y;
+	j = (int)coord.x;
 	if (xory == 0)
-		i = (int)coord.y + 0.1;
+	{
+		res->wall = &data->assets.no;
+		res->wall_x = j % res->wall->width;
+	}
 	else
-		i = (int)coord.y - 0.1;
-	if (xory == 0)
-		j = (int)coord.x + 0.1;
+	{
+		res->wall = &data->assets.so;
+		res->wall_x = j % res->wall->width;
+	}
+	if (xory == 1)
+	{
+		res->wall = &data->assets.ea;
+		res->wall_x = i % res->wall->height;
+	}
 	else
-		j = (int)coord.x - 0.1;
-	if (map[i][j] > 0)
-		return (1);
+	{
+		res->wall = &data->assets.we;
+		res->wall_x = i % res->wall->height;
+	}
+	if (map[i][j] - 48 == 1)
+	{
+		res->distance = pow(data->camera.coord.x, 2) - pow(coord.x, 2)
+			+ pow(data->camera.coord.y, 2) - pow(coord.y, 2);
+		return (res);
+	}
 	else
 		return (0);
 }

@@ -262,7 +262,7 @@ void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 			sideX = ft_find_next_coord(sideX, ray->angle, ft_coord(sideX.y, sideX.x + 1));
 			sideY = ft_find_next_coord(sideY, ray->angle, ft_coord(sideY.y + 1, sideY.x));
 
-			if(ft_check_if_wall_hit(data->map, data->camera.coord, 1))
+			if(ft_check_if_wall_hit(data, data->map, data->camera.coord, 1))
 				ft_printf("YES\n");
 			else
 				ft_printf("NO\n");
@@ -275,7 +275,7 @@ void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	}
 
 //	ft_render_one_px(ft_coord_to_pos(sideY), COLOR_WALL, data);
-	
+
 }
 
 int	ft_fdf_render(t_data *data)

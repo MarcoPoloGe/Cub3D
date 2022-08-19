@@ -64,18 +64,3 @@
 	}
 	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(ray->angle), , data);
 }*/
-
-int	ft_ray_calculate_pixel(int x, int y, int side, t_assets assets)
-{
-	if (side == 0)
-		return (x % assets.no.width);
-	else if (side == 1)
-		return (y % assets.ea.height);
-	else if (side == 2)
-		return (x % assets.so.width);
-	else if (side == 3)
-		return (y % assets.we.height);
-	return (0);
-}
-
-

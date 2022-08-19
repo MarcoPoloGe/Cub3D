@@ -40,3 +40,18 @@ t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle)
 
 	return (prime);
 }
+
+t_coord	ft_find_next_coord(t_coord a, double alpha, t_coord c)
+{
+	double	ab;
+	double	ac;
+	double	bc;
+	t_coord	res;
+
+	ac = c.x - a.x;
+	ab = 1 * ac / cos(alpha);
+	bc = pow(ab, 2) - pow(ac, 2);
+	res.y = c.y - bc;
+	res.x = c.x;
+	return (res);
+}

@@ -41,8 +41,8 @@ int	keycode_handling(int keycode, t_data *data)
 	i = -1;
 	while (++i < WINDOW_WIDTH)
 	{
-		ft_ray_calculate_collision(data->map, data->camera.coord,
-			&data->camera.ray_list[i]);
+		/*ft_ray_calculate_collision(data->map, data->camera.coord,
+			&data->camera.ray_list[i]);*/
 		/*ft_put_pixel_frame(&(data->frame), data->camera.coord.y,
 			data->camera.coord.x, 0x009933CC);*/
 	}

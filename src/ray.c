@@ -54,7 +54,7 @@
 		if (map[i][j] > 0)
 			hit = 1;
 	}
-	/*while (map[++i])
+	while (map[++i])
 	{
 		while (map[++j])
 		{
@@ -62,7 +62,7 @@
 				distance = pow(coord.x - j) + pow(coord.y - i);
 		}
 	}
-	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(ray->angle), , data);*/
+	ft_render_pixel_line(ft_coord_to_pos(coord), ft_coord_to_pos(ray->angle), , data);
 }*/
 
 int	ft_ray_calculate_pixel(int x, int y, int side, t_assets assets)
@@ -75,4 +75,7 @@ int	ft_ray_calculate_pixel(int x, int y, int side, t_assets assets)
 		return (x % assets.so.width);
 	else if (side == 3)
 		return (y % assets.we.height);
+	return (0);
 }
+
+

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/17 15:27:34 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/19 16:08:11 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,25 @@ int	render_image(t_img *img, t_img *color)
 }
 
 //try de dessiner l'image en plus petit
-int	render_rect(t_img *img, t_img *color)
+int	render_rect(t_img *img, t_img *color, int line_to_render, int distance)
 {
 	int	y;
 	int	x;
 	int	i;
 	int	j;
-	int	distance;
 
-
-	distance = 6;
+	distance /= 12;
 	x = 0;
 	j = (WINDOW_WIDTH / 2) - ((color->width / distance) / 2);
-	/*while (j < (WINDOW_WIDTH / 2) + ((color->width / distance) / 2))
-	{*/
-		i = (WINDOW_HEIGHT / 2) - (color->height / distance / 2);
-		y = 0;
-		while (i < (WINDOW_HEIGHT / 2) + (color->height / distance / 2))
-		{
-			img->addr[(i * img->width) + j]
-				= color->addr[((y * distance) * color->width) + (x * distance)];
-			++y;
-			++i;
-		}
-		/*//color->height -= 2;
-		++x;
-		++j;
-	}*/
+	i = (WINDOW_HEIGHT / 2) - (color->height / distance / 2);
+	y = 0;
+	while (i < (WINDOW_HEIGHT / 2) + (color->height / distance / 2))
+	{
+		img->addr[(i * img->width) + j]
+			= color->addr[((y * distance) * color->width) + (x * distance)];
+		++y;
+		++i;
+	}
 	return (0);
 }
 
@@ -72,7 +64,6 @@ void	render_line(t_img *line, t_img *wall, int line_to_render)
 	int	d;
 
 	y = 0;
-	printf("height: %d, len: %d, width: %d\n", line->height, wall->line_size, wall->height);
 	d = wall->line_size  / line->height;
 	while (y < line->height)
 	{
@@ -83,13 +74,11 @@ void	render_line(t_img *line, t_img *wall, int line_to_render)
 	}
 }
 
-void	display_line(t_data *data, t_img *wall, int line_to_render, int pos_y, int pos_x, int len) //should be called display_wall_vertical_line()
+void	display_line(t_data *data, t_img *wall, int line_to_render, int len) //should be called display_wall_vertical_line()
 {
-	t_img	line;
 
-	ft_new_image(&line, 1, len, data);
 	render_line(&line, wall, line_to_render);
-	mlx_put_image_to_window(data->mlx, data->win, line.ptr, pos_x, pos_y);
+	mlx_put_image_to_window(data->mlx, data->win, line.ptr, 0, 0);
 	mlx_destroy_image(data->mlx, line.ptr);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/19 15:21:04 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/19 16:04:20 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void		ft_file_to_image(char *path, t_img *img, t_data *data);
 
 //raycasting.c
 int			load_texture(t_data *data);
+void		display_line(t_data *data, t_img *wall, int line_to_render,
+				int len);
 
 //render_fdf.c
 int			ft_fdf_render(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/19 16:04:20 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/23 11:27:53 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_camera
 {
 	t_ray	*ray_list;
 	t_coord	coord;
+	int		sidey;
+	int		sidex;
 	double	dir_angle; // may replace dir coord but not sur yet;
 }	t_camera;
 
@@ -124,7 +126,6 @@ void		ft_new_image(t_img *img, int width, int height, t_data *data);
 void		ft_file_to_image(char *path, t_img *img, t_data *data);
 
 //raycasting.c
-int			load_texture(t_data *data);
 void		display_line(t_data *data, t_img *wall, int line_to_render,
 				int len);
 
@@ -138,8 +139,10 @@ void		render_background(t_img *frame, t_assets assets);
 double		ft_degrees_to_radian(double degrees);
 double		ft_radian_to_degrees(double degrees);
 t_coord		ft_rotate_point(t_coord axis, t_coord point, double angle);
-t_coord		ft_find_next_coord(t_coord a, double alpha, t_coord c);
-t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c);
+t_coord		ft_find_next_coord(t_coord a, double alpha, t_coord c,
+				int negative);
+t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c,
+				int negative);
 t_impact	*ft_check_if_wall_hit(t_data *data, char **map,
 				t_coord coord, int xory);
 

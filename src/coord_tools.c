@@ -41,7 +41,7 @@ t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle)
 	return (prime);
 }
 
-t_coord	ft_find_next_coord(t_coord a, double alpha, t_coord c)
+t_coord	ft_find_next_coord(t_coord a, double alpha, t_coord c, int negative)
 {
 	double	ab;
 	double	ac;
@@ -51,12 +51,15 @@ t_coord	ft_find_next_coord(t_coord a, double alpha, t_coord c)
 	ac = c.x - a.x;
 	ab = 1 * ac / cos(alpha);
 	bc = pow(ab, 2) - pow(ac, 2);
-	res.y = c.y - bc;
+	if (negative == 0)
+		res.y = c.y - bc;
+	else
+		res.y = c.y + bc;
 	res.x = c.x;
 	return (res);
 }
 
-t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c)
+t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c, int negative)
 {
 	double	ab;
 	double	ac;
@@ -66,7 +69,10 @@ t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c)
 	ac = c.y - a.y;
 	ab = 1 * ac / cos(alpha);
 	bc = pow(ab, 2) - pow(ac, 2);
-	res.x = c.x - bc;
+	if (negative == 0)
+		res.x = c.x - bc;
+	else
+		res.x = c.x + bc;
 	res.y = c.y;
 	return (res);
 }

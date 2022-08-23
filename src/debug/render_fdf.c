@@ -235,43 +235,67 @@ t_coord ft_coord(double y, double x)
 	return (coord);
 }
 
+void	check_side(t_data *data)
+{
+	if (data->camera.dir_angle < 90)
+	{
+		data->camera.sidex = 0;
+		data->camera.sidey = 0;
+		return;
+	}
+	else if (data->camera.dir_angle < 180)
+	{
+		data->camera.sidex = 0;
+		data->camera.sidey = 1;
+		return;
+	}
+	else if (data->camera.dir_angle < 270)
+	{
+		data->camera.sidex = 1;
+		data->camera.sidey = 1;
+		return;
+	}
+	else if (data->camera.dir_angle < 360)
+	{
+		data->camera.sidex = 1;
+		data->camera.sidey = 0;
+		return;
+	}
+}
+
 void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 {
-	t_coord sideX;
-	t_coord sideY;
+	t_coord	sideX;
+	t_coord	sideY;
 
 	sideX.y = coord.y;
 	sideX.x = ft_get_sideDist(coord.x);
-
 	sideY.y = ft_get_sideDist(coord.y);
 	sideY.x = coord.x;
-
 	ft_render_one_px(ft_coord_to_pos(sideX), COLOR_WALL, data);
-
 	//while (1) //ray->impact == NULL
-
 	int i;
 
-	sideX = ft_find_next_coord(coord, ray->angle, sideX);
-	sideY = ft_find_next_coord(coord, ray->angle, sideY);
+	sideX = ft_find_next_coord(coord, ray->angle, sideX, data->camera.sidex);
+	sideY = ft_find_next_coord(coord, ray->angle, sideY, data->camera.sidey);
 	i = 0;
 	while (i < 15)
 	{
-		if(i != 0)
+		if (i != 0)
 		{
-			sideX = ft_find_next_coord(sideX, ray->angle, ft_coord(sideX.y, sideX.x + 1));
-			sideY = ft_find_next_coord(sideY, ray->angle, ft_coord(sideY.y + 1, sideY.x));
-
-			if(ft_check_if_wall_hit(data, data->map, data->camera.coord, 1))
+			sideX = ft_find_next_coord(sideX, ray->angle,
+					ft_coord(sideX.y, sideX.x + 1), data->camera.sidex);
+			sideY = ft_find_next_coord(sideY, ray->angle,
+					ft_coord(sideY.y + 1, sideY.x), data->camera.sidey);
+			if (ft_check_if_wall_hit(data, data->map, data->camera.coord, 1))
 				ft_printf("YES\n");
 			else
 				ft_printf("NO\n");
-
 		}
 		ft_render_one_px(ft_coord_to_pos(sideX), COLOR_COLLISION, data);
-		ft_render_one_px(ft_coord_to_pos(sideY), COLOR_RAY, data);
-
-	    i++;
+		ft_render_one_px(ft_coord_to_pos(sideY), COLOR_FOV, data);
+		//ft_render_pixel_line(ft_coord_to_pos(sideX),ft_coord_to_pos(coord), COLOR_RAY,data);
+		i++;
 	}
 
 //	ft_render_one_px(ft_coord_to_pos(sideY), COLOR_WALL, data);

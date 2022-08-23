@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/23 11:27:53 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/23 14:43:44 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void		display_line(t_data *data, t_img *wall, int line_to_render,
 
 //render_fdf.c
 int			ft_fdf_render(t_data *data);
+void		check_side(t_camera *camera);
 
 //display_backgroud.c
 void		render_background(t_img *frame, t_assets assets);

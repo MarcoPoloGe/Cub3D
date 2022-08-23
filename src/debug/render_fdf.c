@@ -235,34 +235,6 @@ t_coord ft_coord(double y, double x)
 	return (coord);
 }
 
-void	check_side(t_data *data)
-{
-	if (data->camera.dir_angle < 90)
-	{
-		data->camera.sidex = 0;
-		data->camera.sidey = 0;
-		return;
-	}
-	else if (data->camera.dir_angle < 180)
-	{
-		data->camera.sidex = 0;
-		data->camera.sidey = 1;
-		return;
-	}
-	else if (data->camera.dir_angle < 270)
-	{
-		data->camera.sidex = 1;
-		data->camera.sidey = 1;
-		return;
-	}
-	else if (data->camera.dir_angle < 360)
-	{
-		data->camera.sidex = 1;
-		data->camera.sidey = 0;
-		return;
-	}
-}
-
 void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 {
 	t_coord	sideX;
@@ -283,10 +255,34 @@ void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	{
 		if (i != 0)
 		{
-			sideX = ft_find_next_coord(sideX, ray->angle,
-					ft_coord(sideX.y, sideX.x + 1), data->camera.sidex);
-			sideY = ft_find_next_coord(sideY, ray->angle,
-					ft_coord(sideY.y + 1, sideY.x), data->camera.sidey);
+			if (data->camera.dir_angle < 90)
+			{
+				sideX = ft_find_next_coord(sideX, ray->angle,
+					ft_coord(sideX.y, sideX.x + 1), 0);
+				sideY = ft_find_next_coord(sideY, ray->angle,
+					ft_coord(sideY.y - 1, sideY.x), 0);
+			}
+			else if (data->camera.dir_angle < 180)
+			{
+				sideX = ft_find_next_coord(sideX, ray->angle,
+					ft_coord(sideX.y, sideX.x + 1), 1);
+				sideY = ft_find_next_coord(sideY, ray->angle,
+					ft_coord(sideY.y + 1, sideY.x), 1);
+			}
+			else if (data->camera.dir_angle < 270)
+			{
+				sideX = ft_find_next_coord(sideX, ray->angle,
+					ft_coord(sideX.y, sideX.x - 1), 1);
+				sideY = ft_find_next_coord(sideY, ray->angle,
+					ft_coord(sideY.y + 1, sideY.x), 0);
+			}
+			else if (data->camera.dir_angle < 360)
+			{
+				sideX = ft_find_next_coord(sideX, ray->angle,
+					ft_coord(sideX.y, sideX.x - 1), 0);
+				sideY = ft_find_next_coord(sideY, ray->angle,
+					ft_coord(sideY.y - 1, sideY.x), 1);
+			}
 			if (ft_check_if_wall_hit(data, data->map, data->camera.coord, 1))
 				ft_printf("YES\n");
 			else

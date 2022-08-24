@@ -106,6 +106,15 @@ t_impact	*ft_check_if_wall_hit(t_data *data, char **map, t_coord coord, int xory
 		res->wall = &data->assets.we;
 		res->wall_x = i % res->wall->height;
 	}
+	printf("i = %d, j = %d\n", i, j);
+	if (i < 0)
+		i = 0;
+	if (j < 0)
+		j = 0;
+	if (i > 19)
+		i = 19;
+	if (j > 25)
+		j = 25;
 	if (map[i][j] - 48 == 1)
 	{
 		res->distance = pow(data->camera.coord.x, 2) - pow(coord.x, 2)

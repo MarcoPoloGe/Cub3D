@@ -3,9 +3,9 @@
 void	ft_rotate_camera(t_camera *camera, double angle)
 {
 	camera->dir_angle += angle;
-	if(camera->dir_angle < 0)
+	if (camera->dir_angle < 0)
 		camera->dir_angle += 360;
-	if(camera->dir_angle >= 360)
+	if (camera->dir_angle >= 360)
 		camera->dir_angle -= 360;
 	//printf("angle: %f\n", camera->dir_angle);
 }

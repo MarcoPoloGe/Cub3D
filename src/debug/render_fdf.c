@@ -231,49 +231,54 @@ void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	sideY.y = ft_get_sideDist(coord.y);
 	sideY.x = coord.x;
 	ft_render_one_px(ft_coord_to_pos(sideX), COLOR_WALL, data);
-	sideX = ft_find_next_coord(coord, ray->angle, sideX, data->camera.sidex);
-	sideY = ft_find_next_coord(coord, ray->angle, sideY, data->camera.sidey);
+	sideX = ft_find_next_coord_x(coord, ray->angle, sideX, 0);
+	sideY = ft_find_next_coord_y(coord, ray->angle, sideY, 0);
 	i = 0;
+	ray->impact = 0;
 	while (ray->impact == 0)
 	{
 		if (i != 0)
 		{
 			if (ray->angle < 90)
 			{
-				sideX = ft_find_next_coord(sideX, ray->angle,
+				sideX = ft_find_next_coord_x(sideX, ray->angle,
 						ft_coord(sideX.y, sideX.x + 1), 0);
-				sideY = ft_find_next_coord(sideY, ray->angle,
+				sideY = ft_find_next_coord_y(sideY, ray->angle,
 						ft_coord(sideY.y - 1, sideY.x), 0);
 			}
 			else if (ray->angle < 180)
 			{
-				sideX = ft_find_next_coord(sideX, ray->angle,
+				sideX = ft_find_next_coord_x(sideX, ray->angle,
 						ft_coord(sideX.y, sideX.x + 1), 1);
-				sideY = ft_find_next_coord(sideY, ray->angle,
+				sideY = ft_find_next_coord_y(sideY, ray->angle,
 						ft_coord(sideY.y + 1, sideY.x), 1);
 			}
 			else if (ray->angle < 270)
 			{
-				sideX = ft_find_next_coord(sideX, ray->angle,
+				sideX = ft_find_next_coord_x(sideX, ray->angle,
 						ft_coord(sideX.y, sideX.x - 1), 1);
-				sideY = ft_find_next_coord(sideY, ray->angle,
+				sideY = ft_find_next_coord_y(sideY, ray->angle,
 						ft_coord(sideY.y + 1, sideY.x), 0);
 			}
 			else if (ray->angle < 360)
 			{
-				sideX = ft_find_next_coord(sideX, ray->angle,
+				sideX = ft_find_next_coord_x(sideX, ray->angle,
 						ft_coord(sideX.y, sideX.x - 1), 0);
-				sideY = ft_find_next_coord(sideY, ray->angle,
+				sideY = ft_find_next_coord_y(sideY, ray->angle,
 						ft_coord(sideY.y - 1, sideY.x), 1);
 			}
 		}
 		ray->impact = ft_check_if_wall_hit(data, data->map, sideX, 0);
 		if (ray->impact == 0)
+		{
 			ray->impact = ft_check_if_wall_hit(data, data->map, sideY, 1);
+			if (ray->impact != 0)
+				ft_render_one_px(ft_coord_to_pos(sideY), COLOR_FOV, data);
+		}
+		else
+			ft_render_one_px(ft_coord_to_pos(sideX), COLOR_COLLISION, data);
 		i++;
 	}
-	ft_render_one_px(ft_coord_to_pos(sideX), COLOR_COLLISION, data);
-	ft_render_one_px(ft_coord_to_pos(sideY), COLOR_FOV, data);
 }
 
 int	ft_fdf_render(t_data *data)

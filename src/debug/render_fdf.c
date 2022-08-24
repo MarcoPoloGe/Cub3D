@@ -17,9 +17,6 @@ void	ft_render_pixel_line(t_pos start, t_pos end, int color, t_data *data)
 	while (1)
 	{
 		ft_put_pixel_frame(&(data->frame), start.y, start.x, color);
-		//ft_put_pixel_frame(&(data->frame), start.y - 1, start.x, color);
-		//ft_put_pixel_frame(&(data->frame), start.y, start.x - 1, color);
-		//ft_put_pixel_frame(&(data->frame), start.y - 1, start.x - 1, color);
 		if (start.y == end.y && start.x == end.x)
 			break ;
 		e2 = 2 * err;
@@ -208,22 +205,10 @@ double ft_get_sideDist(double nb)
 	double sideDist;
 
 
-	diff =  1 - (nb - (int)nb);
+	diff = 1 - (nb - (int) nb);
 	sideDist = nb + diff;
 
-	/*if(diff < 0.500)
-	{
-
-	}
-	else
-	{
-		diff -= 1;
-	}*/
-
-
-//	printf("coord.y = %f, coord.x = %f\n", coord.y, coord.x);
-	//printf("dist.y = %f, dist.x = %f, diff = %f, decimal = %f\n", sideDist.y, sideDist.x, diff, decimal);
-	return(sideDist);
+	return (sideDist);
 }
 
 t_coord ft_coord(double y, double x)

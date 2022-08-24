@@ -76,8 +76,6 @@ typedef struct s_camera
 {
 	t_ray	*ray_list;
 	t_coord	coord;
-	int		sidey;
-	int		sidex;
 	double	dir_angle; // may replace dir coord but not sur yet;
 }	t_camera;
 
@@ -140,7 +138,7 @@ void		render_background(t_img *frame, t_assets assets);
 double		ft_degrees_to_radian(double degrees);
 double		ft_radian_to_degrees(double degrees);
 t_coord		ft_rotate_point(t_coord axis, t_coord point, double angle);
-t_coord		ft_find_next_coord(t_coord a, double alpha, t_coord c,
+t_coord		ft_find_next_coord_x(t_coord a, double alpha, t_coord c,
 				int negative);
 t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c,
 				int negative);

@@ -41,7 +41,9 @@ int	keycode_handling(int keycode, t_data *data)
 	i = -1;
 	while (++i < WINDOW_WIDTH)
 	{
-		//render_rect(data, data->camera.ray_list[i].impact->wall, data->camera.ray_list[i].impact->wall_x, data->camera.ray_list[i].impact->distance);
+		ft_calculate_impact_point(data->camera.coord,
+			&data->camera.ray_list[i], data);
+		/*render_line(data->win, data->camera.ray_list[i].impact->wall, data->camera.ray_list[i].impact->wall_x, data->camera.ray_list[i].impact->distance);*/
 	}
 	return (0);
 }

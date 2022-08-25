@@ -48,6 +48,7 @@ t_coord	ft_find_next_coord_x(t_coord a, double alpha, t_coord c, int negative)
 	double	bc;
 	t_coord	res;
 
+	(void)negative;
 	if(alpha > 89.99)
 	{
 		res.x = 0;
@@ -57,7 +58,7 @@ t_coord	ft_find_next_coord_x(t_coord a, double alpha, t_coord c, int negative)
 	ac = c.x - a.x;
 	ab = 1 * ac / cos(ft_degrees_to_radian(alpha));
 	bc = pow(ab, 2) - pow(ac, 2);
-	if (negative == 0)
+	if (alpha > 0)
 		res.y = c.y - bc;
 	else
 		res.y = c.y + bc;
@@ -72,6 +73,7 @@ t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c, int negative)
 	double	bc;
 	t_coord	res;
 
+	(void)negative;
 	if(alpha > 89.99)
 	{
 		res.x = 0;
@@ -81,7 +83,7 @@ t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c, int negative)
 	ac = c.y - a.y;
 	ab = 1 * ac / cos(ft_degrees_to_radian(alpha));
 	bc = pow(ab, 2) - pow(ac, 2);
-	if (negative == 0)
+	if (alpha > 0)
 		res.x = c.x - bc;
 	else
 		res.x = c.x + bc;
@@ -118,12 +120,11 @@ t_impact	*ft_check_if_wall_hit(t_data *data, char **map, t_coord coord, int xory
 		res->wall = &data->assets.we;
 		res->wall_x = i % res->wall->height;
 	}
-	printf("i = %d, j = %d\n", i, j);
 	if (i < 0)
 		i = 0;
 	if (j < 0)
 		j = 0;
-	if (i > 19)
+	if (i > 19) //todo change with height and width & not recalculate every time
 		i = 19;
 	if (j > 25)
 		j = 25;
@@ -134,5 +135,8 @@ t_impact	*ft_check_if_wall_hit(t_data *data, char **map, t_coord coord, int xory
 		return (res);
 	}
 	else
+	{
+		free(res);
 		return (0);
+	}
 }

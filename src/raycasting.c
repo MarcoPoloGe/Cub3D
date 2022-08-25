@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/23 10:38:38 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:54:44 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	render_rect(t_img *img, t_img *color, int line_to_render, int distance)
 	int	i;
 	int	j;
 
-	distance /= 12;
+	//distance /= 2;
 	(void) line_to_render;
 	x = 0;
 	j = (WINDOW_WIDTH / 2) - ((color->width / distance) / 2);
@@ -59,18 +59,24 @@ int	render_rect(t_img *img, t_img *color, int line_to_render, int distance)
 	return (0);
 }
 
-void	render_line(t_img *line, t_img *wall, int line_to_render)
+void	render_line(t_img *line, t_img *wall, int line_to_render, int distance)
 {
 	int	y;
-	int	d;
+	int	x;
+	int	i;
+	int	j;
 
+	distance *= -1;
+	distance /= 24;
+	x = 0;
+	j = (WINDOW_WIDTH / 2) - ((wall->width / distance) / 2);
+	i = (WINDOW_HEIGHT / 2) - (wall->height / distance / 2);
 	y = 0;
-	d = wall->line_size  / line->height;
-	while (y < line->height)
+	while (i < (WINDOW_HEIGHT / 2) + (wall->height / distance / 2))
 	{
-		(void)line_to_render;
-		line->addr[y] = wall->addr[d]; //todo here should do calculation to choose which pixel use for the line displayed ex: line height is 64 but original image is 100;
+		line->addr[(i * line->width) + j]
+			= wall->addr[((line_to_render * distance) * wall->width) + (x * distance)];
 		++y;
-		d += wall->line_size / line->height;
+		++i;
 	}
 }

@@ -220,78 +220,75 @@ t_coord ft_coord(double y, double x)
 	return (coord);
 }
 
-void ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
+void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 {
-	t_coord	sideX;
-	t_coord	sideY;
+	t_coord	sidex;
+	t_coord	sidey;
 	int		i;
 
-	sideX.y = coord.y;
-	sideX.x = ft_get_sideDist(coord.x);
-	sideY.y = ft_get_sideDist(coord.y);
-	sideY.x = coord.x;
-	ft_render_one_px(ft_coord_to_pos(sideX), COLOR_WALL, data);
-	sideX = ft_find_next_coord_x(coord, ray->angle, sideX, 0);
-	sideY = ft_find_next_coord_y(coord, ray->angle, sideY, 0);
-	i = 0;
+	sidex.y = coord.y;
+	sidex.x = ft_get_sideDist(coord.x);
+	sidey.y = ft_get_sideDist(coord.y) - 1;
+	sidey.x = coord.x;
+	ft_render_one_px(ft_coord_to_pos(sidex), COLOR_WALL, data);
+	sidex = ft_find_next_coord_x(coord, ray->angle, sidex, 0);
+	sidey = ft_find_next_coord_y(coord, ray->angle, sidey, 0);
+	i = -1;
 	ray->impact = 0;
+	printf("angle: %f\n", ray->angle);
 	while (ray->impact == 0)
 	{
-		if (i != 0)
+		if (++i != 0)
 		{
 			if (ray->angle < 90)
 			{
-				sideX = ft_find_next_coord_x(sideX, ray->angle,
-						ft_coord(sideX.y, sideX.x + 1), 0);
-				sideY = ft_find_next_coord_y(sideY, ray->angle,
-						ft_coord(sideY.y - 1, sideY.x), 0);
+				/*sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x + 1), 0);*/
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+						ft_coord(sidey.y - 1, sidey.x), 0);
 			}
-			else if (ray->angle < 180)
+			/*else if (ray->angle < 180)
 			{
-				sideX = ft_find_next_coord_x(sideX, ray->angle,
-						ft_coord(sideX.y, sideX.x + 1), 1);
-				sideY = ft_find_next_coord_y(sideY, ray->angle,
-						ft_coord(sideY.y + 1, sideY.x), 1);
+				sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x + 1), 1);
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+						ft_coord(sidey.y + 1, sidey.x), 1);
 			}
 			else if (ray->angle < 270)
 			{
-				sideX = ft_find_next_coord_x(sideX, ray->angle,
-						ft_coord(sideX.y, sideX.x - 1), 1);
-				sideY = ft_find_next_coord_y(sideY, ray->angle,
-						ft_coord(sideY.y + 1, sideY.x), 0);
+				sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x - 1), 1);
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+						ft_coord(sidey.y + 1, sidey.x), 0);
 			}
 			else if (ray->angle < 360)
 			{
-				sideX = ft_find_next_coord_x(sideX, ray->angle,
-						ft_coord(sideX.y, sideX.x - 1), 0);
-				sideY = ft_find_next_coord_y(sideY, ray->angle,
-						ft_coord(sideY.y - 1, sideY.x), 1);
-			}
+				sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x - 1), 0);
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+						ft_coord(sidey.y - 1, sidey.x), 1);
+			}*/
 		}
-		ray->impact = ft_check_if_wall_hit(data, data->map, sideX, 0);
-		if (ray->impact == 0)
-		{
-			ray->impact = ft_check_if_wall_hit(data, data->map, sideY, 1);
-			if (ray->impact != 0)
-				ft_render_one_px(ft_coord_to_pos(sideY), COLOR_FOV, data);
-		}
+		ray->impact = ft_check_if_wall_hit(data, data->map, sidex, 1);
+		if (ray->impact != 0)
+			ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
 		else
-			ft_render_one_px(ft_coord_to_pos(sideX), COLOR_COLLISION, data);
-		i++;
+		{
+			ray->impact = ft_check_if_wall_hit(data, data->map, sidey, 0);
+			if (ray->impact != 0)
+				ft_render_one_px(ft_coord_to_pos(sidey), COLOR_FOV, data);
+		}
+		ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
+		ft_render_one_px(ft_coord_to_pos(sidey), COLOR_FOV, data);
 	}
 }
 
 int	ft_fdf_render(t_data *data)
 {
-	int	i;
 
 	mlx_clear_window(data->mlx, data->win);
 	ft_render_grid(data->map, FDF_RENDER_SIZE, data);
 	ft_render_player_fov(data);
-	i = -1;
-	while (++i < WINDOW_WIDTH)
-		ft_calculate_impact_point(data->camera.coord,
-			&data->camera.ray_list[i], data);
 /*	ft_printf("map_y: %i map_x: %i", (int)data->camera.coord.y , (int)data->camera.coord.x);
 
 

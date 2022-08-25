@@ -55,7 +55,6 @@ void	ft_get_player_infos(char **map, t_data *data)
 		y++;
 	}
 }
-/*
 
 char **ft_make_map_rectangular(char **map)
 {
@@ -76,32 +75,19 @@ char **ft_make_map_rectangular(char **map)
 	while(map[i])
 	{
 		while (ft_strlen(map[i]) < max_len)
-			ft_stradd(&map[i], " ");
+			ft_stradd(map + i, " ");
 		i++;
 	}
 	return (map);
 }
-*/
 
 int	ft_get_map(char **input_tab, t_data *data)
 {
-	//char ***map;
-
-	//map = &(data->map);
-	/*printf("--- MAP INPUT START ---\n");
-	ft_display_tab(input_tab);
-	printf("--- MAP INPUT END ---\n");*/
-
 	data->map = ft_tabdup(input_tab);
-//	data->map = ft_make_map_rectangular(data->map);
-//	if (ft_check_map(data->map))
-//	{
-	//	leave(data, "Error : map invalid\n");
-//		ft_free_tab(input_tab);
-	//	return (0);
-//	}
-//	else
-	//{
-		return (ft_tablen(data->map));
-	//}
+	data->map = ft_make_map_rectangular(data->map);
+	data->map_height = ft_tablen(data->map);
+	data->map_width = ft_strlen(data->map[0]);
+	if (ft_check_map(data->map))
+		leave(data, "Error : map invalid\n");
+	return (ft_tablen(data->map));
 }

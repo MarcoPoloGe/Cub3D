@@ -97,6 +97,8 @@ typedef struct s_data
 	t_assets	assets;
 	t_camera	camera;
 	char		**map;
+	int			map_width;
+	int			map_height;
 }				t_data;
 
 //leave.c
@@ -113,7 +115,7 @@ int			ft_get_map(char **input_tab, t_data *data);
 int			ft_check_map(char **map);
 
 //put_struct.c
-void		ft_put_map(char **map);
+void		ft_put_map(t_data *data);
 void		ft_put_img(t_img *img);
 void		ft_put_data(t_data *data);
 void		ft_put_camera(t_camera camera);

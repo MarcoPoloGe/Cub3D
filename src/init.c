@@ -42,6 +42,8 @@ void	init_data(t_data *data)
 	init_camera(&(data->camera));
 	init_rays(&(data->camera), data);
 	data->map = 0;
+	data->map_height = 0;
+	data->map_width = 0;
 }
 
 t_ray	*init_rays(t_camera *camera, t_data *data) //todo

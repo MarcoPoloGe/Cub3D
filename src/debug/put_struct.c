@@ -12,18 +12,22 @@
 
 #include "../src/cub3D.h"
 
-void	ft_put_map(char **map)
+void	ft_put_map(t_data *data)
 {
+	char **map;
 	int	x;
 	int	y;
 
+	map = data->map;
 	if (map == NULL)
 	{
 		printf("data.map = NULL;\n");
 		return ;
 	}
-	y = 0;
 	printf("-- start map --\n");
+	printf("map_width: %i\n", data->map_width);
+	printf("map_height: %i\n", data->map_height);
+	y = 0;
 	while (map[y])
 	{
 		x = 0;
@@ -108,6 +112,6 @@ void	ft_put_data(t_data *data)
 	ft_put_camera(data->camera);
 	ft_put_assets(data->assets);
 
-	ft_put_map(data->map);
+	ft_put_map(data);
 	printf("--- End Struct Data ---\n");
 }

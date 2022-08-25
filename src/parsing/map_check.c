@@ -12,7 +12,7 @@
 
 #include "../src/cub3D.h"
 
-int	ft_player_count_good(char **map)
+int	ft_player_count_bad(char **map)
 {
 	int	player_count;
 	int	x;
@@ -124,7 +124,7 @@ int	ft_end_no_border(char **map)
 			{
 				if (y == 0 || x == 0)
 					return (1);
-				if (y == ft_tablen(map) || x == ft_strlen(map[y]) - 1)
+				if (y == ft_tablen(map) - 1 || x == ft_strlen(map[y]) - 1)
 					return (1);
 			}
 			x++;
@@ -138,7 +138,7 @@ int	ft_check_map(char **map)
 {
 	if (map == NULL || *map == NULL)
 		return (1);
-	if (ft_player_count_good(map))
+	if (ft_player_count_bad(map))
 		return (1);
 	if (ft_forbiden_char(map))
 		return (1);

@@ -129,13 +129,14 @@ void		ft_file_to_image(char *path, t_img *img, t_data *data);
 void		display_line(t_data *data, t_img *wall, int line_to_render,
 				int len);
 void		render_line(t_img *line, t_img *wall, int line_to_render, int distance);
-
-
+void		ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data);
 
 //render_fdf.c
 int			ft_fdf_render(t_data *data);
 void		check_side(t_camera *camera);
-void		ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data);
+t_pos	ft_coord_to_pos(t_coord input);
+void	ft_render_one_px(t_pos pos, int color, t_data *data);
+void	ft_render_pixel_line(t_pos start, t_pos end, int color, t_data *data);
 
 //display_backgroud.c
 void		render_background(t_img *frame, t_assets assets);

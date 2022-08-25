@@ -10,73 +10,87 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
-//dessine une copy de l'image
-int	render_image(t_img *img, t_img *color)
-{
-	int	y;
-	int	x;
-	int	distance;
+#include "../src/cub3D.h"
 
-	distance = 8;
-	y = 0;
-	while (y < color->height / distance)
+double ft_get_sideDist(double nb)
+{
+	double diff;
+	double sideDist;
+
+	diff = 1 - (nb - (int) nb);
+	sideDist = nb + diff;
+
+	return (sideDist);
+}
+
+t_coord ft_coord(double y, double x)
+{
+	t_coord coord;
+
+	coord.y = y;
+	coord.x = x;
+	return (coord);
+}
+
+void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
+{
+	t_coord	sidex;
+	t_coord	sidey;
+	int		i;
+
+	sidex.y = coord.y;
+	sidex.x = ft_get_sideDist(coord.x);
+	sidey.y = ft_get_sideDist(coord.y) - 1;
+	sidey.x = coord.x;
+	ft_render_one_px(ft_coord_to_pos(sidex), COLOR_WALL, data);
+	sidex = ft_find_next_coord_x(coord, ray->angle, sidex, 0);
+	sidey = ft_find_next_coord_y(coord, ray->angle, sidey, 0);
+	i = -1;
+	ray->impact = 0;
+	printf("angle: %f\n", ray->angle);
+	while (ray->impact == 0)
 	{
-		x = 0;
-		while (x < color->width / distance)
+		if (++i != 0)
 		{
-			img->addr[(y * img->width) + x]
-				= color->addr[((y * distance) * color->width) + (x * distance)];
-			x++;
-			//printf("%d/%d, %d/%d\n", y, color->height, x, color->width);
+			if (ray->angle < 90)
+			{
+				/*sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x + 1), 0);*/
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+											 ft_coord(sidey.y - 1, sidey.x), 0);
+			}
+			/*else if (ray->angle < 180)
+			{
+				sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x + 1), 1);
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+						ft_coord(sidey.y + 1, sidey.x), 1);
+			}
+			else if (ray->angle < 270)
+			{
+				sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x - 1), 1);
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+						ft_coord(sidey.y + 1, sidey.x), 0);
+			}
+			else if (ray->angle < 360)
+			{
+				sidex = ft_find_next_coord_x(sidex, ray->angle,
+						ft_coord(sidex.y, sidex.x - 1), 0);
+				sidey = ft_find_next_coord_y(sidey, ray->angle,
+						ft_coord(sidey.y - 1, sidey.x), 1);
+			}*/
 		}
-		++y;
-	}
-	return (0);
-}
-
-//try de dessiner l'image en plus petit
-int	render_rect(t_img *img, t_img *color, int line_to_render, int distance)
-{
-	int	y;
-	int	x;
-	int	i;
-	int	j;
-
-	//distance /= 2;
-	(void) line_to_render;
-	x = 0;
-	j = (WINDOW_WIDTH / 2) - ((color->width / distance) / 2);
-	i = (WINDOW_HEIGHT / 2) - (color->height / distance / 2);
-	y = 0;
-	while (i < (WINDOW_HEIGHT / 2) + (color->height / distance / 2))
-	{
-		img->addr[(i * img->width) + j]
-			= color->addr[((y * distance) * color->width) + (x * distance)];
-		++y;
-		++i;
-	}
-	return (0);
-}
-
-void	render_line(t_img *line, t_img *wall, int line_to_render, int distance)
-{
-	int	y;
-	int	x;
-	int	i;
-	int	j;
-
-	distance *= -1;
-	distance /= 24;
-	x = 0;
-	j = (WINDOW_WIDTH / 2) - ((wall->width / distance) / 2);
-	i = (WINDOW_HEIGHT / 2) - (wall->height / distance / 2);
-	y = 0;
-	while (i < (WINDOW_HEIGHT / 2) + (wall->height / distance / 2))
-	{
-		line->addr[(i * line->width) + j]
-			= wall->addr[((line_to_render * distance) * wall->width) + (x * distance)];
-		++y;
-		++i;
+		ray->impact = ft_check_if_wall_hit(data, data->map, sidex, 1);
+		if (ray->impact != 0)
+			ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
+		else
+		{
+			ray->impact = ft_check_if_wall_hit(data, data->map, sidey, 0);
+			if (ray->impact != 0)
+				ft_render_one_px(ft_coord_to_pos(sidey), COLOR_FOV, data);
+		}
+		ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
+		ft_render_one_px(ft_coord_to_pos(sidey), COLOR_FOV, data);
 	}
 }

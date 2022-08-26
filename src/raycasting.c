@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/26 16:00:58 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/26 16:24:28 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,38 +55,29 @@ void    ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	{
 		if (++i != 0)
 		{
-		    //if (ray->angle < 90)
-		    //{
-		        /*if (ray->angle < 0)
-		            sidex = ft_find_next_coord_x(sidex, ray->angle + 90,
-		                ft_coord(sidex.y, sidex.x + 1), 0);
-		        else
-		            sidex = ft_find_next_coord_x(sidex, ray->angle + 90,
-		                ft_coord(sidex.y, sidex.x - 1), 0);*/
+		//if (ray->angle < 90)
+			//{
+				/*if (ray->angle < 0)
+					sidex = ft_find_next_coord_x(sidex, ray->angle + 90,
+						ft_coord(sidex.y, sidex.x + 1), 0);
+				else
+					sidex = ft_find_next_coord_x(sidex, ray->angle + 90,
+						ft_coord(sidex.y, sidex.x - 1), 0);*/
 				sidey = ft_find_next_coord_y(sidey, ray->angle,
 					ft_coord(sidey.y - 1, sidey.x), 0);
-		    //}
-		    /*else if (ray->angle < 180)
-		    {
-		        sidex = ft_find_next_coord_x(sidex, ray->angle,
-		                ft_coord(sidex.y, sidex.x + 1), 1);
-		        sidey = ft_find_next_coord_y(sidey, ray->angle,
-		                ft_coord(sidey.y + 1, sidey.x), 1);
-		    }
-		    else if (ray->angle < 270)
-		    {
-		        sidex = ft_find_next_coord_x(sidex, ray->angle,
-		                ft_coord(sidex.y, sidex.x - 1), 1);
-		        sidey = ft_find_next_coord_y(sidey, ray->angle,
-		                ft_coord(sidey.y + 1, sidey.x), 0);
-		    }
-		    else if (ray->angle < 360)
-		    {
-		        sidex = ft_find_next_coord_x(sidex, ray->angle,
-		                ft_coord(sidex.y, sidex.x - 1), 0);
-		        sidey = ft_find_next_coord_y(sidey, ray->angle,
-		                ft_coord(sidey.y - 1, sidey.x), 1);
-		    }*/
+			//}
+			/*else if (ray->angle < 180)
+			{
+
+			}
+			else if (ray->angle < 270)
+			{
+
+			}
+			else if (ray->angle < 360)
+			{
+
+			}*/
 		}
 		resy = ft_check_if_wall_hit(data, data->map, sidey, 0);
 		if (resy != 0)

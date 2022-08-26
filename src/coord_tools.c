@@ -49,19 +49,20 @@ t_coord	ft_find_next_coord_x(t_coord a, double alpha, t_coord c, int negative)
 	t_coord	res;
 
 	(void)negative;
-	if(alpha > 89.99)
+	/*if(alpha > 89.99)
 	{
 		res.x = 0;
 		res.y = 0;
 		return (res);
-	}
-	ac = c.x - a.x;
-	ab = 1 * ac / cos(ft_degrees_to_radian(alpha));
-	bc = pow(ab, 2) - pow(ac, 2);
-	if (alpha > 0)
-		res.y = c.y - bc;
+	}*/
+	printf("angle: %f\n", alpha);
+	if (alpha > 90)
+		ac = c.x - a.x;
 	else
-		res.y = c.y + bc;
+		ac = a.x - c.x;
+	ab = 1 * ac / cos(ft_degrees_to_radian(alpha));
+	bc = sqrt(pow(ab, 2) - pow(ac, 2));
+	res.y = c.y - bc;
 	res.x = c.x;
 	return (res);
 }
@@ -74,15 +75,18 @@ t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c, int negative)
 	t_coord	res;
 
 	(void)negative;
-	if(alpha > 89.99)
+	/*if(alpha > 89.99)
 	{
 		res.x = 0;
 		res.y = 0;
 		return (res);
-	}
-	ac = c.y - a.y;
+	}*/
+	if (alpha > 90)
+		ac = c.y - a.y;
+	else
+		ac = a.y - c.y;
 	ab = 1 * ac / cos(ft_degrees_to_radian(alpha));
-	bc = pow(ab, 2) - pow(ac, 2);
+	bc = sqrt(pow(ab, 2) - pow(ac, 2));
 	if (alpha > 0)
 		res.x = c.x - bc;
 	else
@@ -124,14 +128,14 @@ t_impact	*ft_check_if_wall_hit(t_data *data, char **map, t_coord coord, int xory
 		i = 0;
 	if (j < 0)
 		j = 0;
-	if (i > 19) //todo change with height and width & not recalculate every time
-		i = 19;
-	if (j > 25)
-		j = 25;
+	if (i > data->map_height)
+		i = data->map_height;
+	if (j > data->map_width)
+		j = data->map_width;
 	if (map[i][j] - 48 == 1)
 	{
-		res->distance = pow(data->camera.coord.x, 2) - pow(coord.x, 2)
-			+ pow(data->camera.coord.y, 2) - pow(coord.y, 2);
+		res->distance = pow(data->camera.coord.x - coord.x, 2)
+			+ pow(data->camera.coord.y - coord.y, 2);
 		return (res);
 	}
 	else

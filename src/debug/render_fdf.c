@@ -204,6 +204,11 @@ int	ft_fdf_render(t_data *data)
 	mlx_clear_window(data->mlx, data->win);
 	ft_render_grid(data->map, FDF_RENDER_SIZE, data);
 	ft_render_player_fov(data);
+
+	int i = 0;
+	while (++i < WINDOW_WIDTH)
+		ft_calculate_impact_point(data->camera.coord,
+			&data->camera.ray_list[i], data);
 /*	ft_printf("map_y: %i map_x: %i", (int)data->camera.coord.y , (int)data->camera.coord.x);
 
 

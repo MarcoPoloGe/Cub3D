@@ -41,21 +41,19 @@ t_coord	ft_rotate_point(t_coord axis, t_coord point, double angle)
 	return (prime);
 }
 
-t_coord	ft_find_next_coord_x(t_coord a, double alpha, t_coord c, int negative)
+t_coord	ft_find_next_coord_x(t_coord a, double alpha, t_coord c)
 {
 	double	ab;
 	double	ac;
 	double	bc;
 	t_coord	res;
 
-	(void)negative;
 	/*if(alpha > 89.99)
 	{
 		res.x = 0;
 		res.y = 0;
 		return (res);
 	}*/
-	printf("angle: %f\n", alpha);
 	if (alpha > 90)
 		ac = c.x - a.x;
 	else
@@ -67,21 +65,20 @@ t_coord	ft_find_next_coord_x(t_coord a, double alpha, t_coord c, int negative)
 	return (res);
 }
 
-t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c, int negative)
+t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c)
 {
 	double	ab;
 	double	ac;
 	double	bc;
 	t_coord	res;
 
-	(void)negative;
 	/*if(alpha > 89.99)
 	{
 		res.x = 0;
 		res.y = 0;
 		return (res);
 	}*/
-	if (alpha > 90)
+	if (alpha > 90 && alpha < 270 )
 		ac = c.y - a.y;
 	else
 		ac = a.y - c.y;
@@ -128,10 +125,10 @@ t_impact	*ft_check_if_wall_hit(t_data *data, char **map, t_coord coord, int xory
 		i = 0;
 	if (j < 0)
 		j = 0;
-	if (i > data->map_height)
-		i = data->map_height;
-	if (j > data->map_width)
-		j = data->map_width;
+	if (i >= data->map_height)
+		i = data->map_height - 1;
+	if (j >= data->map_width)
+		j = data->map_width - 1;
 	if (map[i][j] - 48 == 1)
 	{
 		res->distance = pow(data->camera.coord.x - coord.x, 2)

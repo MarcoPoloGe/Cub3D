@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/24 16:28:32 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/29 11:20:30 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,9 @@ void		ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data);
 //render_fdf.c
 int			ft_fdf_render(t_data *data);
 void		check_side(t_camera *camera);
-t_pos	ft_coord_to_pos(t_coord input);
-void	ft_render_one_px(t_pos pos, int color, t_data *data);
-void	ft_render_pixel_line(t_pos start, t_pos end, int color, t_data *data);
+t_pos		ft_coord_to_pos(t_coord input);
+void		ft_render_one_px(t_pos pos, int color, t_data *data);
+void		ft_render_pixel_line(t_pos start, t_pos end, int color, t_data *data);
 
 //display_backgroud.c
 void		render_background(t_img *frame, t_assets assets);
@@ -145,10 +145,8 @@ void		render_background(t_img *frame, t_assets assets);
 double		ft_degrees_to_radian(double degrees);
 double		ft_radian_to_degrees(double degrees);
 t_coord		ft_rotate_point(t_coord axis, t_coord point, double angle);
-t_coord		ft_find_next_coord_x(t_coord a, double alpha, t_coord c,
-				int negative);
-t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c,
-				int negative);
+t_coord		ft_find_next_coord_x(t_coord a, double alpha, t_coord c);
+t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c);
 t_impact	*ft_check_if_wall_hit(t_data *data, char **map,
 				t_coord coord, int xory);
 

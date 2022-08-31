@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/31 15:10:20 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/31 15:22:21 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,10 +163,6 @@ double		ft_radian_to_degrees(double degrees);
 t_coord		ft_rotate_point(t_coord axis, t_coord point, double angle);
 t_coord		ft_find_next_coord_x(t_coord a, double alpha, t_coord c);
 t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c);
-t_impact	*ft_check_if_wall_hit_y(t_data *data, char **map,
-				t_coord coord, double angle);
-t_impact	*ft_check_if_wall_hit_x(t_data *data, char **map,
-				t_coord coord, double angle);
 
 //init.c
 void		init_data(t_data *data);
@@ -185,6 +181,12 @@ void		ft_push_frame(t_pos pos, t_img *frame, t_data *data, int reset);
 
 //ray.c
 void		ft_ray_calculate_collision(char **map, t_coord coord, t_ray *ray);
+
+//ray_impact.c
+t_impact	*ft_check_if_wall_hit_y(t_data *data, char **map,
+				t_coord coord, double angle);
+t_impact	*ft_check_if_wall_hit_x(t_data *data, char **map,
+				t_coord coord, double angle);
 
 //minimap.c
 void	ft_minimap_render(t_img *minimap, t_data *data);

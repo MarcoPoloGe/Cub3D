@@ -95,47 +95,86 @@ t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c)
 	return (res);
 }
 
-t_impact	*ft_check_if_wall_hit(t_data *data, char **map, t_coord coord, int xory)
+t_impact	*ft_check_if_wall_hit_y(t_data *data, char **map, t_coord coord, double angle)
 {
 	int			i;
 	int			j;
 	t_impact	*res;
 
 	res = malloc(sizeof(t_impact));
-	i = (int)coord.y;
-	j = (int)coord.x;
-	if (xory == 0)
+	i = 0;
+	j = 0;
+	if (angle <= 180)
 	{
-		res->wall = &data->assets.no;
-		res->wall_x = j % res->wall->width;
-	}
-	else
-	{
-		res->wall = &data->assets.so;
-		res->wall_x = j % res->wall->width;
-	}
-	if (xory == 1)
-	{
+		i = floor(coord.y);
+		j = floor(coord.x);
 		res->wall = &data->assets.ea;
 		res->wall_x = i % res->wall->height;
 	}
 	else
 	{
+		i = ceil(coord.y);
+		j = ceil(coord.x);
 		res->wall = &data->assets.we;
 		res->wall_x = i % res->wall->height;
 	}
-	if (i < 0)
+	if (i <= 0)
 		i = 0;
-	if (j < 0)
+	if (j <= 0)
 		j = 0;
-	if (i >= data->map_height)
+	if (i >= data->map_height - 1)
 		i = data->map_height - 1;
-	if (j >= data->map_width)
+	if (j >= data->map_width - 1)
 		j = data->map_width - 1;
 	if (map[i][j] - 48 == 1)
 	{
-		res->distance = pow(data->camera.coord.x - coord.x, 2)
-			+ pow(data->camera.coord.y - coord.y, 2);
+		res->distance = sqrt(pow(data->camera.coord.x - coord.x, 2)
+			+ pow(data->camera.coord.y - coord.y, 2));
+		return (res);
+	}
+	else
+	{
+		free(res);
+		return (0);
+	}
+}
+
+t_impact	*ft_check_if_wall_hit_x(t_data *data, char **map, t_coord coord, double angle)
+{
+	int			i;
+	int			j;
+	t_impact	*res;
+
+
+	res = malloc(sizeof(t_impact));
+	i = 0;
+	j = 0;
+	if (angle <= 90 || angle >= 270)
+	{
+		i = ceil(coord.y);
+		j = ceil(coord.x);
+		res->wall = &data->assets.no;
+		res->wall_x = j % res->wall->width;
+	}
+	else if (angle > 90 && angle < 270)
+	{
+		i = floor(coord.y);
+		j = floor(coord.x);
+		res->wall = &data->assets.so;
+		res->wall_x = j % res->wall->width;
+	}
+	if (i <= 0)
+		i = 0;
+	if (j <= 0)
+		j = 0;
+	if (i >= data->map_height - 1)
+		i = data->map_height - 1;
+	if (j >= data->map_width - 1)
+		j = data->map_width - 1;
+	if (map[i][j] - 48 == 1)
+	{
+		res->distance = sqrt(pow(data->camera.coord.x - coord.x, 2)
+			+ pow(data->camera.coord.y - coord.y, 2));
 		return (res);
 	}
 	else

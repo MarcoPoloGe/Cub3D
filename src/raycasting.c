@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/31 12:03:22 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/31 15:09:36 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	else
 		sidey.y = ceil(coord.y);
 	sidey.x = coord.x;
-	printf("angle = %f\n", thisangle);
-	ft_render_one_px(ft_coord_to_pos(sidex), COLOR_WALL, data);
 	if (thisangle > 180)
 		sidey = ft_find_next_coord_y(coord, thisangle, sidey);
 	else if (thisangle <= 180)
@@ -68,7 +66,6 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	i = -1;
 	ray->impact = 0;
 	resy = 0;
-
 	while (resy == 0)
 	{
 		if (++i != 0)
@@ -82,11 +79,9 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 			else if (thisangle <= 360)
 				sidey = ft_find_next_coord_y(sidey, thisangle, ft_coord(sidey.y - 1, sidey.x));
 		}
-		resy = ft_check_if_wall_hit(data, data->map, sidey, 0);
-		if (resy != 0)
-			ft_render_one_px(ft_coord_to_pos(sidey), COLOR_FOV, data);
-		ft_render_one_px(ft_coord_to_pos(sidey), COLOR_COLLISION, data);
+		resy = ft_check_if_wall_hit_y(data, data->map, sidey, thisangle);
 	}
+	printf("angle: %f\n", thisangle);
 	i = -1;
 	while (ray->impact == 0)
 	{
@@ -105,14 +100,19 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 				sidex = ft_find_next_coord_x(sidex, thisangle + 90,
 						ft_coord(sidex.y, sidex.x - 1));
 		}
-		ray->impact = ft_check_if_wall_hit(data, data->map, sidex, 1);
+		ray->impact = ft_check_if_wall_hit_x(data, data->map, sidex, thisangle);
 		if (ray->impact != 0)
 		{
 			if (resy->distance < ray->impact->distance)
+			{
+				free(ray->impact);
 				ray->impact = resy;
-			ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
+				ft_render_one_px(ft_coord_to_pos(sidey), COLOR_COLLISION, data);
+			}
+			else
+				ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
 		}
-		ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
+		//ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
 	}
 	free(resy);
 }

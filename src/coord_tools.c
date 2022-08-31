@@ -54,16 +54,13 @@ t_coord	ft_find_next_coord_x(t_coord a, double alpha, t_coord c)
 		res.y = 0;
 		return (res);
 	}*/
-	if (alpha >= 360)
-		alpha -= 90;
 	if (alpha < 180)
 		ac = c.x - a.x;
 	else
 		ac = a.x - c.x;
 	ab = 1 * ac / cos(ft_degrees_to_radian(alpha));
 	bc = sqrt(pow(ab, 2) - pow(ac, 2));
-	//printf("angle = %f\n", alpha);
-	if (alpha < 180)
+	if (alpha < 180 || alpha > 360)
 		res.y = c.y - bc;
 	else
 		res.y = c.y + bc;
@@ -90,7 +87,7 @@ t_coord	ft_find_next_coord_y(t_coord a, double alpha, t_coord c)
 		ac = a.y - c.y;
 	ab = 1 * ac / cos(ft_degrees_to_radian(alpha));
 	bc = sqrt(pow(ab, 2) - pow(ac, 2));
-	if (alpha < 180)
+	if (alpha > 180)
 		res.x = c.x - bc;
 	else
 		res.x = c.x + bc;

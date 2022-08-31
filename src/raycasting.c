@@ -23,15 +23,6 @@ double ft_get_sideDist(double nb)
 	return (sideDist);
 }
 
-t_coord ft_coord(double y, double x)
-{
-	t_coord coord;
-
-	coord.y = y;
-	coord.x = x;
-	return (coord);
-}
-
 void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 {
 	t_coord		sidex;
@@ -107,10 +98,10 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 			{
 				free(ray->impact);
 				ray->impact = resy;
-				ft_render_one_px(ft_coord_to_pos(sidey), COLOR_COLLISION, data);
+				ft_render_one_px(ft_coord_to_pos(sidey), COLOR_COLLISION, data->frame.game);
 			}
 			else
-				ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
+				ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data->frame.game);
 		}
 		//ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
 	}

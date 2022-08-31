@@ -22,13 +22,15 @@
 
 # define WINDOW_WIDTH 1600
 # define WINDOW_HEIGHT 900
-# define DIR_VECTOR_LEN 10
+# define DIR_VECTOR_LEN 30
 # define FOV 90
+# define MINIMAP_RENDER_SIZE 30
+# define MINIMAP_OVERLAY "assets/map_200.xpm"
 
 //Define for FDF_Render
-# define FDF_RENDER_SIZE 40
+
 # define COLOR_WALL 0x0000FF00
-# define COLOR_GROUD 0x00808080
+# define COLOR_GROUND 0x00808080
 # define COLOR_SPACE 0x000000FF
 # define COLOR_FOV 0x00FF00FF
 # define COLOR_PLAYER_DIR 0x00FF0000
@@ -79,6 +81,13 @@ typedef struct s_camera
 	double	dir_angle; // may replace dir coord but not sur yet;
 }	t_camera;
 
+typedef struct s_frame
+{
+	t_img *game;
+	t_img *overlay;
+	t_img *minimap;
+}	t_frame;
+
 typedef struct s_assets
 {
 	t_img	no;
@@ -91,7 +100,7 @@ typedef struct s_assets
 
 typedef struct s_data
 {
-	t_img		frame;
+	t_frame		frame;
 	void		*mlx;
 	void		*win;
 	t_assets	assets;
@@ -104,6 +113,7 @@ typedef struct s_data
 //leave.c
 int			leave(t_data *data, char *errormsg);
 void		free_all(t_data *data);
+void		ft_free_img(t_img *img, t_data *data);
 
 //main.c
 void		*check_keycode(int keycode, t_data *data);
@@ -132,16 +142,22 @@ void		render_line(t_img *line, t_img *wall, int line_to_render, int distance);
 void		ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data);
 
 //render_fdf.c
-int			ft_fdf_render(t_data *data);
-void		check_side(t_camera *camera);
-t_pos		ft_coord_to_pos(t_coord input);
-void		ft_render_one_px(t_pos pos, int color, t_data *data);
-void		ft_render_pixel_line(t_pos start, t_pos end, int color, t_data *data);
+void 	ft_fdf_render(t_data *data);
+void	check_side(t_camera *camera);
+void	ft_render_one_px(t_pos pos, int color, t_img *frame);
+void	ft_render_line_coord(t_coord start_coord, t_coord end_coord, int color, t_img *frame);
+void	ft_render_line_pos(t_pos start, t_pos end, int color, t_img *frame);
+void	ft_render_grid(t_pos pos, char **map, int size, t_img *frame);
+void	ft_render_player_fov(t_pos pos, t_coord coord, t_data *data);
+void	ft_render_rays(t_data *data);
 
 //display_backgroud.c
 void		render_background(t_img *frame, t_assets assets);
 
 //coord_tools.c
+t_pos 		ft_pos(int y, int x);
+t_coord		ft_coord(double y, double x);
+t_pos		ft_coord_to_pos(t_coord input);
 double		ft_degrees_to_radian(double degrees);
 double		ft_radian_to_degrees(double degrees);
 t_coord		ft_rotate_point(t_coord axis, t_coord point, double angle);
@@ -164,9 +180,12 @@ void		ft_get_player_infos(char **map, t_data *data);
 
 //frame.c
 void		ft_put_pixel_frame(t_img *frame, int y, int x, int color);
-void		ft_push_frame(t_data *data);
+int			ft_display_game(t_data *data);
+void		ft_push_frame(t_pos pos, t_img *frame, t_data *data, int reset);
 
 //ray.c
 void		ft_ray_calculate_collision(char **map, t_coord coord, t_ray *ray);
 
+//minimap.c
+void	ft_minimap_render(t_img *minimap, t_data *data);
 #endif

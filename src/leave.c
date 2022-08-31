@@ -23,6 +23,13 @@ int	leave(t_data *data, char *errormsg)
 	exit(0);
 }
 
+void ft_free_img(t_img *img, t_data *data)
+{
+	mlx_destroy_image(data->mlx, img->ptr);
+	free(img);
+}
+
+
 void	free_all(t_data *data) //todo update so that it free everything in data.
 {
 	int	i;

@@ -1,7 +1,7 @@
 
-SRCS	= 	${addprefix src/, main.c leave.c raycasting.c display_background.c img.c coord_tools.c init.c move.c ray.c frame.c}
+SRCS	= 	${addprefix src/, main.c leave.c raycasting.c display_background.c img.c coord_tools.c init.c move.c ray_impact.c frame.c}
 SRCS	+= 	${addprefix src/parsing/, parser.c map.c map_check.c}
-SRCS	+= 	${addprefix src/debug/, put_struct.c render_fdf.c}
+SRCS	+= 	${addprefix src/debug/, put_struct.c render_fdf.c minimap.c}
 
 OBJS		=	${SRCS:.c=.o}
 NAME		= 	cub3D

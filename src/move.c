@@ -25,7 +25,7 @@ void	ft_move_player(double move, t_camera *camera) // has to calculate where to 
 int	keycode_handling(int keycode, t_data *data)
 {
 	t_camera	*camera;
-	int			i;
+	//int			i;
 
 	camera = &(data->camera);
 	if (keycode == 53)
@@ -38,12 +38,12 @@ int	keycode_handling(int keycode, t_data *data)
 		ft_move_player(0.5, camera);
 	if (keycode == 13)
 		ft_move_player(-0.5, camera);
-	i = -1;
+	/*i = -1;
 	while (++i < WINDOW_WIDTH)
 	{
 		ft_calculate_impact_point(data->camera.coord,
 			&data->camera.ray_list[i], data);
-		/*render_line(data->win, data->camera.ray_list[i].impact->wall, data->camera.ray_list[i].impact->wall_x, data->camera.ray_list[i].impact->distance);*/
-	}
+		*//*render_line(data->win, data->camera.ray_list[i].impact->wall, data->camera.ray_list[i].impact->wall_x, data->camera.ray_list[i].impact->distance);*//*
+	}*/
 	return (0);
 }

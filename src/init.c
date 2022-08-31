@@ -33,11 +33,19 @@ void	init_camera(t_camera *camera)
 	camera->coord.x = 0;
 }
 
+void init_frame(t_frame *frame, t_data *data)
+{
+	frame->game = ft_calloc(sizeof(t_img), 1);
+	ft_new_image(frame->game, WINDOW_WIDTH, WINDOW_HEIGHT, data);
+	frame->overlay = NULL;
+	frame->minimap = NULL;
+}
+
 void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D");
-	ft_new_image(&(data->frame), WINDOW_WIDTH, WINDOW_HEIGHT, data);
+	init_frame(&(data->frame), data);
 	init_assets(&(data->assets));
 	init_camera(&(data->camera));
 	init_rays(&(data->camera), data);

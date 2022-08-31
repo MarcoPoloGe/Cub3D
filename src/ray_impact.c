@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 16:51:38 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/31 16:51:39 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:53:13 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ t_impact	*ft_check_if_wall_hit_y(t_data *data, char **map, t_coord coord, double
 	if (map[i][j] - 48 == 1)
 	{
 		res->distance = sqrt(pow(data->camera.coord.x - coord.x, 2)
-					+ pow(data->camera.coord.y - coord.y, 2));
-		ft_render_one_px(ft_coord_to_pos(coord), COLOR_COLLISION, data->frame.game);
+				+ pow(data->camera.coord.y - coord.y, 2));
 		return (res);
 	}
 	else
@@ -92,7 +91,6 @@ t_impact	*ft_check_if_wall_hit_x(t_data *data, char **map, t_coord coord, double
 	{
 		res->distance = sqrt(pow(data->camera.coord.x - coord.x, 2)
 				+ pow(data->camera.coord.y - coord.y, 2));
-		ft_render_one_px(ft_coord_to_pos(coord), COLOR_COLLISION, data->frame.game);
 		return (res);
 	}
 	else

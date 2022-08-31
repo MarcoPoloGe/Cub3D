@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/30 16:46:13 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:42:24 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,38 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 		thisangle -= 360;
 	if (thisangle < 0)
 		thisangle += 360;
-	/*else if (thisangle > 90 && thisangle < 180)
-		thisangle -= 45;*/
 	sidex.y = coord.y;
-	printf("dir: %f + ray: %f = angle: %f\n", data->camera.dir_angle, ray->angle, thisangle);
-	if (thisangle > 90 || thisangle < 180)
-		sidex.x = floor(coord.x);
-	else
+	if (thisangle < 180)
 		sidex.x = ceil(coord.x);
+	else
+		sidex.x = floor(coord.x);
 
 	if (thisangle < 90 || thisangle > 270)
-		sidey.y = floor(coord.y);
-	else
 		sidey.y = ceil(coord.y);
+	else
+		sidey.y = floor(coord.y);
 	sidey.x = coord.x;
-	//ft_render_one_px(ft_coord_to_pos(sidex), COLOR_WALL, data);
+	printf("angle = %f\n", thisangle);
+	ft_render_one_px(ft_coord_to_pos(sidex), COLOR_WALL, data);
 	if (thisangle > 180)
 	{
-		sidex = ft_find_next_coord_x(coord, ray->angle + 90, sidex);
+		//sidex = ft_find_next_coord_x(coord, thisangle, sidex);
 		sidey = ft_find_next_coord_y(coord, thisangle, sidey);
 	}
 	else if (thisangle <= 180)
 	{
-		sidex = ft_find_next_coord_x(coord, ray->angle + 90, sidex);
+		//sidex = ft_find_next_coord_x(coord, thisangle + 90, sidex);
 		sidey = ft_find_next_coord_y(coord, thisangle - 180, sidey);
 	}
+	if (thisangle <= 270)
+		sidex = ft_find_next_coord_x(coord, thisangle + 90, sidex);
+	else
+		sidex = ft_find_next_coord_x(coord, thisangle + 90, sidex);
 	i = -1;
 	ray->impact = 0;
 	resy = 0;
-	while (resy == 0)
+
+	/*while (resy == 0)
 	{
 		if (++i != 0)
 		{
@@ -101,28 +104,42 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 		if (resy != 0)
 			ft_render_one_px(ft_coord_to_pos(sidey), COLOR_FOV, data);
 		ft_render_one_px(ft_coord_to_pos(sidey), COLOR_COLLISION, data);
-	}
+	}*/
 	i = -1;
-	/*while (ray->impact == 0)
+	while (ray->impact == 0)
 	{
 		if (++i != 0)
 		{
-			if (ray->angle < 0)
-				sidex = ft_find_next_coord_x(sidex, ray->angle + 90,
+			if (thisangle <= 90)
+			{
+				sidex = ft_find_next_coord_x(sidex, thisangle + 90,
 						ft_coord(sidex.y, sidex.x + 1));
-			else
-				sidex = ft_find_next_coord_x(sidex, ray->angle + 90,
+			}
+			else if (thisangle <= 180)
+			{
+				sidex = ft_find_next_coord_x(sidex, thisangle + 90,
+						ft_coord(sidex.y, sidex.x + 1));
+			}
+			else if (thisangle <= 270)
+			{
+				sidex = ft_find_next_coord_x(sidex, thisangle + 90,
 						ft_coord(sidex.y, sidex.x - 1));
+			}
+			else if (thisangle <= 360)
+			{
+				sidex = ft_find_next_coord_x(sidex, thisangle + 90,
+						ft_coord(sidex.y, sidex.x - 1));
+			}
 		}
 		ray->impact = ft_check_if_wall_hit(data, data->map, sidex, 1);
 		if (ray->impact != 0)
 		{
-			if (resy->distance < ray->impact->distance)
-				ray->impact = resy;
+			/*if (resy->distance < ray->impact->distance)
+				ray->impact = resy;*/
 			ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
 		}
 		ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION, data);
-	}*/
+	}
 	free(resy);
 }
 

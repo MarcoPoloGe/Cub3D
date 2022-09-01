@@ -6,21 +6,11 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 11:21:26 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:38:59 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../src/cub3D.h"
-
-/*double	ft_get_sideDist(double nb)
-{
-	double	diff;
-	double	sidedist;
-
-	diff = 1 - (nb - (int) nb);
-	sidedist = nb + diff;
-	return (sidedist);
-}*/
 
 void	init_this_angle(t_data *data, t_ray *ray, double *thisangle)
 {

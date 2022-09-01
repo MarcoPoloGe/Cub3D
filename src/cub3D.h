@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 11:24:40 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:14:39 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,16 +140,25 @@ void		display_line(t_data *data, t_img *wall, int line_to_render,
 				int len);
 void		ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data);
 
-//render_fdf.c
-void		ft_fdf_render(t_data *data);
-void		check_side(t_camera *camera);
-void		ft_render_one_px(t_pos pos, int color, t_img *frame);
+//draw_line.c
 void		ft_render_line_coord(t_coord start_coord, t_coord end_coord,
 				int color, t_img *frame);
 void		ft_render_line_pos(t_pos start, t_pos end, int color, t_img *frame);
+
+//draw_cube.c
+void		ft_render_cube_empty(t_pos pos, int size, int color, t_img *frame);
+void		ft_render_cube_filled(t_pos pos, int size, int color, t_img *frame);
+void		ft_render_cube_wall(t_pos pos, int size, int color, t_img *frame);
+
+//draw_rays
+void		ft_render_one_px(t_pos pos, int color, t_img *frame);
+void		ft_render_rays(t_data *data);
+
+//render_fdf.c
+void		ft_fdf_render(t_data *data);
+void		check_side(t_camera *camera);
 void		ft_render_grid(t_pos pos, char **map, int size, t_img *frame);
 void		ft_render_player_fov(t_pos pos, t_coord coord, t_data *data);
-void		ft_render_rays(t_data *data);
 
 //display_backgroud.c
 void		render_background(t_img *frame, t_assets assets);

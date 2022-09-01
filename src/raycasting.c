@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 11:38:59 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:19:21 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ t_impact	*calulate_impact_for_y(t_data *data, t_coord *sidey,
 
 	resy = 0;
 	i = -1;
-	while (resy == 0 && i < data->map_width)
+	while (resy == 0 && ++i < data->map_width + data->map_height)
 	{
-		if (++i != 0)
+		if (i != 0)
 		{
 			if (thisangle <= 90)
 				*sidey = ft_find_next_coord_y(*sidey, thisangle - 180,
@@ -80,9 +80,9 @@ void	calulate_impact_for_x(t_data *data, t_ray *ray, t_coord *sidex,
 	int	i;
 
 	i = -1;
-	while (ray->impact == 0 && i < data->map_height)
+	while (ray->impact == 0 && ++i < data->map_width + data->map_height)
 	{
-		if (++i != 0)
+		if (i != 0)
 		{
 			if (thisangle <= 90)
 				*sidex = ft_find_next_coord_x(*sidex, thisangle + 90,
@@ -114,7 +114,7 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	init_sidexy(coord, &sidex, &sidey, thisangle);
 	resy = calulate_impact_for_y(data, &sidey, thisangle);
 	calulate_impact_for_x(data, ray, &sidex, thisangle);
-	if (resy && resy->distance < ray->impact->distance)
+	if (resy && ray->impact && resy->distance < ray->impact->distance)
 	{
 		ray->impact = resy;
 		ft_render_one_px(ft_coord_to_pos(sidey), COLOR_COLLISION,

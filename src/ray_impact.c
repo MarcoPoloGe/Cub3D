@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 16:51:38 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 11:10:08 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:16:12 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	check_ool(int *ij, int map_height, int map_width)
 
 t_impact	*is_wall_hit(t_data *data, t_coord coord, int *ij, t_impact *res)
 {
-	if (data->map[ij[0]][ij[1]] - 48 == 1)
+	if ((ij[0] < data->map_height && ij[1] < data->map_width)
+		&& data->map[ij[0]][ij[1]] == '1')
 	{
 		res->distance = sqrt(pow(data->camera.coord.x - coord.x, 2)
 				+ pow(data->camera.coord.y - coord.y, 2));
@@ -73,7 +74,7 @@ t_impact	*ft_check_if_wall_hit_x(t_data *data, t_coord coord, double angle)
 	t_impact	*res;
 
 	ij[0] = 0;
-	ij[0] = 0;
+	ij[1] = 0;
 	res = ft_calloc(sizeof(t_impact), 1);
 	if (!res)
 		leave(data, "Error: malloc\n");

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 11:36:07 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 11:24:49 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:08:17 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_free_img(t_img *img, t_data *data)
 	free(img);
 }
 
-void	free_all(t_data *data) //todo update so that it free everything in data.
+void	free_all(t_data *data)
 {
 	int	i;
 

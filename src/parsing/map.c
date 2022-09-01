@@ -6,32 +6,39 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 14:38:45 by Marco Belar       #+#    #+#             */
-/*   Updated: 2022/08/18 10:27:48 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:53:26 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/cub3D.h"
+#include "../cub3D.h"
+
+int	ft_check_map(char **map)
+{
+	if (map == 0 || *map == 0)
+		return (1);
+	if (ft_player_count_bad(map))
+		return (1);
+	if (ft_forbiden_char(map))
+		return (1);
+	if (ft_space_no_border(map))
+		return (1);
+	if (ft_end_no_border(map))
+		return (1);
+	return (0);
+}
 
 void	ft_init_player_info(int y, int x, char dir_char, t_camera *camera)
 {
 	camera->coord.x = (double)x + 0.5;
 	camera->coord.y = (double)y + 0.5;
 	if (dir_char == 'N')
-	{
 		camera->dir_angle = 0;
-	}
 	else if (dir_char == 'S')
-	{
 		camera->dir_angle = 180;
-	}
 	else if (dir_char == 'E')
-	{
 		camera->dir_angle = 90;
-	}
 	else if (dir_char == 'W')
-	{
 		camera->dir_angle = 270;
-	}
 }
 
 void	ft_get_player_infos(char **map, t_data *data)
@@ -56,23 +63,23 @@ void	ft_get_player_infos(char **map, t_data *data)
 	}
 }
 
-char **ft_make_map_rectangular(char **map)
+char	**ft_make_map_rectangular(char **map)
 {
-	int len;
-	int max_len;
-	int i;
+	int	len;
+	int	max_len;
+	int	i;
 
 	i = 0;
 	max_len = 0;
 	while (map[i])
 	{
 		len = ft_strlen(map[i]);
-		if(max_len < len)
+		if (max_len < len)
 			max_len = len;
-	    i++;
+		i++;
 	}
 	i = 0;
-	while(map[i])
+	while (map[i])
 	{
 		while (ft_strlen(map[i]) < max_len)
 			ft_stradd(map + i, " ");

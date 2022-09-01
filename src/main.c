@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:26:38 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 11:29:33 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:51:10 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		leave(0, "Error: not enough argument\n");
-
 	init_data(&data);
 	ft_parser(av[1], &data);
 	ft_put_data(&data);
@@ -28,7 +27,6 @@ int	main(int ac, char **av)
 		ft_calculate_impact_point(data.camera.coord,
 			&data.camera.ray_list[i], &data);
 	mlx_loop_hook(data.mlx, ft_display_game, &data);
-
 	mlx_hook(data.win, 2, 1L << 1, keycode_handling, &data);
 	mlx_hook(data.win, 17, 1L << 0, leave, &data);
 	mlx_loop(data.mlx);

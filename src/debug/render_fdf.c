@@ -6,11 +6,11 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:41:24 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 12:15:02 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:21:59 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/cub3D.h"
+#include "../cub3D.h"
 
 void	ft_render_grid_empty(t_pos pos, char **map, int size, t_img *frame)
 {
@@ -49,6 +49,18 @@ void	ft_render_grid(t_pos pos, char **map, int size, t_img *frame)
 	}
 }
 
+void	init_player_fov(t_pos *camera_pos, t_pos pos, t_pos *pos_list)
+{
+	camera_pos->x += pos.x;
+	camera_pos->y += pos.y;
+	pos_list[0].x += pos.x;
+	pos_list[0].y += pos.y;
+	pos_list[1].x += pos.x;
+	pos_list[1].y += pos.y;
+	pos_list[2].x += pos.x;
+	pos_list[2].y += pos.y;
+}
+
 void	ft_render_player_fov(t_pos pos, t_coord coord, t_data *data)
 {
 	t_coord	coord_list[3];
@@ -65,14 +77,7 @@ void	ft_render_player_fov(t_pos pos, t_coord coord, t_data *data)
 	pos_list[0] = ft_coord_to_pos(coord_list[0]);
 	pos_list[1] = ft_coord_to_pos(coord_list[1]);
 	pos_list[2] = ft_coord_to_pos(coord_list[2]);
-	camera_pos.x += pos.x;
-	camera_pos.y += pos.y;
-	pos_list[0].x += pos.x;
-	pos_list[0].y += pos.y;
-	pos_list[1].x += pos.x;
-	pos_list[1].y += pos.y;
-	pos_list[2].x += pos.x;
-	pos_list[2].y += pos.y;
+	init_player_fov(&camera_pos, pos, pos_list);
 	ft_render_line_pos(camera_pos, pos_list[0], COLOR_PLAYER_DIR,
 		data->frame.game);
 	ft_render_line_pos(camera_pos, pos_list[1], COLOR_FOV, data->frame.game);

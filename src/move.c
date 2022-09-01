@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:25:41 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 11:25:49 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:07:04 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	ft_rotate_camera(t_camera *camera, double angle)
 		camera->dir_angle += 360;
 	if (camera->dir_angle >= 360)
 		camera->dir_angle -= 360;
-	//printf("angle: %f\n", camera->dir_angle);
 }
 
-void	ft_move_player(double move, t_camera *camera) // has to calculate where to move both player coord and player dir
+void	ft_move_player(double move, t_camera *camera)
 {
 	t_coord	next_coord;
 	t_coord	coord;
@@ -51,7 +50,5 @@ int	keycode_handling(int keycode, t_data *data)
 	if (keycode == 13)
 		ft_move_player(-0.5, camera);
 	i = -1;
-	//while (++i < WINDOW_WIDTH)
-		//render_line(data->win, data->camera.ray_list[i].impact->wall, data->camera.ray_list[i].impact->wall_x, data->camera.ray_list[i].impact->distance);
 	return (0);
 }

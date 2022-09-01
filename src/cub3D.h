@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 12:14:39 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:11:14 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 typedef struct s_coord
 {
-	double	x; //je les ais mis en double parce que toutes les fonctions de la lib Math.h utilise des doubles.
+	double	x;
 	double	y;
 }				t_coord;
 
@@ -51,7 +51,7 @@ typedef struct s_pos
 
 typedef struct s_img
 {
-	void	*ptr; // pointer to the image
+	void	*ptr;
 	int		width;
 	int		height;
 	int		*addr;
@@ -63,8 +63,8 @@ typedef struct s_img
 typedef struct s_impact
 {
 	t_coord	coord;
-	t_img	*wall; // give the texture of the wall that was hit
-	int		wall_x; // x of the wall where the ray hit;
+	t_img	*wall;
+	int		wall_x;
 	double	distance;
 }	t_impact;
 
@@ -78,7 +78,7 @@ typedef struct s_camera
 {
 	t_ray	*ray_list;
 	t_coord	coord;
-	double	dir_angle; // may replace dir coord but not sur yet;
+	double	dir_angle;
 }	t_camera;
 
 typedef struct s_frame
@@ -184,11 +184,22 @@ t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c);
 void		init_data(t_data *data);
 t_ray		*init_rays(t_camera *camera, t_data *data);
 
+//init2.c
+void		init_assets(t_assets *assets);
+void		init_img(t_img *img);
+
 //move.c
 int			keycode_handling(int keycode, t_data *data);
 
-//map_check.c
+//map.c
 void		ft_get_player_infos(char **map, t_data *data);
+
+//map_check.c
+int			ft_player_count_bad(char **map);
+int			ft_forbiden_char(char **map);
+int			ft_no_wall_space_around(char **map, int y, int x);
+int			ft_space_no_border(char **map);
+int			ft_end_no_border(char **map);
 
 //frame.c
 void		ft_put_pixel_frame(t_img *frame, int y, int x, int color);

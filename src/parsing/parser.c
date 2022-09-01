@@ -6,11 +6,11 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:09:58 by mbelarbi          #+#    #+#             */
-/*   Updated: 2022/07/22 11:14:56 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 14:00:56 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/cub3D.h"
+#include "../cub3D.h"
 
 int	check_assets_good(t_assets *assets)
 {
@@ -93,7 +93,7 @@ void	ft_parser(char *file_name, t_data *data)
 
 	tab = ft_read_tab(file_name, ".cub", '\n');
 	if (tab == 0)
-		leave(NULL, "Error : invalid file\n");
+		leave(0, "Error : invalid file\n");
 	i = 0;
 	i += ft_get_textures(tab + i, data);
 	ft_get_map(tab + i, data);

@@ -1,5 +1,5 @@
 
-SRCS	= 	${addprefix src/, main.c leave.c raycasting.c display_background.c display_wall.c img.c coord_tools.c init.c move.c ray_impact.c frame.c convert.c draw_line.c draw_cube.c draw_rays.c}
+SRCS	= 	${addprefix src/, main.c leave.c raycasting.c display_background.c display_wall.c img.c coord_tools.c init.c move.c ray_impact.c frame.c convert.c draw_line.c draw_cube.c draw_rays.c init2.c}
 SRCS	+= 	${addprefix src/parsing/, parser.c map.c map_check.c}
 SRCS	+= 	${addprefix src/debug/, put_struct.c render_fdf.c minimap.c}
 

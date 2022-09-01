@@ -6,11 +6,11 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:04:05 by mbelarbi          #+#    #+#             */
-/*   Updated: 2022/07/19 14:12:02 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:53:20 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/cub3D.h"
+#include "../cub3D.h"
 
 int	ft_player_count_bad(char **map)
 {
@@ -131,20 +131,5 @@ int	ft_end_no_border(char **map)
 		}
 		y++;
 	}
-	return (0);
-}
-
-int	ft_check_map(char **map)
-{
-	if (map == NULL || *map == NULL)
-		return (1);
-	if (ft_player_count_bad(map))
-		return (1);
-	if (ft_forbiden_char(map))
-		return (1);
-	if (ft_space_no_border(map))
-		return (1);
-	if (ft_end_no_border(map))
-		return (1);
 	return (0);
 }

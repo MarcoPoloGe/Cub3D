@@ -6,20 +6,20 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:58:19 by mbelarbi          #+#    #+#             */
-/*   Updated: 2022/08/17 16:57:49 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:56:56 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/cub3D.h"
+#include "../cub3D.h"
 
 void	ft_put_map(t_data *data)
 {
-	char **map;
-	int	x;
-	int	y;
+	char	**map;
+	int		x;
+	int		y;
 
 	map = data->map;
-	if (map == NULL)
+	if (map == 0)
 	{
 		printf("data.map = NULL;\n");
 		return ;
@@ -30,12 +30,9 @@ void	ft_put_map(t_data *data)
 	y = 0;
 	while (map[y])
 	{
-		x = 0;
-		while (map[y][x])
-		{
+		x = -1;
+		while (map[y][++x])
 			printf("%c ", map[y][x]);
-			x++;
-		}
 		printf("\n");
 		y++;
 	}
@@ -44,7 +41,7 @@ void	ft_put_map(t_data *data)
 
 void	ft_put_img(t_img *img)
 {
-	if (img == NULL)
+	if (img == 0)
 	{
 		printf("img = NULL;\n");
 		return ;
@@ -89,29 +86,20 @@ void	ft_put_ray(t_ray ray)
 
 void	ft_put_camera(t_camera camera)
 {
-//	int	i;
-
 	printf("camera.coord.y: %fl\n", camera.coord.y);
 	printf("camera.coord.x: %fl\n", camera.coord.x);
 	printf("camera.dir_angle: %fl\n", camera.dir_angle);
-	//i = 0;
-	//while (i < WINDOW_WIDTH)
-//	{
-//		ft_put_ray(camera.ray_list[i]);
-//		i++;
-//	}
 }
 
 void	ft_put_data(t_data *data)
 {
-	if (data == NULL)
+	if (data == 0)
 		return ;
 	printf("--- Start Struct Data ---\n");
 	printf("data.mlx = %p\n", data->mlx);
 	printf("data.win = %p\n", data->win);
 	ft_put_camera(data->camera);
 	ft_put_assets(data->assets);
-
 	ft_put_map(data);
 	printf("--- End Struct Data ---\n");
 }

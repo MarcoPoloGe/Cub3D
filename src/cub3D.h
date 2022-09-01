@@ -129,6 +129,7 @@ void		ft_put_map(t_data *data);
 void		ft_put_img(t_img *img);
 void		ft_put_data(t_data *data);
 void		ft_put_camera(t_camera camera);
+void		ft_put_impact(t_impact *impact);
 
 //img.c
 int			encode_rgb(int red, int green, int blue);
@@ -203,4 +204,7 @@ t_impact	*ft_check_if_wall_hit_x(t_data *data, t_coord coord, double angle);
 
 //minimap.c
 void		ft_minimap_render(t_img *minimap, t_data *data);
+
+//render_wall.c
+void		ft_render_walls(t_camera camera, t_data *data);
 #endif

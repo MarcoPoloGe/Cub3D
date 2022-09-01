@@ -68,7 +68,7 @@ void	ft_put_assets(t_assets assets)
 	printf("ea.img.ptr = %p\n", assets.ea.ptr);
 }
 
-void	ft_impact(t_impact *impact)
+void	ft_put_impact(t_impact *impact)
 {
 	if (impact != 0)
 	{
@@ -84,7 +84,7 @@ void	ft_put_ray(t_ray ray)
 {
 	printf("ray.angle: %fl\n", ray.angle);
 	printf("ray.");
-	ft_impact(ray.impact);
+	ft_put_impact(ray.impact);
 }
 
 void	ft_put_camera(t_camera camera)

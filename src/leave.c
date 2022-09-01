@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 11:36:07 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/07/22 14:16:49 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:24:49 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ int	leave(t_data *data, char *errormsg)
 	exit(0);
 }
 
-void ft_free_img(t_img *img, t_data *data)
+void	ft_free_img(t_img *img, t_data *data)
 {
 	mlx_destroy_image(data->mlx, img->ptr);
 	free(img);
 }
-
 
 void	free_all(t_data *data) //todo update so that it free everything in data.
 {

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/08/31 15:22:21 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:24:40 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ typedef struct s_camera
 
 typedef struct s_frame
 {
-	t_img *game;
-	t_img *overlay;
-	t_img *minimap;
+	t_img	*game;
+	t_img	*overlay;
+	t_img	*minimap;
 }	t_frame;
 
 typedef struct s_assets
@@ -138,28 +138,34 @@ void		ft_file_to_image(char *path, t_img *img, t_data *data);
 //raycasting.c
 void		display_line(t_data *data, t_img *wall, int line_to_render,
 				int len);
-void		render_line(t_img *line, t_img *wall, int line_to_render, int distance);
 void		ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data);
 
 //render_fdf.c
-void 	ft_fdf_render(t_data *data);
-void	check_side(t_camera *camera);
-void	ft_render_one_px(t_pos pos, int color, t_img *frame);
-void	ft_render_line_coord(t_coord start_coord, t_coord end_coord, int color, t_img *frame);
-void	ft_render_line_pos(t_pos start, t_pos end, int color, t_img *frame);
-void	ft_render_grid(t_pos pos, char **map, int size, t_img *frame);
-void	ft_render_player_fov(t_pos pos, t_coord coord, t_data *data);
-void	ft_render_rays(t_data *data);
+void		ft_fdf_render(t_data *data);
+void		check_side(t_camera *camera);
+void		ft_render_one_px(t_pos pos, int color, t_img *frame);
+void		ft_render_line_coord(t_coord start_coord, t_coord end_coord,
+				int color, t_img *frame);
+void		ft_render_line_pos(t_pos start, t_pos end, int color, t_img *frame);
+void		ft_render_grid(t_pos pos, char **map, int size, t_img *frame);
+void		ft_render_player_fov(t_pos pos, t_coord coord, t_data *data);
+void		ft_render_rays(t_data *data);
 
 //display_backgroud.c
 void		render_background(t_img *frame, t_assets assets);
 
-//coord_tools.c
-t_pos 		ft_pos(int y, int x);
+//display_wall.c
+void		render_line(t_img *line, t_img *wall, int line_to_render,
+				int distance);
+
+//convert.c
+t_pos		ft_pos(int y, int x);
 t_coord		ft_coord(double y, double x);
 t_pos		ft_coord_to_pos(t_coord input);
 double		ft_degrees_to_radian(double degrees);
 double		ft_radian_to_degrees(double degrees);
+
+//coord_tools.c
 t_coord		ft_rotate_point(t_coord axis, t_coord point, double angle);
 t_coord		ft_find_next_coord_x(t_coord a, double alpha, t_coord c);
 t_coord		ft_find_next_coord_y(t_coord a, double alpha, t_coord c);
@@ -183,11 +189,9 @@ void		ft_push_frame(t_pos pos, t_img *frame, t_data *data, int reset);
 void		ft_ray_calculate_collision(char **map, t_coord coord, t_ray *ray);
 
 //ray_impact.c
-t_impact	*ft_check_if_wall_hit_y(t_data *data, char **map,
-				t_coord coord, double angle);
-t_impact	*ft_check_if_wall_hit_x(t_data *data, char **map,
-				t_coord coord, double angle);
+t_impact	*ft_check_if_wall_hit_y(t_data *data, t_coord coord, double angle);
+t_impact	*ft_check_if_wall_hit_x(t_data *data, t_coord coord, double angle);
 
 //minimap.c
-void	ft_minimap_render(t_img *minimap, t_data *data);
+void		ft_minimap_render(t_img *minimap, t_data *data);
 #endif

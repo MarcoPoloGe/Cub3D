@@ -23,12 +23,12 @@
 # define WINDOW_WIDTH 1600
 # define WINDOW_HEIGHT 900
 # define DIR_VECTOR_LEN 30
-# define FOV 90
+# define FOV 60
 # define MINIMAP_RENDER_SIZE 30
 # define MINIMAP_OVERLAY "assets/map_200.xpm"
+# define VIEW_DISTANCE 10
 
-//Define for FDF_Render
-
+//COLORS
 # define COLOR_WALL 0x0000FF00
 # define COLOR_GROUND 0x00808080
 # define COLOR_SPACE 0x000000FF

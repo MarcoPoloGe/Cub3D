@@ -61,3 +61,4 @@ CMakeLists.txt
 src/main.c
 .gitignore
 .vscode/settings.json
+cub3D

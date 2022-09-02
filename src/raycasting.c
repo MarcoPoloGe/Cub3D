@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 15:19:21 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/02 12:09:06 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,17 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	init_sidexy(coord, &sidex, &sidey, thisangle);
 	resy = calulate_impact_for_y(data, &sidey, thisangle);
 	calulate_impact_for_x(data, ray, &sidex, thisangle);
-	if (resy && ray->impact && resy->distance < ray->impact->distance)
+	if ((resy && ray->impact && resy->distance < ray->impact->distance)
+		|| !(ray->impact))
 	{
 		ray->impact = resy;
-		ft_render_one_px(ft_coord_to_pos(sidey), COLOR_COLLISION,
+		ft_render_one_px(ft_coord_to_pos(ray->impact->coord), COLOR_COLLISION,
 			data->frame.game);
 	}
 	else
 	{
 		free(resy);
-		ft_render_one_px(ft_coord_to_pos(sidex), COLOR_COLLISION,
+		ft_render_one_px(ft_coord_to_pos(ray->impact->coord), COLOR_COLLISION,
 			data->frame.game);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 16:51:38 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/02 13:33:35 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/02 13:59:41 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_impact	*ft_check_if_wall_hit_y(t_data *data, t_coord coord, double angle)
 		ij[1] = floor(coord.x);
 		check_ool(ij, data->map_height, data->map_width);
 		res->wall = &data->assets.no;
-		res->wall_x = coord.y % res->wall->width;
+		res->wall_x = coord.x - ij[1];
 	}
 	else if (res)
 	{
@@ -66,7 +66,7 @@ t_impact	*ft_check_if_wall_hit_y(t_data *data, t_coord coord, double angle)
 		ij[1] = floor(coord.x);
 		check_ool(ij, data->map_height, data->map_width);
 		res->wall = &data->assets.so;
-		res->wall_x = coord.y % res->wall->width;
+		res->wall_x = coord.x - ij[1];
 	}
 	return (is_wall_hit(data, coord, ij, res));
 }
@@ -87,7 +87,7 @@ t_impact	*ft_check_if_wall_hit_x(t_data *data, t_coord coord, double angle)
 		ij[1] = floor(coord.x);
 		check_ool(ij, data->map_height, data->map_width);
 		res->wall = &data->assets.ea;
-		res->wall_x = coord.x % res->wall->height;
+		res->wall_x = coord.y - ij[0];
 	}
 	else if (res)
 	{
@@ -95,7 +95,7 @@ t_impact	*ft_check_if_wall_hit_x(t_data *data, t_coord coord, double angle)
 		ij[1] = ceil(coord.x) - 1;
 		check_ool(ij, data->map_height, data->map_width);
 		res->wall = &data->assets.we;
-		res->wall_x = coord.x % res->wall->height;
+		res->wall_x = coord.y - ij[0];
 	}
 	return (is_wall_hit(data, coord, ij, res));
 }

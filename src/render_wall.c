@@ -112,7 +112,7 @@ void	ft_render_wall_line(t_pos pos, t_ray ray, t_data *data)
 	wall_height = ft_get_nb_from_percent(percent_y, WINDOW_HEIGHT);*/
 
 	step_y = impact->wall->height / wall_height;
-	
+
 	//printf("percent_y = %f\n", percent_y);
 
 	pos.y -= (wall_height / 2);
@@ -120,6 +120,7 @@ void	ft_render_wall_line(t_pos pos, t_ray ray, t_data *data)
 	while (i < wall_height)
 	{
 		ft_put_pixel_frame(frame, pos.y + i, pos.x, ft_get_wall_color(i * step_y, impact->wall_x, impact->wall));
+		printf("wall_x: %f\n", impact->wall_x);
 		i++;
 	}
 }

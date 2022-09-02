@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/02 10:33:28 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/02 13:49:23 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_impact
 {
 	t_coord	coord;
 	t_img	*wall;
-	int		wall_x;
+	double	wall_x;
 	double	distance;
 }	t_impact;
 

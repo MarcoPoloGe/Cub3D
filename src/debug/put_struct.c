@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:58:19 by mbelarbi          #+#    #+#             */
-/*   Updated: 2022/09/01 13:56:56 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/02 13:53:23 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_put_impact(t_impact *impact)
 		printf("impact.coord.x: %fl\n", impact->coord.x);
 		printf("impact.distance: %fl\n", impact->coord.y);
 		printf("impact.wall: %p\n", impact->wall->ptr);
-		printf("impact.wall_x: %i\n", impact->wall_x);
+		printf("impact.wall_x: %f\n", impact->wall_x);
 	}
 }
 

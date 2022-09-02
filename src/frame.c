@@ -45,7 +45,7 @@ void	ft_push_frame(t_pos pos, t_img *frame, t_data *data, int reset)
 
 void ft_calculate_rays(t_data *data)
 {
-	int i = 0;
+	int i = -1;
 
 	while (++i < WINDOW_WIDTH)
 		ft_calculate_impact_point(data->camera.coord,

@@ -1,6 +1,5 @@
 #include "cub3D.h"
 
-//dessine une copy de l'image
 int	render_image(t_img *img, t_img *color)
 {
 	int	y;
@@ -15,9 +14,8 @@ int	render_image(t_img *img, t_img *color)
 		while (x < color->width / distance)
 		{
 			img->addr[(y * img->width) + x]
-					= color->addr[((y * distance) * color->width) + (x * distance)];
+				= color->addr[((y * distance) * color->width) + (x * distance)];
 			x++;
-			//printf("%d/%d, %d/%d\n", y, color->height, x, color->width);
 		}
 		++y;
 	}
@@ -26,10 +24,10 @@ int	render_image(t_img *img, t_img *color)
 
 void	render_line(t_img *line, t_img *wall, int line_to_render, int distance)
 {
-	int y;
-	int x;
-	int i;
-	int j;
+	int	y;
+	int	x;
+	int	i;
+	int	j;
 
 	if (distance < 0)
 		distance *= -1;
@@ -47,42 +45,28 @@ void	render_line(t_img *line, t_img *wall, int line_to_render, int distance)
 	}
 }
 
-
-double ft_invert_percent(double percent)
+double	ft_get_percent(double nb, double total)
 {
-	double invert;
-
-	invert = 100 - percent;
-
-	return (invert);
-}
-
-double ft_get_percent(double nb, double total)
-{
-	double percent;
+	double	percent;
 
 	percent = nb * 100 / total;
-
 	return (percent);
 }
 
-double ft_get_nb_from_percent(double percent, double total)
+double	ft_get_nb_from_percent(double percent, double total)
 {
-	double nb;
+	double	nb;
 
 	nb = percent * total / 100;
-
 	return (nb);
 }
 
-int ft_get_wall_color(int wall_y, int wall_x, t_img *wall)
+int	ft_get_wall_color(int wall_y, int wall_x, t_img *wall)
 {
-	int color;
-	(void)wall_x;
-	(void)wall_y;
-	(void)wall;
+	int	color;
 
-	if (wall_x < wall->width && wall_y < wall->height && wall_x > 0 && wall_y > 0)
+//	ft_printf("wall_x : %i\n", wall_x);
+	if (wall_x < wall->width && wall_y < wall->height && wall_x >= 0 && wall_y >= 0)
 		color = wall->addr[(wall_y * wall->width) + wall_x];
 	else
 		color = COLOR_COLLISION;
@@ -91,52 +75,41 @@ int ft_get_wall_color(int wall_y, int wall_x, t_img *wall)
 
 void	ft_render_wall_line(t_pos pos, t_ray ray, t_data *data)
 {
-	t_impact *impact;
-	t_img *frame;
-	int i;
-//	double percent_y;
-	double step_y;
-	double wall_height;
-	double correct_distance;
+	t_impact	*impact;
+	t_img		*frame;
+	int			i;
+	double		step_y;
+	double		wall_height;
+	double		correct_distance;
 
 	frame = data->frame.game;
 	impact = ray.impact;
 
-	correct_distance = impact->distance; // * cos(ft_degrees_to_radian(ray.angle));
-
+	correct_distance = impact->distance * cos(ft_degrees_to_radian(ray.angle));
 	wall_height = WINDOW_HEIGHT / (correct_distance);
-
-/*	printf("%lf, correct : %fl , distance : %fl\n", ray.angle, correct_distance, impact->distance);
-	percent_y = ft_get_percent(correct_distance, 30);
-	percent_y = ft_invert_percent(percent_y); //20%
-	wall_height = ft_get_nb_from_percent(percent_y, WINDOW_HEIGHT);*/
-
 	step_y = impact->wall->height / wall_height;
-
-	//printf("percent_y = %f\n", percent_y);
-
 	pos.y -= (wall_height / 2);
 	i = 0;
 	while (i < wall_height)
 	{
-		ft_put_pixel_frame(frame, pos.y + i, pos.x, ft_get_wall_color(i * step_y, impact->wall_x, impact->wall));
-		printf("wall_x: %f\n", impact->wall_x);
+		//if(impact->wall_x > 10)
+		//	printf("wall_x : %i\n", impact->wall_x);
+		ft_put_pixel_frame(frame, pos.y + i, pos.x, ft_get_wall_color(i * step_y, ft_get_nb_from_percent(impact->wall_x, impact->wall->width), impact->wall));
 		i++;
 	}
 }
 
 void	ft_render_walls(t_camera camera, t_data *data)
 {
-	int i;
-	t_ray *ray_list;
+	int		i;
+	t_ray	*ray_list;
 
 	ray_list = camera.ray_list;
 	i = 0;
 	while (i < WINDOW_WIDTH)
 	{
-		if(ray_list[i].impact != NULL)
+		if (ray_list[i].impact != NULL)
 			ft_render_wall_line(ft_pos(WINDOW_HEIGHT / 2, i), ray_list[i], data);
 		i++;
 	}
 }
-

@@ -86,15 +86,8 @@ void	ft_render_player_fov(t_pos pos, t_coord coord, t_data *data)
 
 void	ft_fdf_render(t_data *data)
 {
-	int	i;
+	ft_render_grid(ft_pos(0,0),data->map, MINIMAP_RENDER_SIZE, data->frame.game);
+	ft_render_player_fov(ft_pos(0,0), data->camera.coord, data);
 
-	ft_render_grid_empty(ft_pos(0, 0), data->map, MINIMAP_RENDER_SIZE,
-		data->frame.game);
-	ft_render_grid(ft_pos(0, 0), data->map, MINIMAP_RENDER_SIZE,
-		data->frame.game);
-	ft_render_player_fov(ft_pos(0, 0), data->camera.coord, data);
-	i = -1;
-	while (++i < WINDOW_WIDTH)
-		ft_calculate_impact_point(data->camera.coord,
-			&data->camera.ray_list[i], data);
+	//ft_render_rays(data);
 }

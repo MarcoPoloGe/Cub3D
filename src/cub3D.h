@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 11:37:12 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 14:11:14 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/02 10:33:28 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WINDOW_HEIGHT 900
 # define DIR_VECTOR_LEN 30
 # define FOV 90
-# define MINIMAP_RENDER_SIZE 30
+# define MINIMAP_RENDER_SIZE 10
 # define MINIMAP_OVERLAY "assets/map_200.xpm"
 
 //Define for FDF_Render

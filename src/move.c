@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:25:41 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/02 11:56:49 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:54:45 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@ void	ft_rotate_camera(t_camera *camera, double angle)
 
 void	ft_move_player(t_data *data, double move, t_camera *camera)
 {
-	t_coord	next_coord;
-	t_coord	coord;
-	(void)data;
+	t_coord		next_coord;
+	t_coord		coord;
+	int			ij[2];
+
 	coord = camera->coord;
-	//if (coord.y + move)
 	next_coord.y = coord.y + move;
 	next_coord.x = coord.x;
 	next_coord = ft_rotate_point(coord, next_coord, camera->dir_angle);
+	ij[0] = floor(next_coord.y);
+	ij[1] = floor(next_coord.x);
+	//printf("i %d j %d = %c\n", ij[0], ij[1], data->map[ij[0]][ij[1]]);
+	if (data->map[ij[0]][ij[1]] == '1')
+		next_coord = coord;
 	camera->coord = next_coord;
 }
 

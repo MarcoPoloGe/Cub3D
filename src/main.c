@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 		leave(0, "Error: not enough argument\n");
 	init_data(&data);
 	ft_parser(av[1], &data);
+	ft_display_game(&data);
 	//mlx_loop_hook(data.mlx, ft_display_game, &data);
 	mlx_hook(data.win, 2, 1L << 1, keycode_handling, &data);
 	mlx_hook(data.win, 17, 1L << 0, leave, &data);

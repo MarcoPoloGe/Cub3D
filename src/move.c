@@ -51,5 +51,6 @@ int	keycode_handling(int keycode, t_data *data)
 	if (keycode == 13 || keycode == 126)
 		ft_move_player(data, -0.5, camera);
 	i = -1;
+	ft_display_game(data);
 	return (0);
 }

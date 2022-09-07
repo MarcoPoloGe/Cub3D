@@ -25,11 +25,11 @@ void	render_background(t_img *frame, t_assets assets)
 		while (x < frame->width)
 		{
 			if (y < frame->height / 2)
-				ft_put_pixel_frame(frame, y, x, encode_rgb(assets.f[0],
-						assets.f[1], assets.f[2]));
-			else
 				ft_put_pixel_frame(frame, y, x, encode_rgb(assets.c[0],
 						assets.c[1], assets.c[2]));
+			else
+				ft_put_pixel_frame(frame, y, x, encode_rgb(assets.f[0],
+						assets.f[1], assets.f[2]));
 			x++;
 		}
 		y++;

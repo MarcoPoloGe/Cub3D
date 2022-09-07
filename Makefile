@@ -8,7 +8,7 @@ NAME		= 	cub3D
 AR			=	ar rcs
 GCC			=	gcc
 RM			= 	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g # -fsanitize=address
 MLX_PATH	=	./mlx/
 LBFT_PATH	=	./libft/
 FRAMLIBS	=	-L ${LBFT_PATH} -lft -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit

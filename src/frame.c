@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:46:46 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 13:46:46 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:17:17 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	ft_display_game(t_data *data)
 {
 	t_pos	minimap_pos;
 	int		minimap_size;
+	int		i;
 
 	minimap_pos = ft_pos(590, 1200);
 	minimap_size = 200;
@@ -72,10 +73,16 @@ int	ft_display_game(t_data *data)
 	}
 	ft_minimap_render(data->frame.minimap, data);
 	render_background(data->frame.game, data->assets);
+	if (data->camera.ray_list)
+	{
+		i = -1;
+		while (++i < WINDOW_WIDTH)
+			free(data->camera.ray_list[i].impact);
+	}
 	ft_calculate_rays(data);
 	ft_render_walls(data->camera, data);
 
-	//ft_fdf_render(data);
+	ft_fdf_render(data);
 	ft_push_frame(ft_pos(0,0), data->frame.game, data, 1);
 	ft_push_frame(minimap_pos, data->frame.minimap, data, 1);
 	ft_push_frame(ft_pos(minimap_pos.y - 120, minimap_pos.x -210),

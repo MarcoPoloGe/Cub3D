@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:04:17 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 14:09:48 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:27:58 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ t_ray	*init_rays(t_camera *camera, t_data *data)
 		ray_list[i].impact = 0;
 	}
 	camera->ray_list = ray_list;
-	return (ray_list);
+	return (camera->ray_list);
 }

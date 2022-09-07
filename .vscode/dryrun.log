@@ -1,21 +1,6 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/ktrosset/Desktop/Cub3D'
-gcc -Wall -Wextra -Werror -g -fsanitize=address -Imlx -c src/draw_line.c -o src/draw_line.o
+make: Nothing to be done for `all'.
  
-gcc -Wall -Wextra -Werror -g -fsanitize=address -Imlx -c src/draw_cube.c -o src/draw_cube.o
-gcc -Wall -Wextra -Werror -g -fsanitize=address -Imlx -c src/draw_rays.c -o src/draw_rays.o
-gcc -Wall -Wextra -Werror -g -fsanitize=address -Imlx -c src/debug/render_fdf.c -o src/debug/render_fdf.o
-/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ./libft/
- 
-make[1]: Entering directory `/Users/ktrosset/Desktop/Cub3D/libft'
- 
-make[1]: Nothing to be done for `all'.
-make[1]: Leaving directory `/Users/ktrosset/Desktop/Cub3D/libft'
-/Applications/Xcode.app/Contents/Developer/usr/bin/make -C ./mlx/
- 
-make[1]: Entering directory `/Users/ktrosset/Desktop/Cub3D/mlx'
-make[1]: Nothing to be done for `all'.
-make[1]: Leaving directory `/Users/ktrosset/Desktop/Cub3D/mlx'
-gcc src/main.o src/leave.o src/raycasting.o src/display_background.o src/display_wall.o src/img.o src/coord_tools.o src/init.o src/move.o src/ray_impact.o src/frame.o src/convert.o src/draw_line.o src/draw_cube.o src/draw_rays.o src/parsing/parser.o src/parsing/map.o src/parsing/map_check.o src/debug/put_struct.o src/debug/render_fdf.o src/debug/minimap.o -Wall -Wextra -Werror -g -fsanitize=address -I ./mlx/ -I ./libft/ -o cub3D -L ./libft/ -lft -L ./mlx/ -lmlx -framework OpenGL -framework AppKit
 make: Leaving directory `/Users/ktrosset/Desktop/Cub3D'
  

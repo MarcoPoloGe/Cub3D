@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 11:36:07 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/01 14:08:17 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:49:38 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,53 @@ int	leave(t_data *data, char *errormsg)
 	exit(0);
 }
 
-void	ft_free_img(t_img *img, t_data *data)
+void	ft_free_img(t_data *data)
 {
-	mlx_destroy_image(data->mlx, img->ptr);
-	free(img);
+	if (data->assets.no.ptr)
+	{
+		mlx_destroy_image(data->mlx, data->assets.no.ptr);
+		free(data->assets.no.ptr);
+	}
+	if (data->assets.so.ptr)
+	{
+		mlx_destroy_image(data->mlx, data->assets.so.ptr);
+		free(data->assets.so.ptr);
+	}
+	if (data->assets.we.ptr)
+	{
+		mlx_destroy_image(data->mlx, data->assets.we.ptr);
+		free(data->assets.we.ptr);
+	}
+	if (data->assets.ea.ptr)
+	{
+		mlx_destroy_image(data->mlx, data->assets.ea.ptr);
+		free(data->assets.ea.ptr);
+	}
 }
 
 void	free_all(t_data *data)
 {
 	int	i;
 
-	if (data->assets.no.ptr)
-		free(data->assets.no.ptr);
-	if (data->assets.so.ptr)
-		free(data->assets.so.ptr);
-	if (data->assets.we.ptr)
-		free(data->assets.we.ptr);
-	if (data->assets.ea.ptr)
-		free(data->assets.ea.ptr);
+	ft_free_img(data);
 	if (data->map)
 	{
 		i = -1;
 		while (data->map[++i])
 			free(data->map[i]);
 		free(data->map);
+	}
+	if (data->frame.game)
+		free(data->frame.game);
+	if (data->frame.overlay)
+		free(data->frame.overlay);
+	if (data->frame.minimap)
+		free(data->frame.minimap);
+	if (data->camera.ray_list)
+	{
+		i = -1;
+		while (data->camera.ray_list[++i].impact)
+			free(data->camera.ray_list[++i].impact);
+		free(data->camera.ray_list);
 	}
 }

@@ -69,7 +69,7 @@ void	free_all(t_data *data)
 	{
 		i = -1;
 		while (data->camera.ray_list[++i].impact)
-			free(data->camera.ray_list[++i].impact);
+			free(data->camera.ray_list[i].impact);
 		free(data->camera.ray_list);
 	}
 }

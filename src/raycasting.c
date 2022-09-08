@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:16:04 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/07 16:15:02 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:22:07 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,7 @@ void	ft_calculate_impact_point(t_coord coord, t_ray *ray, t_data *data)
 	{
 		free(ray->impact);
 		ray->impact = resy;
-		ft_render_one_px(ft_coord_to_pos(ray->impact->coord), COLOR_COLLISION,
-			data->frame.game);
 	}
 	else
-	{
 		free(resy);
-		ft_render_one_px(ft_coord_to_pos(ray->impact->coord), COLOR_COLLISION,
-			data->frame.game);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 11:36:07 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/08 13:53:53 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:15:49 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,25 @@ void	free_all(t_data *data)
 {
 	int	i;
 
-	//ft_free_img(data);
-//	if (data->map)
-//	{
-//		i = -1;
-//		while (data->map[++i])
-	//		free(data->map[i]);
-	//	free(data->map);
-//	}
-//	if (data->frame.game)
-//		mlx_destroy_image(data->mlx, data->frame.game);
-//	if (data->frame.overlay)
-//		mlx_destroy_image(data->mlx, data->frame.game);
-//	if (data->frame.minimap)
-//		mlx_destroy_image(data->mlx, data->frame.game);
+	ft_free_img(data);
+	if (data->map)
+	{
+		i = -1;
+		while (data->map[++i])
+			free(data->map[i]);
+		free(data->map);
+	}
+	if (data->frame.game)
+		free(data->frame.game);
+	if (data->frame.overlay)
+		free(data->frame.overlay);
+	if (data->frame.minimap)
+		free(data->frame.minimap);
 	if (data->camera.ray_list)
 	{
 		i = -1;
-		while (i++ < WINDOW_WIDTH)
-			free(data->camera.ray_list[++i].impact);
+		while (++i < WINDOW_WIDTH)
+			free(data->camera.ray_list[i].impact);
 		free(data->camera.ray_list);
 	}
 }

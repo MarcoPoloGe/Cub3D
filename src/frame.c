@@ -56,11 +56,8 @@ void	ft_calculate_rays(t_data *data)
 int	ft_display_game(t_data *data)
 {
 	t_pos	minimap_pos;
-	int		minimap_size;
-	int		i;
 
 	minimap_pos = ft_pos(590, 1200);
-	minimap_size = 200;
 	mlx_clear_window(data->mlx, data->win);
 	if (data->frame.overlay == 0)
 	{
@@ -70,16 +67,11 @@ int	ft_display_game(t_data *data)
 	if (data->frame.minimap == 0)
 	{
 		data->frame.minimap = ft_calloc(sizeof(t_img), 1);
-		ft_new_image(data->frame.minimap, minimap_size, minimap_size, data);
+		ft_new_image(data->frame.minimap, MINIMAP_SIZE, MINIMAP_SIZE, data);
 	}
 	ft_minimap_render(data->frame.minimap, data);
 	render_background(data->frame.game, data->assets);
-	if (data->camera.ray_list)
-	{
-		i = -1;
-		while (++i < WINDOW_WIDTH)
-			free(data->camera.ray_list[i].impact);
-	}
+	ft_free_ray_list_impact(data);
 	ft_calculate_rays(data);
 	ft_render_walls(data->camera, data);
 	ft_push_frame(ft_pos(0, 0), data->frame.game, data, 1);

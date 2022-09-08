@@ -12,6 +12,18 @@
 
 #include "cub3D.h"
 
+void	ft_free_ray_list_impact(t_data *data)
+{
+	int	i;
+
+	if (data->camera.ray_list)
+	{
+		i = -1;
+		while (++i < WINDOW_WIDTH)
+			free(data->camera.ray_list[i].impact);
+	}
+}
+
 int	leave_simple(t_data *data)
 {
 	leave(data, NULL);
@@ -67,11 +79,6 @@ void	free_all(t_data *data)
 		free(data->frame.overlay);
 	if (data->frame.minimap)
 		free(data->frame.minimap);
-	if (data->camera.ray_list)
-	{
-		i = -1;
-		while (++i < WINDOW_WIDTH)
-			free(data->camera.ray_list[i].impact);
-		free(data->camera.ray_list);
-	}
+	ft_free_ray_list_impact(data);
+	free(data->camera.ray_list);
 }

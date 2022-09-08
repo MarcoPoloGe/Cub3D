@@ -93,7 +93,7 @@ void	ft_parser(char *file_name, t_data *data)
 
 	tab = ft_read_tab(file_name, ".cub", '\n');
 	if (tab == 0)
-		leave(0, "Error : invalid file\n");
+		leave(0, "");
 	i = 0;
 	i += ft_get_textures(tab + i, data);
 	ft_get_map(tab + i, data);

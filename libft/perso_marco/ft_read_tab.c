@@ -20,7 +20,7 @@ char	**ft_read_tab(char *file_name, char *ext, char sep)
 	char	**tab;
 
 	file = ft_read_file(file_name, ext);
-	if(file == NULL)
+	if (file == NULL)
 		return (NULL);
 	tab = ft_split(file, sep);
 	free(file);

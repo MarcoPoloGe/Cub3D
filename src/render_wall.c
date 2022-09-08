@@ -36,7 +36,7 @@ int	ft_get_wall_color(int wall_y, int wall_x, t_img *wall)
 		&& wall_y >= 0)
 		color = wall->addr[(wall_y * wall->width) + wall_x];
 	else
-		color = COLOR_COLLISION;
+		color = 0;
 	return (color);
 }
 

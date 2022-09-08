@@ -22,7 +22,10 @@ char	*ft_read_file(char *file_name, char *ext)
 	int		fd;
 
 	if (!ft_check_ext(file_name, ext))
+	{
+		ft_printf("Error: %s: %s\n", file_name, "incompatible extension");
 		return (NULL);
+	}
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{

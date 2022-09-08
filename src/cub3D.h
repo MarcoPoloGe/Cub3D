@@ -26,7 +26,7 @@
 # define FOV 60
 # define MINIMAP_RENDER_SIZE 30
 # define MINIMAP_SIZE 200
-# define MINIMAP_OVERLAY "assets/map_200.xpm"
+# define MINIMAP_OVERLAY "assets/map_overlay.xpm"
 # define VIEW_DISTANCE 10
 
 //COLORS

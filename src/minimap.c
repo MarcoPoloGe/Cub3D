@@ -10,7 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3D.h"
+#include "cub3D.h"
+
+void	ft_render_grid(t_pos pos, char **map, int size, t_img *frame)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+			if (map[y][x] == '1')
+				ft_render_cube_wall(ft_pos(y * size + pos.y,
+						x * size + pos.x), size, COLOR_WALL, frame);
+	}
+}
 
 void	ft_render_player_arrow(t_pos pos, double dir_angle, t_img *frame)
 {

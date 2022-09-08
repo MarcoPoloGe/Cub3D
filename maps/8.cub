@@ -5,18 +5,18 @@
 
 
 
-NO assets/star1.xpm
+NO assets/wall1.xpm
 
 
-SO assets/star2.xpm
-
-
-
-WE assets/star3.xpm
+SO assets/wall2.xpm
 
 
 
-EA assets/star4.xpm
+WE assets/wall3.xpm
+
+
+
+EA assets/wall4.xpm
 
 
 C 30,30,30

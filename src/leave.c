@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 11:36:07 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/07 15:49:38 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:53:53 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	free_all(t_data *data)
 	if (data->camera.ray_list)
 	{
 		i = -1;
-		while (data->camera.ray_list[++i].impact)
-			free(data->camera.ray_list[i].impact);
+		while (i++ < WINDOW_WIDTH)
+			free(data->camera.ray_list[++i].impact);
 		free(data->camera.ray_list);
 	}
 }

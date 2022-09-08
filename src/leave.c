@@ -12,6 +12,12 @@
 
 #include "cub3D.h"
 
+int	leave_simple(t_data *data)
+{
+	leave(data, NULL);
+	return (0);
+}
+
 int	leave(t_data *data, char *errormsg)
 {
 	if (data && data->win)

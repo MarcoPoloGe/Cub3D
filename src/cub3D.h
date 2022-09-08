@@ -114,6 +114,7 @@ typedef struct s_data
 int			leave(t_data *data, char *errormsg);
 void		free_all(t_data *data);
 void		ft_free_img(t_data *data);
+int			leave_simple(t_data *data);
 
 //main.c
 void		*check_keycode(int keycode, t_data *data);

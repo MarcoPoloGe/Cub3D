@@ -82,7 +82,6 @@ int	ft_display_game(t_data *data)
 	}
 	ft_calculate_rays(data);
 	ft_render_walls(data->camera, data);
-	//ft_fdf_render(data);
 	ft_push_frame(ft_pos(0, 0), data->frame.game, data, 1);
 	ft_push_frame(minimap_pos, data->frame.minimap, data, 1);
 	ft_push_frame(ft_pos(minimap_pos.y - 120, minimap_pos.x -210),

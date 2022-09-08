@@ -12,21 +12,6 @@
 
 #include "../cub3D.h"
 
-int	ft_check_map(char **map)
-{
-	if (map == 0 || *map == 0)
-		return (1);
-	if (ft_player_count_bad(map))
-		return (1);
-	if (ft_forbiden_char(map))
-		return (1);
-	if (ft_space_no_border(map))
-		return (1);
-	if (ft_end_no_border(map))
-		return (1);
-	return (0);
-}
-
 void	ft_init_player_info(int y, int x, char dir_char, t_camera *camera)
 {
 	camera->coord.x = (double)x + 0.5;
@@ -86,6 +71,21 @@ char	**ft_make_map_rectangular(char **map)
 		i++;
 	}
 	return (map);
+}
+
+int	ft_check_map(char **map)
+{
+	if (map == 0 || *map == 0)
+		return (1);
+	if (ft_player_count_bad(map))
+		return (1);
+	if (ft_forbidden_char(map))
+		return (1);
+	if (ft_space_no_border(map))
+		return (1);
+	if (ft_end_no_border(map))
+		return (1);
+	return (0);
 }
 
 int	ft_get_map(char **input_tab, t_data *data)

@@ -3,8 +3,8 @@ SO assets/star2.xpm
 WE assets/star3.xpm
 EA assets/star4.xpm
 
-F 220,100,0
-C 225,30,0
+C 30,30,30
+F 10,10,10
 
 
 

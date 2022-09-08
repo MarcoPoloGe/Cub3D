@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:25:41 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/07 15:06:04 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:28:29 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	keycode_handling(int keycode, t_data *data)
 	if (keycode == 2 || keycode == 124)
 		ft_rotate_camera(camera, 10);
 	if (keycode == 1 || keycode == 125)
-		ft_move_player(data, 0.5, camera);
+		ft_move_player(data, 0.3, camera);
 	if (keycode == 13 || keycode == 126)
-		ft_move_player(data, -0.5, camera);
+		ft_move_player(data, -0.3, camera);
 	i = -1;
 	ft_display_game(data);
 	return (0);

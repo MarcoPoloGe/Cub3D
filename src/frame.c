@@ -6,7 +6,7 @@
 /*   By: ktrosset <ktrosset@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:46:46 by ktrosset          #+#    #+#             */
-/*   Updated: 2022/09/07 16:17:17 by ktrosset         ###   ########.fr       */
+/*   Updated: 2022/09/08 11:47:35 by ktrosset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ void	ft_push_frame(t_pos pos, t_img *frame, t_data *data, int reset)
 		ft_reset_frame(frame);
 }
 
-void ft_calculate_rays(t_data *data)
+void	ft_calculate_rays(t_data *data)
 {
-	int i = -1;
+	int	i;
 
+	i = -1;
 	while (++i < WINDOW_WIDTH)
 		ft_calculate_impact_point(data->camera.coord,
-								  &data->camera.ray_list[i], data);
+			&data->camera.ray_list[i], data);
 }
 
 int	ft_display_game(t_data *data)
@@ -81,9 +82,8 @@ int	ft_display_game(t_data *data)
 	}
 	ft_calculate_rays(data);
 	ft_render_walls(data->camera, data);
-
-	ft_fdf_render(data);
-	ft_push_frame(ft_pos(0,0), data->frame.game, data, 1);
+	//ft_fdf_render(data);
+	ft_push_frame(ft_pos(0, 0), data->frame.game, data, 1);
 	ft_push_frame(minimap_pos, data->frame.minimap, data, 1);
 	ft_push_frame(ft_pos(minimap_pos.y - 120, minimap_pos.x -210),
 		data->frame.overlay, data, 0);

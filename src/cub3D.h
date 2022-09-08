@@ -196,7 +196,7 @@ void		ft_get_player_infos(char **map, t_data *data);
 
 //map_check.c
 int			ft_player_count_bad(char **map);
-int			ft_forbiden_char(char **map);
+int			ft_forbidden_char(char **map);
 int			ft_no_wall_space_around(char **map, int y, int x);
 int			ft_space_no_border(char **map);
 int			ft_end_no_border(char **map);

@@ -39,7 +39,7 @@ int	ft_player_count_bad(char **map)
 		return (1);
 }
 
-int	ft_forbiden_char(char **map)
+int	ft_forbidden_char(char **map)
 {
 	int	x;
 	int	y;
